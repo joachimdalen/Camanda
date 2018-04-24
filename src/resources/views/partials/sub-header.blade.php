@@ -12,9 +12,18 @@
             <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                     <li class="nav-item">
-                        <a href="{{route('home')}}" class="nav-link"><i class="fe fe-pencil"></i>Blog</a>
+                        <a href="{{route('home')}}" class="nav-link"><i class="fe fe-paperclip"></i>Blog</a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{route('blogPosts')}}" class="nav-link"><i class="fe fe-edit-2"></i>Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('home')}}" class="nav-link"><i class="fe fe-image"></i>Images</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('home')}}" class="nav-link"><i class="fe fe-tag"></i>Whitelabel</a>
+                    </li>
+                   {{-- <li class="nav-item">
                         <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe fe-box"></i> Interface</a>
                         <div class="dropdown-menu dropdown-menu-arrow">
                             <a href="./cards.html" class="dropdown-item ">Cards design</a>
@@ -58,7 +67,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="./docs/index.html" class="nav-link"><i class="fe fe-file-text"></i> Documentation</a>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>
         </div>

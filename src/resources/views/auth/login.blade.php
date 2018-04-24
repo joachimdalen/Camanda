@@ -45,6 +45,15 @@
                     <div class="form-footer">
                         <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
                     </div>
+
+                    <p class="text-center mt-3 mb-2">Or sign in using any of these providers</p>
+                    <div class="btn-list text-center">
+                        <button type="button" class="btn w-auto btn-bitbucket"><i class="fa fa-bitbucket mr-2"></i>Bitbucket
+                        </button>
+                        <button type="button" class="btn w-auto btn-github"><i class="fa fa-github mr-2"></i>Github
+                        </button>
+                    </div>
+
                 </div>
             </form>
             <div class="text-center text-muted">

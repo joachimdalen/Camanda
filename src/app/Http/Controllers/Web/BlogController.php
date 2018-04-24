@@ -13,4 +13,14 @@ class BlogController extends Controller
         return view('templates.blog');
     }
 
+    public function getBlogPostsView(Request $request)
+    {
+        return view('blog.posts');
+    }
+    public function getBlogWritePostView(Request $request)
+    {
+        return view('blog.write');
+    }
+
+
 }
