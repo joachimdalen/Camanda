@@ -23,7 +23,7 @@
 
     {{--<script src="{{asset('js/vendor.js')}}"></script>--}}
     {{--<link href="{{asset('css/vendor.css')}}" rel="stylesheet"/>--}}
-    <link href="{{asset('css/app.css')}}" rel="stylesheet"/>
+    <link href="{{mix('css/app.css')}}" rel="stylesheet"/>
 
 </head>
 <body class="">
@@ -34,6 +34,6 @@
         </div>
     </div>
 </div>
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{mix('js/app.js')}}"></script>
 </body>
 </html>

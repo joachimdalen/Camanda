@@ -44,6 +44,7 @@
                                     <span class="status-icon bg-success"></span> Published
                                 </td>
                                 <td class="text-right">
+
                                     <a href="javascript:void(0)" class="btn btn-secondary btn-sm">
                                         <i class="fe fe-x text-danger"></i>
                                         Unpublish
