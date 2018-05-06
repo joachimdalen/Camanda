@@ -21,7 +21,8 @@ class BlogController extends Controller
 
     public function getBlogWritePostView(Request $request)
     {
-        return view('blog.write');
+        //return view('blog.write');
+        return view('layout.react-base', ['model' => ['id' => 'write-post', 'title' => 'Write Post']]);
     }
 
 

@@ -10,6 +10,7 @@ require('./tabler/dashboard');
 require('./tabler/core');
 
 require('./components/blog/BlogPosts');
+require('./components/blog/WritePost');
 
 
 

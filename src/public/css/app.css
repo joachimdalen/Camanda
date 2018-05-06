@@ -20692,10 +20692,33 @@ svg {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   cursor: pointer;
+  position: relative;
+  opacity: 0.5;
+}
+
+.image-selectable:hover:not(.selected) {
+  opacity: 1;
 }
 
 .image-selectable.selected {
   border: 2px solid #45aaf2;
-  cursor: default;
+  border-radius: 5px;
+  opacity: 1;
+}
+
+.image-selectable.selected .image-toolbar {
+  display: none;
+}
+
+.image-selectable .image-toolbar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+}
+
+.image-selectable .image-toolbar i {
+  margin-left: 3px;
+  margin-right: 3px;
 }
 

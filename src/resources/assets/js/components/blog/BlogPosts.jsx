@@ -14,10 +14,18 @@ export default class BlogPosts extends Component {
     constructor() {
         super();
         this.state = {
+            error: null,
             loading: false,
             posts: []
         };
+    }
 
+    componentDidMount() {
+        axios.get(`/api/blog/posts`).then(response => {
+            this.setState({loading: false, posts: response.data.data});
+        }).catch(error => {
+            this.setState({error: error.data});
+        })
     }
 
     render() {
