@@ -1,0 +1,21 @@
+.ql-editor {
+  min-height: 300px !important;
+}
+
+strong {
+  font-weight: 900 !important;
+}
+
+.editor-container {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.zindex-fixed{
+  z-index: $zindex-fixed;
+}
+.card-fullscreen{
+  .ql-editor{
+    min-height: 80vh !important;
+  }
+}

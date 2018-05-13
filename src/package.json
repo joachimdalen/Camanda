@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "immutability-helper": "^2.7.0",
-        "prop-types": "^15.6.1"
+        "prop-types": "^15.6.1",
+        "react-quill": "^1.2.7"
     }
 }

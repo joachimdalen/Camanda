@@ -20722,3 +20722,25 @@ svg {
   margin-right: 3px;
 }
 
+.ql-editor {
+  min-height: 300px !important;
+}
+
+strong {
+  font-weight: 900 !important;
+}
+
+.editor-container {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.zindex-fixed {
+  z-index: 1030;
+}
+
+.card-fullscreen .ql-editor {
+  min-height: 80vh !important;
+}
+

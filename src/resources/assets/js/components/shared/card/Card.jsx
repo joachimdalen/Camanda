@@ -6,7 +6,7 @@ export default class Card extends Component {
     }
     render() {
         return (
-            <div className={"card"}>
+            <div className={`card ${this.props.className}`}>
                 {this.props.children}
             </div>
         );
