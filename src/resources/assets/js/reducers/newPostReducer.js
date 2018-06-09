@@ -26,13 +26,13 @@ export default function reducer(state={
       case "SET_POST_TITLE": {
         return {
           ...state,
-          user: {...state.post, title: action.payload},
+          post: {...state.post, title: action.payload},
         }
       }
       case "SET_POST_SUMMARY": {
         return {
           ...state,
-          user: {...state.post, summary: action.payload},
+          post: {...state.post, summary: action.payload},
         }
       }
     }

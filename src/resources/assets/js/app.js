@@ -9,9 +9,9 @@ require('./bootstrap');
 require('./tabler/dashboard');
 require('./tabler/core');
 
-require('./components/blog/BlogPosts');
-require('./components/blog/WritePost');
-
+/*require('./components/blog/BlogPosts');
+require('./components/blog/WritePost');*/
+require('./client');
 
 
 /**
