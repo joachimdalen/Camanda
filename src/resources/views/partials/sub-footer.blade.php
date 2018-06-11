@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-6 col-md-3">
                         <ul class="list-unstyled mb-0">
-                            <li><a href="#"><i class="fa fa-lock fa-fw"></i> Privacy Policy</a></li>
+                        <li><a href="{{route('legal.privacy-policy')}}"><i class="fa fa-lock fa-fw"></i> Privacy Policy</a></li>
                             <li><a href="#"><i class="fa fa-question fa-fw"></i> About Us</a></li>
                         </ul>
                     </div>

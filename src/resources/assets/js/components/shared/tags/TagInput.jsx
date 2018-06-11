@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DismissableTag from "./DismissableTag";
-import {handleChange, hasError, getError} from "../../../helpers/helpers";
+import { handleChange, hasError, getError } from "../../../helpers/helpers";
 import update from 'immutability-helper';
 
 export default class TagInput extends Component {
@@ -26,10 +26,15 @@ export default class TagInput extends Component {
         let tag = {
             label: this.state.label
         };
-        console.log(tag);
-        this.setState({label: ""});
+        this.setState({ label: "" });
         this.props.onAdded(tag);
-
+    }
+    renderTags() {
+        if (this.props.tags === undefined) return;
+        return this.props.tags.map(tag => {
+            return (<DismissableTag key={tag.label} label={tag.label}
+                dismiss={() => this.props.onDismissed(tag)} />)
+        })
     }
 
     render() {
@@ -37,7 +42,7 @@ export default class TagInput extends Component {
             <div>
                 <div className="input-group">
                     <input type="text" name="label" className="form-control" placeholder="Label.."
-                           onChange={(e) => this.handleChange(e)} value={this.state.label}/>
+                        onChange={(e) => this.handleChange(e)} value={this.state.label} />
                     <span className="input-group-append">
                         <button className="btn btn-success" type="button" onClick={() => this.newTag()}>
                             <i className="fe fe-plus"></i>
@@ -45,11 +50,7 @@ export default class TagInput extends Component {
                     </span>
                 </div>
                 <div className="tags mt-2">
-                    {this.props.tags.map(tag => {
-                        return (<DismissableTag key={tag.label} label={tag.label}
-                                                dismiss={() => this.props.onDismissed(tag)}/>)
-                    })}
-
+                    {this.renderTags()}
                 </div>
             </div>
         );

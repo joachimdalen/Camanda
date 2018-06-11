@@ -14,6 +14,6 @@ let mix = require('laravel-mix');
 mix.react('resources/assets/js/app.js', 'public/js');
 mix.sass('resources/assets/sass/app.scss', 'public/css');
 //mix.styles(['resources/assets/css/tabler.css'],'public/css/vendor.css');
-mix.copyDirectory('resources/assets/fonts', 'public/fonts');
-mix.copyDirectory('resources/assets/images', 'public/img');
+//mix.copyDirectory('resources/assets/fonts', 'public/fonts');
+//mix.copyDirectory('resources/assets/images', 'public/img');
 mix.version();

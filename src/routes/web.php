@@ -1,4 +1,10 @@
 <?php
+Route::group(['prefix' => 'legal'], function () {
+    Route::get('privacy', function () {
+        return view('legal.privacy-policy');
+    })->name('legal.privacy-policy');
+});
+
 Auth::routes();
 Route::group(['prefix' => '', 'namespace' => 'Web'], function () {
     Route::get('', 'BlogController@getView')->name('home');
@@ -10,7 +16,7 @@ Route::group(['prefix' => 'blog', 'namespace' => 'Web'], function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-   
+
     Route::group(['prefix' => 'account', 'namespace' => 'Web', 'middleware' => ['auth']], function () {
         Route::get('', 'AccountController@getView')->name('userAccount');
         Route::put('', 'AccountController@updateAccount')->name('updateAccount');
