@@ -3,8 +3,9 @@
 namespace App\CA\Blog\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\CA\AppBaseModel;
 
-class BlogPost extends Model
+class BlogPost extends AppBaseModel
 {
     //
 }

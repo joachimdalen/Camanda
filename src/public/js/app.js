@@ -68890,20 +68890,10 @@ var AppLayout = function (_Component) {
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         __WEBPACK_IMPORTED_MODULE_8__shared_card_CardBody__["a" /* default */],
-                                        { className: "editor-container" },
+                                        { className: "editor-container pb-0" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__shared_editor_Editor__["a" /* default */], { onChange: function onChange(e) {
                                                 return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["c" /* setPostContent */])(e));
-                                            }, text: this.props.post.content }),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'div',
-                                            { className: 'form-group' },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'button',
-                                                { className: 'btn btn-success btn-sm float-right mr-2 mt-2' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
-                                                'Save'
-                                            )
-                                        )
+                                            }, text: this.props.post.content })
                                     )
                                 )
                             )
@@ -68929,12 +68919,37 @@ var AppLayout = function (_Component) {
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'label',
                                         { className: 'form-label' },
-                                        'Title'
+                                        'Status'
                                     ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'title', type: 'text', className: 'form-control', placeholder: 'Text..',
-                                        onChange: function onChange(e) {
-                                            return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["e" /* setPostTitle */])(e.target.value));
-                                        } })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'select',
+                                        { name: 'status', id: 'status', className: 'form-control' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'option',
+                                            { value: 'draft' },
+                                            'Draft'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'option',
+                                            { value: 'publised' },
+                                            'Publised'
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            'option',
+                                            { value: 'scheduled' },
+                                            'Scheduled'
+                                        )
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'form-group' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'button',
+                                        { className: 'btn btn-success btn-block' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
+                                        'Save'
+                                    )
                                 )
                             )
                         )

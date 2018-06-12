@@ -55,14 +55,8 @@ class AppLayout extends Component {
                                                 <i className="fe fe-maximize"></i></a>
                                         </CardOptions>
                                     </CardHeader>
-                                    <CardBody className={"editor-container"}>
+                                    <CardBody className={"editor-container pb-0"}>
                                         <Editor onChange={(e) => this.props.dispatch(setPostContent(e))} text={this.props.post.content} />
-                                        <div className="form-group">
-                                            <button className="btn btn-success btn-sm float-right mr-2 mt-2">
-                                                <i className="fe fe-save"></i>
-                                                Save
-                                </button>
-                                        </div>
                                     </CardBody>
                                 </Card>
                             </div>
@@ -75,9 +69,18 @@ class AppLayout extends Component {
                             </CardHeader>
                             <CardBody>
                                 <div className="form-group">
-                                    <label className="form-label">Title</label>
-                                    <input name="title" type="text" className="form-control" placeholder="Text.."
-                                        onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))} />
+                                    <label className="form-label">Status</label>
+                                    <select name="status" id="status" className="form-control">
+                                        <option value="draft">Draft</option>
+                                        <option value="publised">Publised</option>
+                                        <option value="scheduled">Scheduled</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <button className="btn btn-success btn-block">
+                                        <i className="fe fe-save"></i>
+                                        Save
+                                    </button>
                                 </div>
                             </CardBody>
                         </Card>

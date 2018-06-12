@@ -38,8 +38,14 @@ class BlogRepository
     {
         $posts = $this->model->where('status', PostStatus::public)->paginate(25);
         $posts->getCollection()->map(function ($post) {
-          $post->tags = $this->tagRepo->getTagsForPost($post->id);
+            $post->tags = $this->tagRepo->getTagsForPost($post->id);
         });
         return $posts;
+    }
+
+    public function createPost(array $data, array $tags)
+    {
+        $post = $this->model->create($data);
+        //Loop and check/create tags
     }
 }

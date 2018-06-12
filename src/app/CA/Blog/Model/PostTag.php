@@ -4,7 +4,10 @@ namespace App\CA\Blog\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostTag extends Model
+use App\CA\AppBaseModel;
+
+class PostTag extends AppBaseModel
 {
     //
 }
+
