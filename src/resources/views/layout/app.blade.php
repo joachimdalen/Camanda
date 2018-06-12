@@ -30,10 +30,12 @@
 <div class="page">
     <div class="page-main">
         @include('partials.header')
-        @include('partials.sub-header')
+        @yield('content')
+       {{-- @include('partials.sub-header')
         <div class="my-3 my-md-5">
             @yield('content')
         </div>
+        --}}
     </div>
     @include('partials.sub-footer')
     @include('partials.footer')

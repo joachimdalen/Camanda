@@ -11,13 +11,13 @@
                 <div class="card-body p-6">
                     <div class="card-title">Login to your account</div>
                     <div class="form-group">
-                        <label class="form-label">{{ __('E-Mail Address') }}</label>
-                        <input type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                               id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email"
-                               value="{{ old('email') }}" required autofocus>
-                        @if ($errors->has('email'))
+                        <label class="form-label">{{ __('Username') }}</label>
+                        <input type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}"
+                               id="username" aria-describedby="usernameHelp" placeholder="Enter username" name="username"
+                               value="{{ old('username') }}" required autofocus>
+                        @if ($errors->has('username'))
                             <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                         @endif
                     </div>

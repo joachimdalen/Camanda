@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\CA\Blog\PostStatus;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateBlogPostsTable extends Migration
 {
@@ -17,11 +18,10 @@ class CreateBlogPostsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('user_id');
             $table->string('title');
-            $table->string('slug')->unique()->index();
+            $table->string('slug')->unique()->index()->nullable();
             $table->text('content');
             $table->string('summary');
-            $table->integer('status');
-            $table->dateTime('publish_at')->nullable();
+            $table->integer('status')->default(PostStatus::DRAFT);
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')
