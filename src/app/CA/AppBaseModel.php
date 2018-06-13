@@ -3,7 +3,7 @@
 namespace App\CA;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\CA\Traits\UuidTrait;
 class AppBaseModel extends Model
 {
     use UuidTrait;

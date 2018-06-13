@@ -43,6 +43,15 @@ class BlogRepository
         return $posts;
     }
 
+    public function getPostsForUser($userId)
+    {
+        $posts = $this->model->where('user_id', $userId)->paginate(25);
+      /*  $posts->getCollection()->map(function ($post) {
+            $post->tags = $this->tagRepo->getTagsForPost($post->id);
+        });*/
+        return $posts;
+    }
+
     public function createPost(array $data, array $tags)
     {
         $post = $this->model->create($data);

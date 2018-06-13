@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Account\UpdateAccountRequest;
 use Illuminate\Http\Request;
@@ -34,7 +33,7 @@ class AccountController extends Controller
         }
         // Info - Password - Avatar
         $info = $request->only([
-            'name', 'username', 'email'
+            'name', 'username', 'email',
         ]);
         if (!$user->update($info)) {
             $request->session()->flash('error', 'Failed to update account details');

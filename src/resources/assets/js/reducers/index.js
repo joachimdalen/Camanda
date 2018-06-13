@@ -3,7 +3,8 @@ import {
 } from "redux"
 
 import newPost from "./newPostReducer"
-
+import postsList from './postsListReducer';
 export default combineReducers({
-  newPost: newPost
+  newPost: newPost,
+  posts: postsList
 })

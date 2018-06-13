@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api\Blog;
 use App\CA\Blog\BlogRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Resources\Blog\BlogPostResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -22,7 +25,13 @@ class BlogController extends Controller
         $tags = $request->only(['tags']);
         $settings = $request->only(['status']);
 
-        $this->repo->
+    }
+
+    public function getUserBlogPosts(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+        $posts = $this->repo->getPostsForUser($user->id);
+        return BlogPostResource::collection($posts);
     }
 
 }

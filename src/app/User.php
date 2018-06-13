@@ -4,12 +4,13 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Laravel\Passport\HasApiTokens;
 use Webpatser\Uuid\Uuid;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, EntrustUserTrait;
+    use Notifiable, EntrustUserTrait, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

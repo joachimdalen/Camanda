@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Switch, Link } from 'react-router-dom'
 
+//Import route components
+import NewPost from './posts/NewPost';
+import PostsList from './posts/PostsList';
+
 export default class AppLayout extends Component {
     constructor(props) {
         super(props);
@@ -46,8 +50,8 @@ export default class AppLayout extends Component {
                 <div className="my-3 my-md-5">
                     <div className="container-fluid">
                         <Switch>
-                            <Route exact path="/blog/write" render={() => (<div>Match</div>)} />
-                            <Route render={() => (<div>Miss</div>)} />
+                            <Route path="/blog/write" component={NewPost} />
+                            <Route path="/blog/posts" component={PostsList} />
                         </Switch>
                     </div>
                 </div>
