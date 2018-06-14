@@ -10,10 +10,20 @@ let mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+let contentRoot = 'resources/assets/';
+let publicRoot = 'public/'
 
-mix.react('resources/assets/js/app.js', 'public/js');
-mix.sass('resources/assets/sass/app.scss', 'public/css');
-//mix.styles(['resources/assets/css/tabler.css'],'public/css/vendor.css');
-//mix.copyDirectory('resources/assets/fonts', 'public/fonts');
-//mix.copyDirectory('resources/assets/images', 'public/img');
+
+
+mix.react(contentRoot + 'js/app.js', publicRoot + 'js');
+mix.sass(contentRoot + 'sass/app.scss', publicRoot + 'css').options({
+    processCssUrls: false
+});;
+mix.styles([contentRoot + 'css/tabler.css'], publicRoot + 'css/vendor.css').options({
+    processCssUrls: false
+});;
+mix.copyDirectory(contentRoot + 'fonts', publicRoot + 'fonts');
+mix.copyDirectory(contentRoot + 'images', publicRoot + 'img');
+
+
 mix.version();

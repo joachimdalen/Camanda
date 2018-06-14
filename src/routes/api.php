@@ -18,5 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'blog', 'middleware' => ['auth:api']], function () {
-    Route::get('posts', 'Api\Blog\BlogController@getUserBlogPosts')->name('api.blog.posts');
+    Route::group(['prefix' => 'posts'], function () {
+        Route::get('', 'Api\Blog\BlogController@getUserBlogPosts')->name('api.blog.posts');
+        Route::post('', 'Api\Blog\BlogController@createBlogPost')->name('api.blog.posts.create');
+        Route::put('{slug}', 'Api\Blog\BlogController@updateBlogPost')->name('api.blog.posts.update');
+    });
 });

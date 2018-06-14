@@ -74669,11 +74669,12 @@ module.exports = function(module) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["e"] = setPostTitle;
-/* harmony export (immutable) */ __webpack_exports__["d"] = setPostSummary;
+/* harmony export (immutable) */ __webpack_exports__["f"] = setPostTitle;
+/* harmony export (immutable) */ __webpack_exports__["e"] = setPostSummary;
 /* harmony export (immutable) */ __webpack_exports__["a"] = addPostTag;
 /* harmony export (immutable) */ __webpack_exports__["b"] = removePostTag;
-/* harmony export (immutable) */ __webpack_exports__["c"] = setPostContent;
+/* harmony export (immutable) */ __webpack_exports__["d"] = setPostContent;
+/* harmony export (immutable) */ __webpack_exports__["c"] = savePost;
 function setPostTitle(title) {
   return {
     type: 'SET_POST_TITLE',
@@ -74705,6 +74706,31 @@ function setPostContent(content) {
   return {
     type: 'SET_POST_CONTENT',
     payload: content
+  };
+}
+
+function savePost(title, summary, tags, content, status) {
+  return function (dispatch) {
+    dispatch({
+      type: "SAVE_POST"
+    });
+    axios.post("/api/blog/posts", {
+      title: title,
+      content: content,
+      summary: summary,
+      tags: tags,
+      status: status
+    }).then(function (response) {
+      dispatch({
+        type: "SAVE_POST_FULFILLED",
+        payload: response.data
+      });
+    }).catch(function (err) {
+      dispatch({
+        type: "SAVE_POST_REJECTED",
+        payload: err
+      });
+    });
   };
 }
 
@@ -75092,7 +75118,7 @@ var NewPost = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'title', type: 'text', className: 'form-control', placeholder: 'Text..',
                                                 onChange: function onChange(e) {
-                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["e" /* setPostTitle */])(e.target.value));
+                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["f" /* setPostTitle */])(e.target.value));
                                                 } })
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -75126,7 +75152,7 @@ var NewPost = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', name: 'summary', rows: '6',
                                                 placeholder: 'Content..', onChange: function onChange(e) {
-                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["d" /* setPostSummary */])(e.target.value));
+                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["e" /* setPostSummary */])(e.target.value));
                                                 } })
                                         )
                                     )
@@ -75156,7 +75182,7 @@ var NewPost = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_8__shared_card_CardBody__["a" /* default */],
                                         { className: "editor-container pb-0" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__shared_editor_Editor__["a" /* default */], { onChange: function onChange(e) {
-                                                return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["c" /* setPostContent */])(e));
+                                                return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["d" /* setPostContent */])(e));
                                             }, text: this.props.post.content })
                                     )
                                 )
@@ -75210,7 +75236,9 @@ var NewPost = function (_Component) {
                                     { className: 'form-group' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'button',
-                                        { className: 'btn btn-success btn-block' },
+                                        { className: 'btn btn-success btn-block', onClick: function onClick() {
+                                                return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["c" /* savePost */])(_this2.props.post.title, _this2.props.post.summary, _this2.props.tags, _this2.props.post.content, 1));
+                                            } },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
                                         'Save'
                                     )
@@ -75337,18 +75365,24 @@ var PostsList = function (_Component) {
     }, {
         key: 'renderTableBody',
         value: function renderTableBody() {
+            var _this2 = this;
+
+            if (!this.props.posts) return;
+            if (!this.props.posts.data.length) return;
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'tbody',
                 null,
-                this.renderRow()
+                this.props.posts.data.map(function (post) {
+                    return _this2.renderRow(post);
+                })
             );
         }
     }, {
         key: 'renderRow',
-        value: function renderRow() {
+        value: function renderRow(post) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'tr',
-                null,
+                { key: post.id },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'td',
                     null,
@@ -75364,29 +75398,26 @@ var PostsList = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'a',
                         { href: 'invoice.html', className: 'text-inherit' },
-                        'Design Works'
+                        post.title
                     )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'td',
                     null,
-                    'Carlson Limited'
+                    post.created_at_unix
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'td',
                     null,
                     '87956621'
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'td',
-                    null,
-                    '15 Dec 2017'
-                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('td', null),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'td',
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'status-icon bg-success' }),
-                    ' Published'
+                    ' ',
+                    post.status_text
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'td',

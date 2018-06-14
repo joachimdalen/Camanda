@@ -33,21 +33,25 @@ class PostsList extends Component {
         </thead>);
     }
     renderTableBody() {
+        if (!this.props.posts) return;
+        if (!this.props.posts.data.length) return;
         return (
             <tbody>
-                {this.renderRow()}
+                {this.props.posts.data.map(post => {
+                    return this.renderRow(post)
+                })}
             </tbody>
         );
     }
-    renderRow() {
+    renderRow(post) {
         return (
-            <tr>
+            <tr key={post.id}>
                 <td><span className="text-muted">001401</span></td>
-                <td><a href="invoice.html" className="text-inherit">Design Works</a></td>
-                <td>Carlson Limited</td>
+                <td><a href="invoice.html" className="text-inherit">{post.title}</a></td>
+                <td>{post.created_at_unix}</td>
                 <td>87956621</td>
-                <td>15 Dec 2017</td>
-                <td><span className="status-icon bg-success"></span> Published</td>
+                <td></td>
+                <td><span className="status-icon bg-success"></span> {post.status_text}</td>
                 <td className="text-right">
                     <Link type={"secondary"} title={"Unpublish"} uri={"#"} icon={"x"}
                         iconClassName={"text-danger"} className={"mr-2"} />

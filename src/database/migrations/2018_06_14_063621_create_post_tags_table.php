@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePostTagsTable extends Migration
 {
@@ -14,12 +14,12 @@ class CreatePostTagsTable extends Migration
     public function up()
     {
         Schema::create('post_tags', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('label');
-            $table->timestamps();
+            $table->uuid('tag_id')->index();
+            $table->uuid('post_id')->index();
+            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('post_id')->references('id')->on('blog_posts');
         });
     }
-
     /**
      * Reverse the migrations.
      *

@@ -7,7 +7,10 @@ Route::group(['prefix' => 'legal'], function () {
 
 Auth::routes();
 Route::group(['prefix' => '', 'namespace' => 'Web'], function () {
-    Route::get('', 'BlogController@getView')->name('home');
+    //Route::get('', 'BlogController@getView')->name('home');
+    Route::get('', function () {
+        return view('layout.react-base', ['model' => ['id' => 'app', 'title' => 'Write Post']]);
+    });
 });
 
 Route::group(['prefix' => 'blog', 'namespace' => 'Web'], function () {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from "react-redux"
-import { setPostTitle, setPostSummary, addPostTag, removePostTag, setPostContent } from '../../../actions/newPostActions';
+import { setPostTitle, setPostSummary, addPostTag, removePostTag, setPostContent, savePost } from '../../../actions/newPostActions';
 import Card from "../../shared/card/Card";
 import CardHeader from "../../shared/card/CardHeader";
 import CardTitle from "../../shared/card/CardTitle";
@@ -77,7 +77,7 @@ class NewPost extends Component {
                                     </select>
                                 </div>
                                 <div className="form-group">
-                                    <button className="btn btn-success btn-block">
+                                    <button className="btn btn-success btn-block" onClick={() => this.props.dispatch(savePost(this.props.post.title, this.props.post.summary, this.props.tags, this.props.post.content, 1))}>
                                         <i className="fe fe-save"></i>
                                         Save
                                     </button>
