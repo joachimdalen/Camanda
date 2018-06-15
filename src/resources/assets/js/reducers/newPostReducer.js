@@ -60,7 +60,13 @@ export default function reducer(state = {
       }
     case "REMOVE_POST_TAG":
       {
-
+        if (!state.tags.includes(action.payload)) return state;
+        let index = state.tags.indexOf(action.payload);
+        if (index == -1) return state;
+        return {
+          ...state,
+          tags: state.tags.filter(item => item !== state.tags[index]),
+        }
       }
     case "SET_POST_CONTENT":
       {

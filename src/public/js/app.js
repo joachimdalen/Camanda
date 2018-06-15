@@ -74965,8 +74965,8 @@ var AppLayout = function (_Component) {
                                         'li',
                                         { className: 'nav-item' },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'a',
-                                            { href: '#', className: 'nav-link' },
+                                            __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* Link */],
+                                            { to: '/blog/posts', className: 'nav-link' },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-edit-2' }),
                                             'Posts'
                                         )
@@ -75078,9 +75078,31 @@ var NewPost = function (_Component) {
     }
 
     _createClass(NewPost, [{
+        key: 'getSaveStatus',
+        value: function getSaveStatus() {
+            var _this2 = this;
+
+            if (this.props.saving) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'button',
+                    { className: 'btn btn-success btn-block disabled' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
+                    'Saving...'
+                );
+            }
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'button',
+                { className: 'btn btn-success btn-block', onClick: function onClick() {
+                        return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["c" /* savePost */])(_this2.props.post.title, _this2.props.post.summary, _this2.props.tags, _this2.props.post.content, 1));
+                    } },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
+                'Save'
+            );
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -75118,7 +75140,7 @@ var NewPost = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'title', type: 'text', className: 'form-control', placeholder: 'Text..',
                                                 onChange: function onChange(e) {
-                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["f" /* setPostTitle */])(e.target.value));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["f" /* setPostTitle */])(e.target.value));
                                                 } })
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -75130,10 +75152,10 @@ var NewPost = function (_Component) {
                                                 'Tags'
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__shared_tags_TagInput__["a" /* default */], { tags: this.props.tags, onDismissed: function onDismissed(tag) {
-                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["b" /* removePostTag */])(tag));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["b" /* removePostTag */])(tag));
                                                 },
                                                 onAdded: function onAdded(tag) {
-                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["a" /* addPostTag */])(tag));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["a" /* addPostTag */])(tag));
                                                 } })
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -75152,7 +75174,7 @@ var NewPost = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', name: 'summary', rows: '6',
                                                 placeholder: 'Content..', onChange: function onChange(e) {
-                                                    return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["e" /* setPostSummary */])(e.target.value));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["e" /* setPostSummary */])(e.target.value));
                                                 } })
                                         )
                                     )
@@ -75182,7 +75204,7 @@ var NewPost = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_8__shared_card_CardBody__["a" /* default */],
                                         { className: "editor-container pb-0" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__shared_editor_Editor__["a" /* default */], { onChange: function onChange(e) {
-                                                return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["d" /* setPostContent */])(e));
+                                                return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["d" /* setPostContent */])(e));
                                             }, text: this.props.post.content })
                                     )
                                 )
@@ -75216,32 +75238,29 @@ var NewPost = function (_Component) {
                                         { name: 'status', id: 'status', className: 'form-control' },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'option',
-                                            { value: 'draft' },
+                                            { value: '3' },
                                             'Draft'
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'option',
-                                            { value: 'publised' },
+                                            { value: '0' },
                                             'Publised'
-                                        ),
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'option',
-                                            { value: 'scheduled' },
-                                            'Scheduled'
                                         )
                                     )
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'div',
-                                    { className: 'form-group' },
+                                    { className: 'form-group text-center' },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'button',
-                                        { className: 'btn btn-success btn-block', onClick: function onClick() {
-                                                return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["c" /* savePost */])(_this2.props.post.title, _this2.props.post.summary, _this2.props.tags, _this2.props.post.content, 1));
-                                            } },
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
-                                        'Save'
+                                        'small',
+                                        null,
+                                        'Post scheduling and preview will be enabled after the post is saved'
                                     )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'form-group' },
+                                    this.getSaveStatus()
                                 )
                             )
                         )
@@ -76902,15 +76921,25 @@ var DismissableTag = function (_Component) {
         key: 'componentDidCatch',
         value: function componentDidCatch(error, info) {}
     }, {
+        key: 'dismiss',
+        value: function dismiss(event) {
+            event.preventDefault();
+            this.props.dismiss();
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'span',
                 { className: 'tag' },
                 this.props.label,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'a',
-                    { href: '#', className: 'tag-addon', onClick: this.props.dismiss },
+                    { href: '#', className: 'tag-addon', onClick: function onClick(e) {
+                            return _this2.dismiss(e);
+                        } },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-x' })
                 )
             );
@@ -77249,7 +77278,16 @@ function reducer() {
         });
       }
     case "REMOVE_POST_TAG":
-      {}
+      {
+        if (!state.tags.includes(action.payload)) return state;
+        var index = state.tags.indexOf(action.payload);
+        if (index == -1) return state;
+        return _extends({}, state, {
+          tags: state.tags.filter(function (item) {
+            return item !== state.tags[index];
+          })
+        });
+      }
     case "SET_POST_CONTENT":
       {
         return _extends({}, state, {

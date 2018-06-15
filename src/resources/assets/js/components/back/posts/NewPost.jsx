@@ -15,6 +15,23 @@ class NewPost extends Component {
         super(props);
     }
 
+    getSaveStatus() {
+        if (this.props.saving) {
+            return (
+                <button className="btn btn-success btn-block disabled">
+                    <i className="fe fe-save"></i>
+                    Saving...
+            </button>
+            );
+        }
+        return (
+            <button className="btn btn-success btn-block" onClick={() => this.props.dispatch(savePost(this.props.post.title, this.props.post.summary, this.props.tags, this.props.post.content, 1))}>
+                <i className="fe fe-save"></i>
+                Save
+             </button>
+        );
+    }
+
     render() {
         return (
             <div className="container-fluid">
@@ -71,16 +88,15 @@ class NewPost extends Component {
                                 <div className="form-group">
                                     <label className="form-label">Status</label>
                                     <select name="status" id="status" className="form-control">
-                                        <option value="draft">Draft</option>
-                                        <option value="publised">Publised</option>
-                                        <option value="scheduled">Scheduled</option>
+                                        <option value="3">Draft</option>
+                                        <option value="0">Publised</option>
                                     </select>
                                 </div>
+                                <div className="form-group text-center">
+                                    <small>Post scheduling and preview will be enabled after the post is saved</small>
+                                </div>
                                 <div className="form-group">
-                                    <button className="btn btn-success btn-block" onClick={() => this.props.dispatch(savePost(this.props.post.title, this.props.post.summary, this.props.tags, this.props.post.content, 1))}>
-                                        <i className="fe fe-save"></i>
-                                        Save
-                                    </button>
+                                    {this.getSaveStatus()}
                                 </div>
                             </CardBody>
                         </Card>

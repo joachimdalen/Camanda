@@ -18,11 +18,15 @@ export default class DismissableTag extends Component {
     componentDidCatch(error, info) {
     }
 
+    dismiss(event){
+        event.preventDefault();
+        this.props.dismiss();
+    }
     render() {
         return (
             <span className="tag">
                 {this.props.label}
-                <a href="#" className="tag-addon" onClick={this.props.dismiss}>
+                <a href="#" className="tag-addon" onClick={(e) => this.dismiss(e)}>
                     <i className="fe fe-x"></i>
                 </a>
             </span>
