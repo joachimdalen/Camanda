@@ -76,5 +76,6 @@ class BlogRepository
     public function createPost(array $data)
     {
         $post = $this->model->create($data);
+        return $post;
     }
 }

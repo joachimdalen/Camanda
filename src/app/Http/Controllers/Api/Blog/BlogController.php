@@ -66,7 +66,10 @@ class BlogController extends Controller
         // Collect all of the required information.
         $user = Auth::guard('api')->user();
         $data = $request->only(['title', 'summary', 'content', 'status']);
-        $tags = $request->only(['tags']);
+        $tags = [];
+        if ($request->filled('tags')) {
+            $tags = $request->get('tags');
+        }
 
         //@todo Here we should really be checking settings to see what kind
         //of slug should be used. Also add something to prevent it from
@@ -77,12 +80,15 @@ class BlogController extends Controller
         }
         $data['slug'] = $slug;
 
+        //Assign post to logged in user
+        $data['user_id'] = $user->id;
+
         //Return the newly created object.
         $created = $this->repo->createPost($data);
 
         // Create and assign the tags
-        $this->tagHelper->assignTagsToPost($tags);
+        $created['tags'] = $this->tagHelper->assignTagsToPost($tags, $created);
 
-        return BlogPostResource($created);
+        return new BlogPostResource($created);
     }
 }

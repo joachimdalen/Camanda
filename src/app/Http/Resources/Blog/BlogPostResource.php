@@ -27,6 +27,7 @@ class BlogPostResource extends JsonResource
             'updated_at' => $this->updated_at,
             'created_at_unix' => strtotime($this->created_at),
             'updated_at_unix' => strtotime($this->updated_at),
+            'tags' => $this->tags
         ];
     }
 }

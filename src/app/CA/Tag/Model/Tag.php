@@ -3,8 +3,8 @@
 namespace App\CA\Tag\Model;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Tag extends Model
+use App\CA\AppBaseModel;
+class Tag extends AppBaseModel
 {
     /**
      * Columns/Fields that is allowed to be mass assigned.

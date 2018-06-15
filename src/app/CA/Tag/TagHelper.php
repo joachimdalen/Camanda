@@ -14,25 +14,48 @@ class TagHelper
     protected $tagRepo;
     protected $postTagRepo;
 
-    public function __constructor(TagRepository $tagRepo, PostTagRepository $postTagRepo)
+    /**
+     * TagHelper constructor.
+     *
+     * @param TagRepository $tagRepo
+     * @param PostTagRepository $postTagRepo
+     */
+    public function __construct(TagRepository $tagRepo, PostTagRepository $postTagRepo)
     {
         $this->tagRepo = $tagRepo;
         $this->postTagRepo = $postTagRepo;
 
     }
+    /**
+     * Assign a set of new tags to a post.
+     *
+     * @param array $tags
+     * @param BlogPost $post
+     * @return Tag[]
+     */
     public function assignTagsToPost(array $tags, BlogPost $post)
     {
+        $assignedTags = [];
         foreach ($tags as $tag) {
-            $existingTag = $this->tagRepo->getTagFromLabel($tag->label);
+            $existingTag = $this->tagRepo->getTagFromLabel($tag['label']);
             if ($existingTag) {
                 $this->postTagRepo->bindTag($existingTag->id, $post->id);
+                $assignedTags[] = $existingTag;
             } else {
-                $createdTag = $this->tagRepo->createTag($tag->label);
+                $createdTag = $this->tagRepo->createTag($tag['label']);
                 $this->postTagRepo->bindTag($createdTag->id, $post->id);
+                $assignedTags[] = $createdTag;
             }
         }
+        return $assignedTags;
     }
 
+    /**
+     * Get all tags associated with the given blog post.
+     *
+     * @param BlogPost $post
+     * @return Tag[]
+     */
     public function getTagsForPost(BlogPost $post)
     {
         $tagsRaw = $this->postTagRepo->getTagsForPost($post->id);

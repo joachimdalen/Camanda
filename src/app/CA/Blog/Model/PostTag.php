@@ -2,10 +2,9 @@
 
 namespace App\CA\Blog\Model;
 
-use App\CA\AppBaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class PostTag extends AppBaseModel
+class PostTag extends Model
 {
     /**
      * Columns/Fields that is allowed to be mass assigned.
@@ -13,6 +12,15 @@ class PostTag extends AppBaseModel
      * @var array
      */
     protected $fillable = [
-
+        'tag_id',
+        'post_id',
     ];
+
+    /**
+     * Set if table contains created_at and updated_at.
+     * When set to false these timestamps will not be updated.
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
 }
