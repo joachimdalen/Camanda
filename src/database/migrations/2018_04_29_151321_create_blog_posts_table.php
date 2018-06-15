@@ -18,7 +18,7 @@ class CreateBlogPostsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('user_id');
             $table->string('title');
-            $table->string('slug')->unique()->index()->nullable();
+            $table->string('slug')->unique()->index();
             $table->text('content');
             $table->string('summary');
             $table->integer('status')->default(PostStatus::DRAFT);

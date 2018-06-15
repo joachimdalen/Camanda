@@ -12,7 +12,6 @@ class BlogRepository
      */
     private $model;
 
-
     /**
      * BlogRepository constructor.
      * @param BlogPost $post
@@ -55,15 +54,19 @@ class BlogRepository
     /**
      * Get all posts created by a user.
      *
-     * @param int $userId
-     * @return void
+     * @param string $userId
+     * @param boolean $paginate
+     * @param integer $pageSize
+     * @return mixed
      */
-    public function getPostsForUser($userId)
+    public function getPostsForUser($userId, $paginate = true, $pageSize = 25)
     {
-        $posts = $this->model->where('user_id', $userId)->paginate(25);
-        /*  $posts->getCollection()->map(function ($post) {
-        $post->tags = $this->tagRepo->getTagsForPost($post->id);
-        });*/
+        $posts = $this->model->where('user_id', $userId);
+        if ($paginate) {
+            $posts->paginate($pageSize);
+        } else {
+            $posts->get();
+        }
         return $posts;
     }
 

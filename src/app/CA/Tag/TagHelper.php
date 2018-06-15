@@ -10,8 +10,14 @@ use App\CA\Tag\TagRepository;
  */
 class TagHelper
 {
-
+    /**
+     * @var TagRepository
+     */
     protected $tagRepo;
+
+    /**
+     * @var PostTagRepository
+     */
     protected $postTagRepo;
 
     /**
@@ -26,6 +32,7 @@ class TagHelper
         $this->postTagRepo = $postTagRepo;
 
     }
+
     /**
      * Assign a set of new tags to a post.
      *
@@ -37,6 +44,9 @@ class TagHelper
     {
         $assignedTags = [];
         foreach ($tags as $tag) {
+            //Check if a tag with the same label already exists, if so, assign that one
+            //to the current post. If not, create a new tag and assign.
+            //Using the same tags/tag-ids will allow us to add filtering based on tags.
             $existingTag = $this->tagRepo->getTagFromLabel($tag['label']);
             if ($existingTag) {
                 $this->postTagRepo->bindTag($existingTag->id, $post->id);

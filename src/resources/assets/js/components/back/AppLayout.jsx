@@ -34,7 +34,7 @@ export default class AppLayout extends Component {
                                         <Link to={`/blog/posts`} className="nav-link"><i className="fe fe-edit-2"></i>Posts</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <a href="#" className="nav-link"><i className="fe fe-image"></i>Images</a>
+                                        <Link to={`/settings`} className="nav-link"><i className="fe fe-cog"></i>Settings</Link>
                                     </li>
                                     <li className="nav-item">
                                         <a href="#" className="nav-link"><i className="fe fe-tag"></i>Whitelabel</a>
