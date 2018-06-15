@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Switch, Link } from 'react-router-dom'
-
+import ReduxToastr from 'react-redux-toastr'
 //Import route components
 import NewPost from './posts/NewPost';
 import PostsList from './posts/PostsList';
@@ -31,7 +31,7 @@ export default class AppLayout extends Component {
                                         <a href="#" className="nav-link"><i className="fe fe-paperclip"></i>Blog</a>
                                     </li>
                                     <li className="nav-item">
-                                    <Link to={`/blog/posts`} className="nav-link"><i className="fe fe-edit-2"></i>Posts</Link>
+                                        <Link to={`/blog/posts`} className="nav-link"><i className="fe fe-edit-2"></i>Posts</Link>
                                     </li>
                                     <li className="nav-item">
                                         <a href="#" className="nav-link"><i className="fe fe-image"></i>Images</a>
@@ -55,6 +55,14 @@ export default class AppLayout extends Component {
                         </Switch>
                     </div>
                 </div>
+                <ReduxToastr
+                    timeOut={4000}
+                    newestOnTop={false}
+                    preventDuplicates
+                    position="top-left"
+                    transitionIn="fadeIn"
+                    transitionOut="fadeOut"
+                    progressBar />
             </div>
         );
     }

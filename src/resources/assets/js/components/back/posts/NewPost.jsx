@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from "react-redux"
+import {toastr} from 'react-redux-toastr'
 import { setPostTitle, setPostSummary, addPostTag, removePostTag, setPostContent, savePost } from '../../../actions/newPostActions';
 import Card from "../../shared/card/Card";
 import CardHeader from "../../shared/card/CardHeader";
@@ -97,6 +98,9 @@ class NewPost extends Component {
                                 </div>
                                 <div className="form-group">
                                     {this.getSaveStatus()}
+                                    <button
+                                        onClick={() => toastr.success('The title', 'The message')}
+                                        type="button">Toastr Success</button>
                                 </div>
                             </CardBody>
                         </Card>

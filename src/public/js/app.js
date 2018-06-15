@@ -5565,6 +5565,66 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/classnames/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if (typeof module !== 'undefined' && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {
+		window.classNames = classNames;
+	}
+}());
+
+
+/***/ }),
+
 /***/ "./node_modules/connected-react-router/lib/ConnectedRouter.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -68487,6 +68547,1929 @@ QuillToolbar.defaultColors = defaultColors;
 
 /***/ }),
 
+/***/ "./node_modules/react-redux-toastr/lib/Button.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__("./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Button = function Button(props) {
+  return _react2.default.createElement(
+    'button',
+    { type: 'button', onClick: function onClick() {
+        return props.onClick();
+      }, className: 'rrt-button ' + props.className },
+    props.children
+  );
+};
+
+Button.displayName = 'ReduxConfirmButton';
+
+exports.default = Button;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/Icon.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__("./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__("./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _icons = __webpack_require__("./node_modules/react-redux-toastr/lib/icons.js");
+
+var _icons2 = _interopRequireDefault(_icons);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+
+var Icon = function (_React$Component) {
+  _inherits(Icon, _React$Component);
+
+  function Icon() {
+    _classCallCheck(this, Icon);
+
+    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+  }
+
+  Icon.prototype.render = function render() {
+    var size = this.props.size;
+
+    var styles = {
+      width: size,
+      height: size
+    };
+
+    return _react2.default.createElement(
+      'svg',
+      {
+        className: (0, _classnames2.default)(this.props.className, 'toastr-icon'),
+        xmlns: 'http://www.w3.org/2000/svg',
+        preserveAspectRatio: 'xMidYMid meet',
+        viewBox: '0 0 ' + this.props.size + ' ' + this.props.size,
+        style: styles
+      },
+      (0, _icons2.default)(this.props.name)
+    );
+  };
+
+  return Icon;
+}(_react2.default.Component);
+
+Icon.displayName = 'ReduxToastrIcon';
+Icon.defaultProps = {
+  size: 32
+};
+exports.default = Icon;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/ProgressBar.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__("./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__("./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+
+var ProgressBar = function (_React$Component) {
+  _inherits(ProgressBar, _React$Component);
+
+  function ProgressBar(props) {
+    _classCallCheck(this, ProgressBar);
+
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+
+    _this.state = { percent: 100 };
+    _this.intervalId = null;
+    return _this;
+  }
+
+  ProgressBar.prototype.componentDidMount = function componentDidMount() {
+    var _this2 = this;
+
+    var distance = 100 / (this.props.duration / 10);
+    this.intervalId = setInterval(function () {
+      var percent = _this2.state.percent - distance;
+
+      _this2.setState({ percent: percent > 0 ? percent : 0 });
+    }, 10);
+  };
+
+  ProgressBar.prototype.componentDidUpdate = function componentDidUpdate() {
+    if (this.state.percent <= 0 && this.intervalId) {
+      clearTimeout(this.intervalId);
+    }
+  };
+
+  ProgressBar.prototype.componentWillUnmount = function componentWillUnmount() {
+    if (this.intervalId) {
+      clearTimeout(this.intervalId);
+    }
+  };
+
+  ProgressBar.prototype.render = function render() {
+    var percent = this.state.percent;
+
+
+    return _react2.default.createElement(
+      'div',
+      { className: 'rrt-progress-container' },
+      _react2.default.createElement('div', { className: 'rrt-progressbar', style: { width: percent + '%' } })
+    );
+  };
+
+  return ProgressBar;
+}(_react2.default.Component);
+
+ProgressBar.displayName = 'ProgressBar';
+ProgressBar.propTypes = {
+  duration: _propTypes2.default.number.isRequired
+};
+exports.default = ProgressBar;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/ReduxToastr.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ReduxToastr = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _react = __webpack_require__("./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__("./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _reactRedux = __webpack_require__("./node_modules/react-redux/es/index.js");
+
+var _classnames = __webpack_require__("./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _ToastrBox = __webpack_require__("./node_modules/react-redux-toastr/lib/ToastrBox.js");
+
+var _ToastrBox2 = _interopRequireDefault(_ToastrBox);
+
+var _ToastrConfirm = __webpack_require__("./node_modules/react-redux-toastr/lib/ToastrConfirm.js");
+
+var _ToastrConfirm2 = _interopRequireDefault(_ToastrConfirm);
+
+var _actions = __webpack_require__("./node_modules/react-redux-toastr/lib/actions.js");
+
+var actions = _interopRequireWildcard(_actions);
+
+var _toastrEmitter = __webpack_require__("./node_modules/react-redux-toastr/lib/toastrEmitter.js");
+
+var _utils = __webpack_require__("./node_modules/react-redux-toastr/lib/utils.js");
+
+var _constants = __webpack_require__("./node_modules/react-redux-toastr/lib/constants.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+
+var ReduxToastr = exports.ReduxToastr = function (_React$Component) {
+  _inherits(ReduxToastr, _React$Component);
+
+  function ReduxToastr(props) {
+    _classCallCheck(this, ReduxToastr);
+
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+
+    _this.toastrFired = {};
+    _this.toastrPositions = ['top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center'];
+
+    (0, _utils.updateConfig)(props);
+    return _this;
+  }
+
+  ReduxToastr.prototype.componentDidMount = function componentDidMount() {
+    var _props = this.props,
+        add = _props.add,
+        showConfirm = _props.showConfirm,
+        clean = _props.clean,
+        removeByType = _props.removeByType,
+        remove = _props.remove;
+
+    _toastrEmitter.EE.on('toastr/confirm', showConfirm);
+    _toastrEmitter.EE.on('add/toastr', add);
+    _toastrEmitter.EE.on('clean/toastr', clean);
+    _toastrEmitter.EE.on('removeByType/toastr', removeByType);
+    _toastrEmitter.EE.on('remove/toastr', remove);
+  };
+
+  ReduxToastr.prototype.componentWillUnmount = function componentWillUnmount() {
+    _toastrEmitter.EE.removeListener('toastr/confirm');
+    _toastrEmitter.EE.removeListener('add/toastr');
+    _toastrEmitter.EE.removeListener('clean/toastr');
+    _toastrEmitter.EE.removeListener('removeByType/toastr');
+    _toastrEmitter.EE.removeListener('remove/toastr');
+    this.toastrFired = {};
+  };
+
+  ReduxToastr.prototype._addToMemory = function _addToMemory(id) {
+    this.toastrFired[id] = true;
+  };
+
+  ReduxToastr.prototype._renderToastrForPosition = function _renderToastrForPosition(position) {
+    var _this2 = this;
+
+    var toastrs = this.props.toastr.toastrs;
+
+
+    if (toastrs) {
+      return toastrs.filter(function (item) {
+        return item.position === position;
+      }).map(function (item) {
+        var mergedItem = _extends({}, item, {
+          options: _extends({
+            progressBar: _this2.props.progressBar,
+            transitionIn: _this2.props.transitionIn,
+            transitionOut: _this2.props.transitionOut
+          }, item.options)
+        });
+
+        return _react2.default.createElement(
+          'span',
+          { key: item.id },
+          _react2.default.createElement(_ToastrBox2.default, _extends({
+            inMemory: _this2.toastrFired,
+            addToMemory: function addToMemory() {
+              return _this2._addToMemory(item.id);
+            },
+            item: mergedItem
+          }, _this2.props)),
+          item.options && item.options.attention && _react2.default.createElement('div', {
+            onClick: function onClick() {
+              if (typeof item.options.onAttentionClick === 'function') {
+                item.options.onAttentionClick(item.id);
+              } else {
+                _this2.props.remove(item.id);
+              }
+            },
+            className: 'toastr-attention' })
+        );
+      });
+    }
+  };
+
+  ReduxToastr.prototype._renderToastrs = function _renderToastrs() {
+    var _this3 = this;
+
+    var toastr = this.props.toastr;
+
+    var width = toastr.toastrs && toastr.toastrs[0] && toastr.toastrs[0].options && toastr.toastrs[0].options.width;
+    var style = width ? { width: width } : {};
+    return _react2.default.createElement(
+      'span',
+      null,
+      this.toastrPositions.map(function (position) {
+        return _react2.default.createElement(
+          'div',
+          { key: position, className: position, style: style },
+          _this3._renderToastrForPosition(position)
+        );
+      })
+    );
+  };
+
+  ReduxToastr.prototype.render = function render() {
+    var _props2 = this.props,
+        className = _props2.className,
+        toastr = _props2.toastr;
+
+    return _react2.default.createElement(
+      'span',
+      { className: (0, _classnames2.default)('redux-toastr', className), 'aria-live': 'assertive' },
+      toastr.confirm && _react2.default.createElement(_ToastrConfirm2.default, _extends({
+        confirm: toastr.confirm
+      }, this.props)),
+      this._renderToastrs()
+    );
+  };
+
+  return ReduxToastr;
+}(_react2.default.Component);
+
+ReduxToastr.displayName = 'ReduxToastr';
+ReduxToastr.propTypes = {
+  toastr: _propTypes2.default.object,
+  position: _propTypes2.default.string,
+  newestOnTop: _propTypes2.default.bool,
+  timeOut: _propTypes2.default.number,
+  confirmOptions: _propTypes2.default.object,
+  progressBar: _propTypes2.default.bool,
+  transitionIn: _propTypes2.default.oneOf(_constants.TRANSITIONS.in),
+  transitionOut: _propTypes2.default.oneOf(_constants.TRANSITIONS.out),
+  preventDuplicates: _propTypes2.default.bool
+};
+ReduxToastr.defaultProps = {
+  position: 'top-right',
+  newestOnTop: true,
+  timeOut: 5000,
+  progressBar: false,
+  transitionIn: _constants.TRANSITIONS.in[0],
+  transitionOut: _constants.TRANSITIONS.out[0],
+  preventDuplicates: false,
+  confirmOptions: {
+    okText: 'ok',
+    cancelText: 'cancel'
+  }
+};
+exports.default = (0, _reactRedux.connect)(function (state) {
+  return {
+    toastr: state.toastr ? state.toastr : state.get('toastr')
+  };
+}, actions)(ReduxToastr);
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/ToastrBox.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__("./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__("./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = __webpack_require__("./node_modules/classnames/index.js");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _ProgressBar = __webpack_require__("./node_modules/react-redux-toastr/lib/ProgressBar.js");
+
+var _ProgressBar2 = _interopRequireDefault(_ProgressBar);
+
+var _Icon = __webpack_require__("./node_modules/react-redux-toastr/lib/Icon.js");
+
+var _Icon2 = _interopRequireDefault(_Icon);
+
+var _utils = __webpack_require__("./node_modules/react-redux-toastr/lib/utils.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } //  eslint-disable-line no-unused-vars
+
+
+var ToastrBox = function (_React$Component) {
+  _inherits(ToastrBox, _React$Component);
+
+  function ToastrBox(props) {
+    _classCallCheck(this, ToastrBox);
+
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+
+    var _props$item$options = props.item.options,
+        transitionIn = _props$item$options.transitionIn,
+        transitionOut = _props$item$options.transitionOut;
+
+
+    _this.isHiding = false;
+    _this.shouldClose = false;
+    _this.intervalId = null;
+    _this.ignoreIsHiding = false;
+
+    _this.transitionIn = transitionIn || _this.props.transitionIn;
+    _this.transitionOut = transitionOut || _this.props.transitionOut;
+
+    _this.state = { progressBar: null };
+
+    (0, _utils._bind)(['renderSubComponent', 'renderIcon', 'renderToastr', 'renderCloseButton', 'renderMessage', '_onAnimationComplete', '_removeToastr', '_setTransition', '_clearTransition', '_setIntervalId', '_setIsHiding', '_setShouldClose'], _this);
+    return _this;
+  }
+
+  ToastrBox.prototype.componentDidMount = function componentDidMount() {
+    var item = this.props.item;
+
+    if (this.props.inMemory[item.id]) return;
+
+    var timeOut = this._getItemTimeOut();
+
+    if (timeOut) {
+      this._setIntervalId(setTimeout(this._removeToastr, timeOut));
+    }
+
+    if (timeOut && item.options.progressBar) {
+      this.setState({ progressBar: { duration: this._getItemTimeOut() } });
+    }
+
+    this._setTransition();
+    (0, _utils.onCSSTransitionEnd)(this.toastrBoxElement, this._onAnimationComplete);
+    this.props.addToMemory(item.id);
+  };
+
+  ToastrBox.prototype.componentWillUnmount = function componentWillUnmount() {
+    if (this.intervalId) {
+      clearTimeout(this.intervalId);
+    }
+  };
+
+  ToastrBox.prototype.handleClick = function handleClick() {
+    var onCloseButtonClick = this.props.item.options.onCloseButtonClick;
+
+    this.ignoreIsHiding = true;
+
+    if (onCloseButtonClick) {
+      onCloseButtonClick();
+    }
+
+    this._setShouldClose(true);
+    this._removeToastr();
+  };
+
+  ToastrBox.prototype.mouseEnter = function mouseEnter() {
+    clearTimeout(this.intervalId);
+
+    this._setIntervalId(null);
+    this._setIsHiding(false);
+
+    var progressBar = this.props.item.options.progressBar;
+
+    var timeOut = this._getItemTimeOut();
+
+    if (timeOut && progressBar) {
+      this.setState({ progressBar: null });
+    }
+  };
+
+  ToastrBox.prototype.mouseLeave = function mouseLeave() {
+    var _props$item$options2 = this.props.item.options,
+        removeOnHover = _props$item$options2.removeOnHover,
+        removeOnHoverTimeOut = _props$item$options2.removeOnHoverTimeOut;
+
+
+    if (!this.isHiding && (removeOnHover || this.shouldClose)) {
+      var interval = removeOnHover === true ? removeOnHoverTimeOut || 1000 : removeOnHover;
+      this._setIntervalId(setTimeout(this._removeToastr, interval));
+
+      var progressBar = this.props.item.options.progressBar;
+
+      var timeOut = this._getItemTimeOut();
+
+      if (timeOut && progressBar) {
+        this.setState({ progressBar: { duration: interval } });
+      }
+    }
+  };
+
+  ToastrBox.prototype.renderSubComponent = function renderSubComponent() {
+    var _this2 = this;
+
+    var _props$item = this.props.item,
+        id = _props$item.id,
+        options = _props$item.options;
+
+
+    var removeCurrentToastrFunc = function removeCurrentToastrFunc() {
+      return _this2.props.remove(id);
+    };
+
+    if ((0, _react.isValidElement)(options.component)) {
+      return _react2.default.cloneElement(options.component, {
+        remove: removeCurrentToastrFunc
+      });
+    }
+
+    return _react2.default.createElement(options.component, { remove: removeCurrentToastrFunc });
+  };
+
+  ToastrBox.prototype.renderIcon = function renderIcon() {
+    var _props$item2 = this.props.item,
+        type = _props$item2.type,
+        options = _props$item2.options;
+
+
+    if ((0, _react.isValidElement)(options.icon)) {
+      return _react2.default.cloneElement(options.icon);
+    }
+
+    var iconName = type === 'light' ? options.icon : type;
+    return _react2.default.createElement(_Icon2.default, { name: iconName });
+  };
+
+  ToastrBox.prototype.renderCloseButton = function renderCloseButton() {
+    return _react2.default.createElement(
+      'button',
+      {
+        type: 'button',
+        className: 'close-toastr',
+        onClick: this.handleClick.bind(this)
+      },
+      '\u2715'
+    );
+  };
+
+  ToastrBox.prototype.renderToastr = function renderToastr() {
+    var _props$item3 = this.props.item,
+        type = _props$item3.type,
+        options = _props$item3.options,
+        message = _props$item3.message,
+        title = _props$item3.title;
+
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'div',
+        { className: 'rrt-left-container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'rrt-holder' },
+          this.renderIcon()
+        )
+      ),
+      options.status && type === 'light' && _react2.default.createElement('div', { className: (0, _classnames2.default)('toastr-status', options.status) }),
+      _react2.default.createElement(
+        'div',
+        { className: 'rrt-middle-container' },
+        title && _react2.default.createElement(
+          'div',
+          { className: 'rrt-title' },
+          title
+        ),
+        message && _react2.default.createElement(
+          'div',
+          { className: 'rrt-text' },
+          message
+        ),
+        options.component && this.renderSubComponent()
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'rrt-right-container' },
+        options.showCloseButton && this.renderCloseButton()
+      ),
+      this.state.progressBar ? _react2.default.createElement(_ProgressBar2.default, this.state.progressBar) : null
+    );
+  };
+
+  ToastrBox.prototype.renderMessage = function renderMessage() {
+    var _props$item4 = this.props.item,
+        title = _props$item4.title,
+        message = _props$item4.message,
+        options = _props$item4.options;
+
+
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        'div',
+        { className: 'rrt-title' },
+        title,
+        this.renderCloseButton()
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'rrt-text' },
+        message,
+        options.component && this.renderSubComponent()
+      )
+    );
+  };
+
+  ToastrBox.prototype.toastr = function toastr() {
+    if (this.props.item.type === 'message') {
+      return this.renderMessage();
+    }
+
+    return this.renderToastr();
+  };
+
+  ToastrBox.prototype._getItemTimeOut = function _getItemTimeOut() {
+    var item = this.props.item;
+    var timeOut = item.options.timeOut;
+
+    if (typeof timeOut === 'undefined') {
+      timeOut = this.props.timeOut;
+    }
+
+    return timeOut;
+  };
+
+  ToastrBox.prototype._onAnimationComplete = function _onAnimationComplete() {
+    var _props = this.props,
+        remove = _props.remove,
+        item = _props.item;
+    var options = item.options,
+        id = item.id;
+
+
+    if (this.isHiding || this.ignoreIsHiding) {
+      this._setIsHiding(false);
+      this.ignoreIsHiding = false;
+      remove(id);
+      if (options.onHideComplete) {
+        options.onHideComplete();
+      }
+    } else if (!this.isHiding && options.onShowComplete) {
+      options.onShowComplete();
+    }
+  };
+
+  ToastrBox.prototype._removeToastr = function _removeToastr() {
+    if (!this.isHiding) {
+      this._setIsHiding(true);
+      this._setTransition(true);
+      (0, _utils.onCSSTransitionEnd)(this.toastrBoxElement, this._onAnimationComplete);
+    }
+  };
+
+  ToastrBox.prototype._setTransition = function _setTransition(hide) {
+    var _this3 = this;
+
+    var animationType = hide ? this.transitionOut : this.transitionIn;
+
+    var onEndListener = function onEndListener(e) {
+      if (e && e.target == _this3.toastrBoxElement) {
+        _this3.toastrBoxElement.classList.remove(animationType);
+      }
+    };
+
+    (0, _utils.onCSSTransitionEnd)(this.toastrBoxElement, onEndListener);
+    this.toastrBoxElement.classList.add(animationType);
+  };
+
+  ToastrBox.prototype._clearTransition = function _clearTransition() {
+    this.toastrBoxElement.classList.remove(this.transitionIn, this.transitionOut);
+  };
+
+  ToastrBox.prototype._setIntervalId = function _setIntervalId(intervalId) {
+    this.intervalId = intervalId;
+  };
+
+  ToastrBox.prototype._setIsHiding = function _setIsHiding(val) {
+    this.isHiding = val;
+  };
+
+  ToastrBox.prototype._setShouldClose = function _setShouldClose(val) {
+    this.shouldClose = val;
+  };
+
+  ToastrBox.prototype.render = function render() {
+    var _this4 = this;
+
+    var _props$item5 = this.props.item,
+        options = _props$item5.options,
+        type = _props$item5.type;
+
+
+    return _react2.default.createElement(
+      'div',
+      {
+        ref: function ref(_ref) {
+          return _this4.toastrBoxElement = _ref;
+        },
+        className: (0, _classnames2.default)('toastr', 'animated', 'rrt-' + type, options.className),
+        onMouseEnter: this.mouseEnter.bind(this),
+        onMouseLeave: this.mouseLeave.bind(this)
+      },
+      this.toastr()
+    );
+  };
+
+  return ToastrBox;
+}(_react2.default.Component);
+
+ToastrBox.displayName = 'ToastrBox';
+ToastrBox.propTypes = {
+  item: _propTypes2.default.shape({
+    options: _propTypes2.default.shape({
+      transitionIn: _propTypes2.default.string,
+      transitionOut: _propTypes2.default.string
+    })
+  })
+};
+exports.default = ToastrBox;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/ToastrConfirm.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__("./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__("./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _utils = __webpack_require__("./node_modules/react-redux-toastr/lib/utils.js");
+
+var _Button = __webpack_require__("./node_modules/react-redux-toastr/lib/Button.js");
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+
+var ENTER = 13;
+var ESC = 27;
+
+var ToastrConfirm = function (_React$Component) {
+  _inherits(ToastrConfirm, _React$Component);
+
+  function ToastrConfirm(props) {
+    _classCallCheck(this, ToastrConfirm);
+
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+
+    var _this$props = _this.props,
+        confirmOptions = _this$props.confirmOptions,
+        confirm = _this$props.confirm;
+    var _confirm$options = confirm.options,
+        okText = _confirm$options.okText,
+        cancelText = _confirm$options.cancelText,
+        transitionIn = _confirm$options.transitionIn,
+        transitionOut = _confirm$options.transitionOut,
+        disableCancel = _confirm$options.disableCancel;
+
+
+    _this.okText = okText || confirmOptions.okText;
+    _this.cancelText = cancelText || confirmOptions.cancelText;
+    _this.transitionIn = transitionIn || confirmOptions.transitionIn || props.transitionIn;
+    _this.transitionOut = transitionOut || confirmOptions.transitionOut || props.transitionOut;
+    _this.disableCancel = disableCancel || confirmOptions.disableCancel;
+    (0, _utils._bind)('setTransition removeConfirm handleOnKeyUp handleOnKeyDown', _this);
+    _this.isKeyDown = false;
+    return _this;
+  }
+
+  ToastrConfirm.prototype.componentDidMount = function componentDidMount() {
+    this.isHiding = false;
+    this.hasClicked = false;
+    this.confirmHolderElement.focus();
+
+    if (this.props.confirm.show) {
+      this.setTransition(true);
+    }
+  };
+
+  ToastrConfirm.prototype.handleOnKeyDown = function handleOnKeyDown(e) {
+    if ((0, _utils.keyCode)(e) == ENTER) {
+      e.preventDefault();
+    }
+    this.isKeyDown = true;
+  };
+
+  ToastrConfirm.prototype.handleButtonClick = function handleButtonClick(callback) {
+    var _this2 = this;
+
+    if (this.hasClicked) return;
+    this.hasClicked = true;
+
+    var onAnimationEnd = function onAnimationEnd() {
+      _this2.removeConfirm();
+      if (callback) {
+        callback();
+      }
+    };
+
+    this.setTransition();
+    (0, _utils.onCSSTransitionEnd)(this.confirmElement, onAnimationEnd);
+  };
+
+  ToastrConfirm.prototype.handleConfirmClick = function handleConfirmClick() {
+    var callback = this.props.confirm.options ? this.props.confirm.options.onOk : null;
+    this.handleButtonClick(callback);
+  };
+
+  ToastrConfirm.prototype.handleCancelClick = function handleCancelClick() {
+    var callback = this.props.confirm.options ? this.props.confirm.options.onCancel : null;
+    this.handleButtonClick(callback);
+  };
+
+  ToastrConfirm.prototype.setTransition = function setTransition(add) {
+    if (add) {
+      this.isHiding = false;
+      this.confirmElement.classList.add(this.transitionIn);
+      if ((0, _utils.isBrowser)()) return document.querySelector('body').classList.add('toastr-confirm-active');
+    }
+
+    this.isHiding = true;
+    this.confirmElement.classList.remove(this.transitionIn);
+    this.confirmElement.classList.add(this.transitionOut);
+  };
+
+  ToastrConfirm.prototype.removeConfirm = function removeConfirm() {
+    this.isHiding = false;
+    this.props.hideConfirm();
+    if ((0, _utils.isBrowser)()) return document.querySelector('body').classList.remove('toastr-confirm-active');
+  };
+
+  ToastrConfirm.prototype.handleOnKeyUp = function handleOnKeyUp(e) {
+    var code = (0, _utils.keyCode)(e);
+    if (code == ESC && !this.disableCancel) {
+      this.handleCancelClick();
+    } else if (code == ESC && this.disableCancel) {
+      this.handleConfirmClick();
+    } else if (code == ENTER && this.isKeyDown) {
+      this.isKeyDown = false;
+      this.handleConfirmClick();
+    }
+  };
+
+  ToastrConfirm.prototype.containsOkButton = function containsOkButton(buttons) {
+    return buttons && buttons.filter(function (button) {
+      return button.ok === true;
+    }).length > 0;
+  };
+
+  ToastrConfirm.prototype.containsCancelButton = function containsCancelButton(buttons) {
+    return buttons && buttons.filter(function (button) {
+      return button.cancel === true;
+    }).length > 0;
+  };
+
+  ToastrConfirm.prototype.getCustomButtonHandler = function getCustomButtonHandler(config) {
+    var _this3 = this;
+
+    if (config.ok === true) {
+      return this.handleConfirmClick.bind(this);
+    }
+    if (config.cancel === true) {
+      return this.handleCancelClick.bind(this);
+    }
+    return function () {
+      return _this3.handleButtonClick(config.handler);
+    };
+  };
+
+  ToastrConfirm.prototype.getCustomButtonText = function getCustomButtonText(config) {
+    if (config.ok === true) {
+      return this.okText;
+    }
+    if (config.cancel === true) {
+      return this.cancelText;
+    }
+    return config.text;
+  };
+
+  ToastrConfirm.prototype.getCustomButtonClassName = function getCustomButtonClassName(config) {
+    if (config.ok === true) {
+      return 'rrt-ok-btn';
+    }
+    if (config.cancel === true) {
+      return 'rrt-cancel-btn';
+    }
+    return config.className;
+  };
+
+  ToastrConfirm.prototype.render = function render() {
+    var _this4 = this;
+
+    var _props$confirm = this.props.confirm,
+        options = _props$confirm.options,
+        message = _props$confirm.message;
+
+
+    return _react2.default.createElement(
+      'div',
+      {
+        className: 'rrt-confirm-holder',
+        tabIndex: '-1',
+        ref: function ref(_ref2) {
+          return _this4.confirmHolderElement = _ref2;
+        },
+        onKeyDown: this.handleOnKeyDown,
+        onKeyUp: this.handleOnKeyUp,
+        role: 'alert'
+      },
+      _react2.default.createElement(
+        'div',
+        { className: 'rrt-confirm animated', ref: function ref(_ref) {
+            return _this4.confirmElement = _ref;
+          } },
+        message && _react2.default.createElement(
+          'div',
+          { className: 'rrt-message' },
+          message
+        ),
+        options.component && _react2.default.createElement(options.component, null),
+        _react2.default.createElement(
+          'div',
+          { className: 'rrt-buttons-holder' },
+          !this.containsOkButton(options.buttons) && _react2.default.createElement(
+            _Button2.default,
+            { className: 'rrt-ok-btn', onClick: function onClick() {
+                return _this4.handleConfirmClick();
+              } },
+            this.okText
+          ),
+          !this.disableCancel && !this.containsCancelButton(options.buttons) && _react2.default.createElement(
+            _Button2.default,
+            { className: 'rrt-cancel-btn', onClick: this.handleCancelClick.bind(this) },
+            this.cancelText
+          ),
+          options.buttons && options.buttons.map(function (button, index) {
+            if (button.cancel === true && _this4.disableCancel) {
+              return null;
+            }
+
+            var handler = _this4.getCustomButtonHandler(button);
+            var text = _this4.getCustomButtonText(button);
+            var className = _this4.getCustomButtonClassName(button);
+
+            return _react2.default.createElement(
+              _Button2.default,
+              { className: className, onClick: handler, key: index },
+              text
+            );
+          })
+        )
+      ),
+      _react2.default.createElement('div', { className: 'shadow' })
+    );
+  };
+
+  return ToastrConfirm;
+}(_react2.default.Component);
+
+ToastrConfirm.displayName = 'ToastrConfirm';
+ToastrConfirm.propTypes = {
+  confirm: _propTypes2.default.shape({
+    options: _propTypes2.default.shape({
+      transitionIn: _propTypes2.default.string,
+      transitionOut: _propTypes2.default.string
+    })
+  })
+};
+exports.default = ToastrConfirm;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/actions.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeByType = exports.hideConfirm = exports.showConfirm = exports.remove = exports.clean = undefined;
+exports.add = add;
+
+var _constants = __webpack_require__("./node_modules/react-redux-toastr/lib/constants.js");
+
+var _utils = __webpack_require__("./node_modules/react-redux-toastr/lib/utils.js");
+
+var _reducer = __webpack_require__("./node_modules/react-redux-toastr/lib/reducer.js");
+
+var _config = __webpack_require__("./node_modules/react-redux-toastr/lib/config.js");
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function add(toastr) {
+  if (_config2.default.preventDuplicates && (0, _utils.preventDuplication)(_reducer.toastrsCache, toastr)) {
+    return {
+      type: _constants.ADD_TOASTR,
+      payload: {
+        ignoreToastr: true
+      }
+    };
+  }
+  return {
+    type: _constants.ADD_TOASTR,
+    payload: toastr
+  };
+}
+
+var clean = exports.clean = function clean() {
+  return { type: _constants.CLEAN_TOASTR };
+};
+
+var remove = exports.remove = function remove(payload) {
+  return {
+    type: _constants.REMOVE_TOASTR,
+    payload: payload
+  };
+};
+
+var showConfirm = exports.showConfirm = function showConfirm(payload) {
+  return {
+    type: _constants.SHOW_CONFIRM,
+    payload: payload
+  };
+};
+
+var hideConfirm = exports.hideConfirm = function hideConfirm() {
+  return { type: _constants.HIDE_CONFIRM };
+};
+
+var removeByType = exports.removeByType = function removeByType(payload) {
+  return {
+    type: _constants.REMOVE_BY_TYPE,
+    payload: payload
+  };
+};
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/config.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var toastr = {
+  maxAnimationDelay: 6000,
+  newestOnTop: true,
+  position: 'top-right',
+  preventDuplicates: true
+};
+
+exports.default = toastr;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/constants.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ADD_TOASTR = exports.ADD_TOASTR = '@ReduxToastr/toastr/ADD';
+var REMOVE_TOASTR = exports.REMOVE_TOASTR = '@ReduxToastr/toastr/REMOVE';
+var CLEAN_TOASTR = exports.CLEAN_TOASTR = '@ReduxToastr/toastr/CLEAN';
+var SHOW_CONFIRM = exports.SHOW_CONFIRM = '@ReduxToastr/confirm/SHOW';
+var HIDE_CONFIRM = exports.HIDE_CONFIRM = '@ReduxToastr/confirm/HIDE';
+var REMOVE_BY_TYPE = exports.REMOVE_BY_TYPE = '@ReduxToastr/toastr/REMOVE_BY_TYPE';
+// before add a new transition - check its presence in src/styles/animations.scss
+var TRANSITIONS = exports.TRANSITIONS = {
+  in: ['bounceIn', 'bounceInDown', 'fadeIn'],
+  out: ['bounceOut', 'bounceOutUp', 'fadeOut']
+};
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/icons.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (name) {
+  switch (name) {
+    case 'success':
+      return _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('path', { d: 'M27 4l-15 15-7-7-5 5 12 12 20-20z' })
+      );
+    case 'info':
+      return _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('path', { d: 'M14 9.5c0-0.825 0.675-1.5 1.5-1.5h1c0.825 0 1.5 0.675 1.5 1.5v1c0 0.825-0.675 1.5-1.5 1.5h-1c-0.825 0-1.5-0.675-1.5-1.5v-1z' }),
+        _react2.default.createElement('path', { d: 'M20 24h-8v-2h2v-6h-2v-2h6v8h2z' }),
+        _react2.default.createElement('path', { d: 'M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13z' })
+      );
+    case 'warning':
+      return _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('path', { d: 'M16 2.899l13.409 26.726h-26.819l13.409-26.726zM16 0c-0.69 0-1.379 0.465-1.903 1.395l-13.659 27.222c-1.046 1.86-0.156 3.383 1.978 3.383h27.166c2.134 0 3.025-1.522 1.978-3.383h0l-13.659-27.222c-0.523-0.93-1.213-1.395-1.903-1.395v0z' }),
+        _react2.default.createElement('path', { d: 'M18 26c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z' }),
+        _react2.default.createElement('path', { d: 'M16 22c-1.105 0-2-0.895-2-2v-6c0-1.105 0.895-2 2-2s2 0.895 2 2v6c0 1.105-0.895 2-2 2z' })
+      );
+    case 'error':
+      return _react2.default.createElement(
+        'g',
+        null,
+        _react2.default.createElement('path', { d: 'M12,0C5.373,0,0,5.373,0,12s5.373,12,12,12s12-5.373,12-12S18.627,0,12,0z M12,19.66 c-0.938,0-1.58-0.723-1.58-1.66c0-0.964,0.669-1.66,1.58-1.66c0.963,0,1.58,0.696,1.58,1.66C13.58,18.938,12.963,19.66,12,19.66z M12.622,13.321c-0.239,0.815-0.992,0.829-1.243,0c-0.289-0.956-1.316-4.585-1.316-6.942c0-3.11,3.891-3.125,3.891,0 C13.953,8.75,12.871,12.473,12.622,13.321z' })
+      );
+    default:
+      return null;
+  }
+};
+
+var _react = __webpack_require__("./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.toastr = exports.reducer = exports.actions = undefined;
+
+var _ReduxToastr = __webpack_require__("./node_modules/react-redux-toastr/lib/ReduxToastr.js");
+
+var _ReduxToastr2 = _interopRequireDefault(_ReduxToastr);
+
+var _actions = __webpack_require__("./node_modules/react-redux-toastr/lib/actions.js");
+
+var ReduxToastrActions = _interopRequireWildcard(_actions);
+
+var _reducer = __webpack_require__("./node_modules/react-redux-toastr/lib/reducer.js");
+
+var _reducer2 = _interopRequireDefault(_reducer);
+
+var _toastrEmitter = __webpack_require__("./node_modules/react-redux-toastr/lib/toastrEmitter.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _ReduxToastr2.default;
+var actions = exports.actions = ReduxToastrActions;
+var reducer = exports.reducer = _reducer2.default;
+var toastr = exports.toastr = _toastrEmitter.toastrEmitter;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/reducer.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.toastrsCache = undefined;
+
+var _createReducer;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _utils = __webpack_require__("./node_modules/react-redux-toastr/lib/utils.js");
+
+var _config = __webpack_require__("./node_modules/react-redux-toastr/lib/config.js");
+
+var _config2 = _interopRequireDefault(_config);
+
+var _constants = __webpack_require__("./node_modules/react-redux-toastr/lib/constants.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+// TOTO: find a better way of handling this issue
+// We will cache data so we can check for duplicated before fire the add action.
+var toastrsCache = exports.toastrsCache = [];
+
+var initialState = {
+  toastrs: [],
+  confirm: null
+};
+
+exports.default = (0, _utils.createReducer)(initialState, (_createReducer = {}, _defineProperty(_createReducer, _constants.ADD_TOASTR, function (state, toastr) {
+  if (toastr.ignoreToastr) {
+    return state;
+  }
+
+  var newToastr = _extends({
+    id: (0, _utils.guid)(),
+    position: _config2.default.position
+  }, toastr);
+
+  var newState = {};
+  if (!_config2.default.newestOnTop) {
+    newState = _extends({}, state, {
+      toastrs: [].concat(_toConsumableArray(state.toastrs), [newToastr])
+    });
+  } else {
+    newState = _extends({}, state, {
+      toastrs: [newToastr].concat(_toConsumableArray(state.toastrs))
+    });
+  }
+  exports.toastrsCache = toastrsCache = newState.toastrs;
+  return newState;
+}), _defineProperty(_createReducer, _constants.REMOVE_TOASTR, function (state, id) {
+  var newState = _extends({}, state, {
+    toastrs: state.toastrs.filter(function (toastr) {
+      return toastr.id !== id;
+    })
+  });
+
+  exports.toastrsCache = toastrsCache = newState.toastrs;
+  return newState;
+}), _defineProperty(_createReducer, _constants.REMOVE_BY_TYPE, function (state, type) {
+  var newState = _extends({}, state, {
+    toastrs: state.toastrs.filter(function (toastr) {
+      return toastr.type !== type;
+    })
+  });
+
+  exports.toastrsCache = toastrsCache = newState.toastrs;
+  return newState;
+}), _defineProperty(_createReducer, _constants.CLEAN_TOASTR, function (state) {
+  exports.toastrsCache = toastrsCache = [];
+  return _extends({}, state, {
+    toastrs: []
+  });
+}), _defineProperty(_createReducer, _constants.SHOW_CONFIRM, function (state, _ref) {
+  var id = _ref.id,
+      message = _ref.message,
+      options = _ref.options;
+
+  return _extends({}, state, {
+    confirm: {
+      id: id || (0, _utils.guid)(),
+      show: true,
+      message: message,
+      options: options || {}
+    }
+  });
+}), _defineProperty(_createReducer, _constants.HIDE_CONFIRM, function (state) {
+  return _extends({}, state, {
+    confirm: null
+  });
+}), _createReducer));
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/toastrEmitter.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.toastrEmitter = exports.EE = undefined;
+
+var _utils = __webpack_require__("./node_modules/react-redux-toastr/lib/utils.js");
+
+var _eventemitter = __webpack_require__("./node_modules/react-redux-toastr/node_modules/eventemitter3/index.js");
+
+var _eventemitter2 = _interopRequireDefault(_eventemitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var emitter = new _eventemitter2.default();
+
+var addToToastr = function addToToastr(type, array) {
+  return emitter.emit('add/toastr', (0, _utils.mapToToastrMessage)(type, array));
+};
+
+var actions = {};
+['light', 'message', 'info', 'success', 'warning', 'error'].forEach(function (item) {
+  actions[item] = function () {
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return addToToastr(item, args);
+  };
+});
+
+actions.clean = function () {
+  return emitter.emit('clean/toastr');
+};
+
+/**
+ * @params: can be a ID or a object that with a property type: 'success'
+ * and by passing this we will remove all toastr with that type.
+ */
+actions.removeByType = function (type) {
+  return emitter.emit('removeByType/toastr', type);
+};
+
+actions.remove = function (id) {
+  return emitter.emit('remove/toastr', id);
+};
+
+actions.confirm = function () {
+  emitter.emit('toastr/confirm', {
+    message: arguments.length <= 0 ? undefined : arguments[0],
+    options: (arguments.length <= 1 ? undefined : arguments[1]) || {}
+  });
+};
+
+var EE = exports.EE = emitter;
+var toastrEmitter = exports.toastrEmitter = actions;
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/lib/utils.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.toastrWarn = toastrWarn;
+exports.createReducer = createReducer;
+exports.isBrowser = isBrowser;
+exports.keyCode = keyCode;
+exports.mapToToastrMessage = mapToToastrMessage;
+exports.guid = guid;
+exports.onCSSTransitionEnd = onCSSTransitionEnd;
+exports.preventDuplication = preventDuplication;
+exports.updateConfig = updateConfig;
+exports._bind = _bind;
+
+var _config = __webpack_require__("./node_modules/react-redux-toastr/lib/config.js");
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function whichAnimationEvent() {
+  var t = void 0;
+  var el = document.createElement('fakeelement');
+
+  var transitions = {
+    animation: 'animationend',
+    oanimation: 'oanimationend',
+    MSAnimation: 'MSAnimationEnd',
+    webkitAnimation: 'webkitAnimationEnd'
+  };
+
+  for (t in transitions) {
+    if (el.style[t] !== undefined) {
+      return transitions[t];
+    }
+  }
+}
+
+function isString(obj) {
+  if (typeof obj == 'string') {
+    return true;
+  }
+  return false;
+}
+
+function toastrWarn(message) {
+  if (false) {
+    return null;
+  }
+  console.warn('[react-redux-toastr] ' + message);
+}
+
+function createReducer(initialState, fnMap) {
+  return function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var _ref = arguments[1];
+    var type = _ref.type,
+        payload = _ref.payload;
+
+    var handle = fnMap[type];
+    return handle ? handle(state, payload) : state;
+  };
+}
+
+function isBrowser() {
+  if (typeof window !== 'undefined') {
+    return true;
+  }
+  return false;
+}
+
+function keyCode(e) {
+  return e.which ? e.which : e.keyCode;
+}
+
+function mapToToastrMessage(type, array) {
+  var obj = {};
+  obj.type = type;
+  obj.position = _config2.default.position;
+
+  obj.options = array.filter(function (item) {
+    return (typeof item === 'undefined' ? 'undefined' : _typeof(item)) == 'object';
+  })[0] || {};
+
+  if (obj.options.hasOwnProperty('position')) {
+    obj.position = obj.options.position;
+  }
+
+  if (!obj.options.hasOwnProperty('removeOnHover')) {
+    obj.options.removeOnHover = true;
+    if (type === 'message') {
+      obj.options.removeOnHover = false;
+    }
+  }
+
+  if (!obj.options.hasOwnProperty('showCloseButton')) {
+    obj.options.showCloseButton = true;
+  }
+
+  if (type === 'message' && !obj.options.hasOwnProperty('timeOut')) {
+    obj.options.timeOut = 0;
+  }
+
+  if (isString(array[0]) && isString(array[1])) {
+    obj.title = array[0];
+    obj.message = array[1];
+  } else if (isString(array[0]) && !isString(array[1])) {
+    obj.title = array[0];
+  } else {
+    obj.message = array[0];
+  }
+
+  return obj;
+}
+
+function guid() {
+  var r = function r() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  };
+  return r() + r() + r() + '-' + r() + '_' + r() + '-' + r() + '_' + r() + r() + r();
+}
+
+function onCSSTransitionEnd(node, callback) {
+  // if css animation is failed - dispatch event manually
+  var animationEnd = whichAnimationEvent();
+  var timeoutId = setTimeout(function () {
+    var e = new Event(animationEnd);
+    toastrWarn('The toastr box was closed automatically, please check \'transitionOut\' prop value');
+    node.dispatchEvent(e);
+  }, _config2.default.maxAnimationDelay);
+
+  var runOnce = function runOnce(e) {
+    clearTimeout(timeoutId);
+    // stopPropagation is not working in IE11 and Edge, the transitionend from the Button.js is waiting
+    // on the confirm animation to end first and not the Button.js
+    e.stopPropagation();
+    node.removeEventListener(animationEnd, runOnce);
+    callback && callback(e);
+  };
+  node.addEventListener(animationEnd, runOnce);
+}
+
+function preventDuplication(currentData, newObjec) {
+  var hasDuplication = false;
+  currentData.forEach(function (item) {
+    // If the toastr options implicitly specify not to prevent duplicates then skip
+    if (item.options.preventDuplicates === false) return;
+    // Because the toastr has a unic id we will check by the title and message.
+    if (item.title === newObjec.title && item.message === newObjec.message && item.type === newObjec.type) {
+      hasDuplication = true;
+    }
+  });
+  return hasDuplication;
+}
+
+function updateConfig(obj) {
+  Object.keys(_config2.default).forEach(function (key) {
+    if (obj.hasOwnProperty(key)) {
+      _config2.default[key] = obj[key];
+    }
+  });
+}
+
+function _bind(strinOrAray, scope) {
+  var array = strinOrAray;
+  if (!Array.isArray(strinOrAray)) {
+    array = strinOrAray.split(' ');
+  }
+  return array.map(function (item) {
+    return scope[item] = scope[item].bind(scope);
+  });
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-redux-toastr/node_modules/eventemitter3/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var has = Object.prototype.hasOwnProperty
+  , prefix = '~';
+
+/**
+ * Constructor to create a storage for our `EE` objects.
+ * An `Events` instance is a plain object whose properties are event names.
+ *
+ * @constructor
+ * @api private
+ */
+function Events() {}
+
+//
+// We try to not inherit from `Object.prototype`. In some engines creating an
+// instance in this way is faster than calling `Object.create(null)` directly.
+// If `Object.create(null)` is not supported we prefix the event names with a
+// character to make sure that the built-in object properties are not
+// overridden or used as an attack vector.
+//
+if (Object.create) {
+  Events.prototype = Object.create(null);
+
+  //
+  // This hack is needed because the `__proto__` property is still inherited in
+  // some old browsers like Android 4, iPhone 5.1, Opera 11 and Safari 5.
+  //
+  if (!new Events().__proto__) prefix = false;
+}
+
+/**
+ * Representation of a single event listener.
+ *
+ * @param {Function} fn The listener function.
+ * @param {Mixed} context The context to invoke the listener with.
+ * @param {Boolean} [once=false] Specify if the listener is a one-time listener.
+ * @constructor
+ * @api private
+ */
+function EE(fn, context, once) {
+  this.fn = fn;
+  this.context = context;
+  this.once = once || false;
+}
+
+/**
+ * Minimal `EventEmitter` interface that is molded against the Node.js
+ * `EventEmitter` interface.
+ *
+ * @constructor
+ * @api public
+ */
+function EventEmitter() {
+  this._events = new Events();
+  this._eventsCount = 0;
+}
+
+/**
+ * Return an array listing the events for which the emitter has registered
+ * listeners.
+ *
+ * @returns {Array}
+ * @api public
+ */
+EventEmitter.prototype.eventNames = function eventNames() {
+  var names = []
+    , events
+    , name;
+
+  if (this._eventsCount === 0) return names;
+
+  for (name in (events = this._events)) {
+    if (has.call(events, name)) names.push(prefix ? name.slice(1) : name);
+  }
+
+  if (Object.getOwnPropertySymbols) {
+    return names.concat(Object.getOwnPropertySymbols(events));
+  }
+
+  return names;
+};
+
+/**
+ * Return the listeners registered for a given event.
+ *
+ * @param {String|Symbol} event The event name.
+ * @param {Boolean} exists Only check if there are listeners.
+ * @returns {Array|Boolean}
+ * @api public
+ */
+EventEmitter.prototype.listeners = function listeners(event, exists) {
+  var evt = prefix ? prefix + event : event
+    , available = this._events[evt];
+
+  if (exists) return !!available;
+  if (!available) return [];
+  if (available.fn) return [available.fn];
+
+  for (var i = 0, l = available.length, ee = new Array(l); i < l; i++) {
+    ee[i] = available[i].fn;
+  }
+
+  return ee;
+};
+
+/**
+ * Calls each of the listeners registered for a given event.
+ *
+ * @param {String|Symbol} event The event name.
+ * @returns {Boolean} `true` if the event had listeners, else `false`.
+ * @api public
+ */
+EventEmitter.prototype.emit = function emit(event, a1, a2, a3, a4, a5) {
+  var evt = prefix ? prefix + event : event;
+
+  if (!this._events[evt]) return false;
+
+  var listeners = this._events[evt]
+    , len = arguments.length
+    , args
+    , i;
+
+  if (listeners.fn) {
+    if (listeners.once) this.removeListener(event, listeners.fn, undefined, true);
+
+    switch (len) {
+      case 1: return listeners.fn.call(listeners.context), true;
+      case 2: return listeners.fn.call(listeners.context, a1), true;
+      case 3: return listeners.fn.call(listeners.context, a1, a2), true;
+      case 4: return listeners.fn.call(listeners.context, a1, a2, a3), true;
+      case 5: return listeners.fn.call(listeners.context, a1, a2, a3, a4), true;
+      case 6: return listeners.fn.call(listeners.context, a1, a2, a3, a4, a5), true;
+    }
+
+    for (i = 1, args = new Array(len -1); i < len; i++) {
+      args[i - 1] = arguments[i];
+    }
+
+    listeners.fn.apply(listeners.context, args);
+  } else {
+    var length = listeners.length
+      , j;
+
+    for (i = 0; i < length; i++) {
+      if (listeners[i].once) this.removeListener(event, listeners[i].fn, undefined, true);
+
+      switch (len) {
+        case 1: listeners[i].fn.call(listeners[i].context); break;
+        case 2: listeners[i].fn.call(listeners[i].context, a1); break;
+        case 3: listeners[i].fn.call(listeners[i].context, a1, a2); break;
+        case 4: listeners[i].fn.call(listeners[i].context, a1, a2, a3); break;
+        default:
+          if (!args) for (j = 1, args = new Array(len -1); j < len; j++) {
+            args[j - 1] = arguments[j];
+          }
+
+          listeners[i].fn.apply(listeners[i].context, args);
+      }
+    }
+  }
+
+  return true;
+};
+
+/**
+ * Add a listener for a given event.
+ *
+ * @param {String|Symbol} event The event name.
+ * @param {Function} fn The listener function.
+ * @param {Mixed} [context=this] The context to invoke the listener with.
+ * @returns {EventEmitter} `this`.
+ * @api public
+ */
+EventEmitter.prototype.on = function on(event, fn, context) {
+  var listener = new EE(fn, context || this)
+    , evt = prefix ? prefix + event : event;
+
+  if (!this._events[evt]) this._events[evt] = listener, this._eventsCount++;
+  else if (!this._events[evt].fn) this._events[evt].push(listener);
+  else this._events[evt] = [this._events[evt], listener];
+
+  return this;
+};
+
+/**
+ * Add a one-time listener for a given event.
+ *
+ * @param {String|Symbol} event The event name.
+ * @param {Function} fn The listener function.
+ * @param {Mixed} [context=this] The context to invoke the listener with.
+ * @returns {EventEmitter} `this`.
+ * @api public
+ */
+EventEmitter.prototype.once = function once(event, fn, context) {
+  var listener = new EE(fn, context || this, true)
+    , evt = prefix ? prefix + event : event;
+
+  if (!this._events[evt]) this._events[evt] = listener, this._eventsCount++;
+  else if (!this._events[evt].fn) this._events[evt].push(listener);
+  else this._events[evt] = [this._events[evt], listener];
+
+  return this;
+};
+
+/**
+ * Remove the listeners of a given event.
+ *
+ * @param {String|Symbol} event The event name.
+ * @param {Function} fn Only remove the listeners that match this function.
+ * @param {Mixed} context Only remove the listeners that have this context.
+ * @param {Boolean} once Only remove one-time listeners.
+ * @returns {EventEmitter} `this`.
+ * @api public
+ */
+EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
+  var evt = prefix ? prefix + event : event;
+
+  if (!this._events[evt]) return this;
+  if (!fn) {
+    if (--this._eventsCount === 0) this._events = new Events();
+    else delete this._events[evt];
+    return this;
+  }
+
+  var listeners = this._events[evt];
+
+  if (listeners.fn) {
+    if (
+         listeners.fn === fn
+      && (!once || listeners.once)
+      && (!context || listeners.context === context)
+    ) {
+      if (--this._eventsCount === 0) this._events = new Events();
+      else delete this._events[evt];
+    }
+  } else {
+    for (var i = 0, events = [], length = listeners.length; i < length; i++) {
+      if (
+           listeners[i].fn !== fn
+        || (once && !listeners[i].once)
+        || (context && listeners[i].context !== context)
+      ) {
+        events.push(listeners[i]);
+      }
+    }
+
+    //
+    // Reset the array, or remove it completely if we have no more listeners.
+    //
+    if (events.length) this._events[evt] = events.length === 1 ? events[0] : events;
+    else if (--this._eventsCount === 0) this._events = new Events();
+    else delete this._events[evt];
+  }
+
+  return this;
+};
+
+/**
+ * Remove all listeners, or those of the specified event.
+ *
+ * @param {String|Symbol} [event] The event name.
+ * @returns {EventEmitter} `this`.
+ * @api public
+ */
+EventEmitter.prototype.removeAllListeners = function removeAllListeners(event) {
+  var evt;
+
+  if (event) {
+    evt = prefix ? prefix + event : event;
+    if (this._events[evt]) {
+      if (--this._eventsCount === 0) this._events = new Events();
+      else delete this._events[evt];
+    }
+  } else {
+    this._events = new Events();
+    this._eventsCount = 0;
+  }
+
+  return this;
+};
+
+//
+// Alias methods names because people roll like that.
+//
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+EventEmitter.prototype.addListener = EventEmitter.prototype.on;
+
+//
+// This function doesn't apply anymore.
+//
+EventEmitter.prototype.setMaxListeners = function setMaxListeners() {
+  return this;
+};
+
+//
+// Expose the prefix.
+//
+EventEmitter.prefixed = prefix;
+
+//
+// Allow `EventEmitter` to be imported as module namespace.
+//
+EventEmitter.EventEmitter = EventEmitter;
+
+//
+// Expose the module.
+//
+if (true) {
+  module.exports = EventEmitter;
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/react-redux/es/components/Provider.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -74889,8 +76872,10 @@ if (document.getElementById('app')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__("./node_modules/react-dom/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__("./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__posts_NewPost__ = __webpack_require__("./resources/assets/js/components/back/posts/NewPost.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__posts_PostsList__ = __webpack_require__("./resources/assets/js/components/back/posts/PostsList.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux_toastr__ = __webpack_require__("./node_modules/react-redux-toastr/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_redux_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__posts_NewPost__ = __webpack_require__("./resources/assets/js/components/back/posts/NewPost.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__posts_PostsList__ = __webpack_require__("./resources/assets/js/components/back/posts/PostsList.jsx");
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -75015,11 +77000,19 @@ var AppLayout = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Switch */],
                             null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Route */], { path: '/blog/write', component: __WEBPACK_IMPORTED_MODULE_3__posts_NewPost__["a" /* default */] }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Route */], { path: '/blog/posts', component: __WEBPACK_IMPORTED_MODULE_4__posts_PostsList__["a" /* default */] })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Route */], { path: '/blog/write', component: __WEBPACK_IMPORTED_MODULE_4__posts_NewPost__["a" /* default */] }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Route */], { path: '/blog/posts', component: __WEBPACK_IMPORTED_MODULE_5__posts_PostsList__["a" /* default */] })
                         )
                     )
-                )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_redux_toastr___default.a, {
+                    timeOut: 4000,
+                    newestOnTop: false,
+                    preventDuplicates: true,
+                    position: 'top-left',
+                    transitionIn: 'fadeIn',
+                    transitionOut: 'fadeOut',
+                    progressBar: true })
             );
         }
     }]);
@@ -75040,14 +77033,16 @@ var AppLayout = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__("./node_modules/react-dom/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_redux__ = __webpack_require__("./node_modules/react-redux/es/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__ = __webpack_require__("./resources/assets/js/actions/newPostActions.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_card_Card__ = __webpack_require__("./resources/assets/js/components/shared/card/Card.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_card_CardHeader__ = __webpack_require__("./resources/assets/js/components/shared/card/CardHeader.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_card_CardTitle__ = __webpack_require__("./resources/assets/js/components/shared/card/CardTitle.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_card_CardOptions__ = __webpack_require__("./resources/assets/js/components/shared/card/CardOptions.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_card_CardBody__ = __webpack_require__("./resources/assets/js/components/shared/card/CardBody.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_tags_TagInput__ = __webpack_require__("./resources/assets/js/components/shared/tags/TagInput.jsx");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared_editor_Editor__ = __webpack_require__("./resources/assets/js/components/shared/editor/Editor.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux_toastr__ = __webpack_require__("./node_modules/react-redux-toastr/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_redux_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__ = __webpack_require__("./resources/assets/js/actions/newPostActions.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_card_Card__ = __webpack_require__("./resources/assets/js/components/shared/card/Card.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_card_CardHeader__ = __webpack_require__("./resources/assets/js/components/shared/card/CardHeader.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_card_CardTitle__ = __webpack_require__("./resources/assets/js/components/shared/card/CardTitle.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_card_CardOptions__ = __webpack_require__("./resources/assets/js/components/shared/card/CardOptions.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_card_CardBody__ = __webpack_require__("./resources/assets/js/components/shared/card/CardBody.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared_tags_TagInput__ = __webpack_require__("./resources/assets/js/components/shared/tags/TagInput.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_editor_Editor__ = __webpack_require__("./resources/assets/js/components/shared/editor/Editor.jsx");
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -75055,6 +77050,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -75093,7 +77089,7 @@ var NewPost = function (_Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'button',
                 { className: 'btn btn-success btn-block', onClick: function onClick() {
-                        return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["c" /* savePost */])(_this2.props.post.title, _this2.props.post.summary, _this2.props.tags, _this2.props.post.content, 1));
+                        return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["c" /* savePost */])(_this2.props.post.title, _this2.props.post.summary, _this2.props.tags, _this2.props.post.content, 1));
                     } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
                 'Save'
@@ -75120,15 +77116,15 @@ var NewPost = function (_Component) {
                                 'div',
                                 { className: 'col-sm-12 col-md-12 col-lg-8 col-xl-3 order-md-1' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    __WEBPACK_IMPORTED_MODULE_4__shared_card_Card__["a" /* default */],
+                                    __WEBPACK_IMPORTED_MODULE_5__shared_card_Card__["a" /* default */],
                                     null,
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        __WEBPACK_IMPORTED_MODULE_5__shared_card_CardHeader__["a" /* default */],
+                                        __WEBPACK_IMPORTED_MODULE_6__shared_card_CardHeader__["a" /* default */],
                                         null,
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_card_CardTitle__["a" /* default */], { title: "Post Metadata" })
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_card_CardTitle__["a" /* default */], { title: "Post Metadata" })
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        __WEBPACK_IMPORTED_MODULE_8__shared_card_CardBody__["a" /* default */],
+                                        __WEBPACK_IMPORTED_MODULE_9__shared_card_CardBody__["a" /* default */],
                                         null,
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'div',
@@ -75140,7 +77136,7 @@ var NewPost = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'title', type: 'text', className: 'form-control', placeholder: 'Text..',
                                                 onChange: function onChange(e) {
-                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["f" /* setPostTitle */])(e.target.value));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["f" /* setPostTitle */])(e.target.value));
                                                 } })
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -75151,11 +77147,11 @@ var NewPost = function (_Component) {
                                                 { className: 'form-label' },
                                                 'Tags'
                                             ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__shared_tags_TagInput__["a" /* default */], { tags: this.props.tags, onDismissed: function onDismissed(tag) {
-                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["b" /* removePostTag */])(tag));
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__shared_tags_TagInput__["a" /* default */], { tags: this.props.tags, onDismissed: function onDismissed(tag) {
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["b" /* removePostTag */])(tag));
                                                 },
                                                 onAdded: function onAdded(tag) {
-                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["a" /* addPostTag */])(tag));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["a" /* addPostTag */])(tag));
                                                 } })
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -75174,7 +77170,7 @@ var NewPost = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', name: 'summary', rows: '6',
                                                 placeholder: 'Content..', onChange: function onChange(e) {
-                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["e" /* setPostSummary */])(e.target.value));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["e" /* setPostSummary */])(e.target.value));
                                                 } })
                                         )
                                     )
@@ -75184,14 +77180,14 @@ var NewPost = function (_Component) {
                                 'div',
                                 { className: 'col-sm-12 col-md-12 col-lg-4 col-xl-9 order-md-1' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    __WEBPACK_IMPORTED_MODULE_4__shared_card_Card__["a" /* default */],
+                                    __WEBPACK_IMPORTED_MODULE_5__shared_card_Card__["a" /* default */],
                                     { className: "zindex-fixed" },
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        __WEBPACK_IMPORTED_MODULE_5__shared_card_CardHeader__["a" /* default */],
+                                        __WEBPACK_IMPORTED_MODULE_6__shared_card_CardHeader__["a" /* default */],
                                         null,
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_card_CardTitle__["a" /* default */], { title: "Post Content" }),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_card_CardTitle__["a" /* default */], { title: "Post Content" }),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            __WEBPACK_IMPORTED_MODULE_7__shared_card_CardOptions__["a" /* default */],
+                                            __WEBPACK_IMPORTED_MODULE_8__shared_card_CardOptions__["a" /* default */],
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'a',
@@ -75201,10 +77197,10 @@ var NewPost = function (_Component) {
                                         )
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        __WEBPACK_IMPORTED_MODULE_8__shared_card_CardBody__["a" /* default */],
+                                        __WEBPACK_IMPORTED_MODULE_9__shared_card_CardBody__["a" /* default */],
                                         { className: "editor-container pb-0" },
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__shared_editor_Editor__["a" /* default */], { onChange: function onChange(e) {
-                                                return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions_newPostActions__["d" /* setPostContent */])(e));
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__shared_editor_Editor__["a" /* default */], { onChange: function onChange(e) {
+                                                return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["d" /* setPostContent */])(e));
                                             }, text: this.props.post.content })
                                     )
                                 )
@@ -75215,15 +77211,15 @@ var NewPost = function (_Component) {
                         'div',
                         { className: 'col-sm-12 col-md-3 col-lg-2 order-lg-2 order-lg-0 mb-4' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_4__shared_card_Card__["a" /* default */],
+                            __WEBPACK_IMPORTED_MODULE_5__shared_card_Card__["a" /* default */],
                             null,
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                __WEBPACK_IMPORTED_MODULE_5__shared_card_CardHeader__["a" /* default */],
+                                __WEBPACK_IMPORTED_MODULE_6__shared_card_CardHeader__["a" /* default */],
                                 null,
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__shared_card_CardTitle__["a" /* default */], { title: "Options" })
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__shared_card_CardTitle__["a" /* default */], { title: "Options" })
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                __WEBPACK_IMPORTED_MODULE_8__shared_card_CardBody__["a" /* default */],
+                                __WEBPACK_IMPORTED_MODULE_9__shared_card_CardBody__["a" /* default */],
                                 null,
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'div',
@@ -75260,7 +77256,16 @@ var NewPost = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'div',
                                     { className: 'form-group' },
-                                    this.getSaveStatus()
+                                    this.getSaveStatus(),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'button',
+                                        {
+                                            onClick: function onClick() {
+                                                return __WEBPACK_IMPORTED_MODULE_3_react_redux_toastr__["toastr"].success('The title', 'The message');
+                                            },
+                                            type: 'button' },
+                                        'Toastr Success'
+                                    )
                                 )
                             )
                         )
@@ -77196,15 +79201,18 @@ function humanFileSize(bytes, si) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__("./node_modules/redux/es/redux.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__newPostReducer__ = __webpack_require__("./resources/assets/js/reducers/newPostReducer.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__postsListReducer__ = __webpack_require__("./resources/assets/js/reducers/postsListReducer.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux_toastr__ = __webpack_require__("./node_modules/react-redux-toastr/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_redux_toastr__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__newPostReducer__ = __webpack_require__("./resources/assets/js/reducers/newPostReducer.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__postsListReducer__ = __webpack_require__("./resources/assets/js/reducers/postsListReducer.js");
 
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_0_redux__["c" /* combineReducers */])({
-  newPost: __WEBPACK_IMPORTED_MODULE_1__newPostReducer__["a" /* default */],
-  posts: __WEBPACK_IMPORTED_MODULE_2__postsListReducer__["a" /* default */]
+  toastr: __WEBPACK_IMPORTED_MODULE_1_react_redux_toastr__["reducer"],
+  newPost: __WEBPACK_IMPORTED_MODULE_2__newPostReducer__["a" /* default */],
+  posts: __WEBPACK_IMPORTED_MODULE_3__postsListReducer__["a" /* default */]
 }));
 
 /***/ }),
