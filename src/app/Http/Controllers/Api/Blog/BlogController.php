@@ -47,8 +47,11 @@ class BlogController extends Controller
      */
     public function getUserBlogPosts(Request $request)
     {
+        // Collect all of the required information.
         $user = Auth::guard('api')->user();
         $posts = $this->repo->getPostsForUser($user->id);
+
+        //Format and return the blog posts as a custom collection.
         return BlogPostResource::collection($posts);
     }
 
@@ -56,19 +59,30 @@ class BlogController extends Controller
      * Create a new blog post.
      *
      * @param CreatePostRequest $request
-     * @return BlogPost
+     * @return void
      */
     public function createBlogPost(CreatePostRequest $request)
     {
+        // Collect all of the required information.
         $user = Auth::guard('api')->user();
-        $data = $request->only(['title', 'summary', 'content']);
+        $data = $request->only(['title', 'summary', 'content', 'status']);
         $tags = $request->only(['tags']);
-        $settings = $request->only(['status']);
 
-        //Create and assign the tags
+        //@todo Here we should really be checking settings to see what kind
+        //of slug should be used. Also add something to prevent it from
+        //running more than x amount of time
+        $slug = str_random(12);
+        while ($this->repo->isSlugInUse($slug)) {
+            $slug = str_random(12);
+        }
+        $data['slug'] = $slug;
 
-        $created = $this->repo->
+        //Return the newly created object.
+        $created = $this->repo->createPost($data);
 
-        return response()->json(['m' => 's']);
+        // Create and assign the tags
+        $this->tagHelper->assignTagsToPost($tags);
+
+        return BlogPostResource($created);
     }
 }

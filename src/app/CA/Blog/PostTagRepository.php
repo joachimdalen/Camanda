@@ -24,4 +24,9 @@ class PostTagRepository
     {
         return $this->model->where('post_id', $id)->get();
     }
+
+    public function bindTag($postId, $tagId)
+    {
+        return $this->model->create(['post_id' => $postId, 'tag_id' => $tagId]);
+    }
 }

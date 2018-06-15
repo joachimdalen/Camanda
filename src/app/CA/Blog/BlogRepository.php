@@ -12,18 +12,22 @@ class BlogRepository
      */
     private $model;
 
-    private $tagRepo;
 
     /**
      * BlogRepository constructor.
      * @param BlogPost $post
      */
-    public function __construct(BlogPost $post, PostTagRepository $tagRepository)
+    public function __construct(BlogPost $post)
     {
         $this->model = $post;
-        $this->tagRepo = $tagRepository;
     }
 
+    /**
+     * Check to see if a slug is already in use by a blog post
+     *
+     * @param string $slug
+     * @return boolean
+     */
     public function isSlugInUse($slug)
     {
         $post = $this->model->where('slug', $slug)->first();
@@ -34,6 +38,11 @@ class BlogRepository
         return false;
     }
 
+    /**
+     * Get all posts from all users marked as public.
+     *
+     * @return void
+     */
     public function getPublicPosts()
     {
         $posts = $this->model->where('status', PostStatus::public)->paginate(25);
@@ -43,18 +52,29 @@ class BlogRepository
         return $posts;
     }
 
+    /**
+     * Get all posts created by a user.
+     *
+     * @param int $userId
+     * @return void
+     */
     public function getPostsForUser($userId)
     {
         $posts = $this->model->where('user_id', $userId)->paginate(25);
-      /*  $posts->getCollection()->map(function ($post) {
-            $post->tags = $this->tagRepo->getTagsForPost($post->id);
+        /*  $posts->getCollection()->map(function ($post) {
+        $post->tags = $this->tagRepo->getTagsForPost($post->id);
         });*/
         return $posts;
     }
 
-    public function createPost(array $data, array $tags)
+    /**
+     * Create a new post for the logged in user.
+     *
+     * @param array $data
+     * @return void
+     */
+    public function createPost(array $data)
     {
         $post = $this->model->create($data);
-        //Loop and check/create tags
     }
 }

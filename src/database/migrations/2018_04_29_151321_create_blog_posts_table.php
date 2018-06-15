@@ -22,6 +22,7 @@ class CreateBlogPostsTable extends Migration
             $table->text('content');
             $table->string('summary');
             $table->integer('status')->default(PostStatus::DRAFT);
+            $table->datetime('posted_at')->nullable();
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')

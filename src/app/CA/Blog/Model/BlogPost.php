@@ -9,6 +9,26 @@ use Illuminate\Database\Eloquent\Model;
 class BlogPost extends AppBaseModel
 {
 
+    /**
+     * Columns/Fields that is allowed to be mass assigned.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'title',
+        'slug',
+        'content',
+        'summary',
+        'status',
+        'posted_at',
+    ];
+
+    /**
+     * Get the staus display text from the status integer.
+     *
+     * @return string
+     */
     public function getStatusText()
     {
         switch ($this->status) {
