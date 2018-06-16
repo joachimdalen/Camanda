@@ -4,6 +4,7 @@ namespace App\CA\Blog;
 
 use App\CA\Blog\Model\BlogPost;
 use App\CA\Blog\PostStatus;
+use App\Http\Resources\Blog\BlogPostResource;
 
 class BlogRepository
 {
@@ -33,21 +34,20 @@ class BlogRepository
         if ($post) {
             return true;
         }
-
         return false;
     }
 
     /**
      * Get all posts from all users marked as public.
      *
-     * @return void
+     * @return mixed
      */
     public function getPublicPosts()
     {
-        $posts = $this->model->where('status', PostStatus::public)->paginate(25);
-        $posts->getCollection()->map(function ($post) {
+        $posts = $this->model->where('status', PostStatus::PUBLISHED)->paginate(25);
+        /*$posts->getCollection()->map(function ($post) {
             $post->tags = $this->tagRepo->getTagsForPost($post->id);
-        });
+        });*/
         return $posts;
     }
 
@@ -61,11 +61,14 @@ class BlogRepository
      */
     public function getPostsForUser($userId, $paginate = true, $pageSize = 25)
     {
-        $posts = $this->model->where('user_id', $userId);
+        $data = [
+            'id', 'title', 'slug', 'status', 'created_at', 'updated_at', 'posted_at', 'user_id'
+        ];
+        $posts = $this->model->where('user_id', $userId)->select($data);
         if ($paginate) {
-            $posts->paginate($pageSize);
+            $posts = $posts->paginate($pageSize);
         } else {
-            $posts->get();
+            $posts = $posts->get();
         }
         return $posts;
     }
@@ -74,7 +77,7 @@ class BlogRepository
      * Create a new post for the logged in user.
      *
      * @param array $data
-     * @return void
+     * @return BlogPost
      */
     public function createPost(array $data)
     {

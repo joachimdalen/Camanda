@@ -76960,10 +76960,10 @@ var AppLayout = function (_Component) {
                                         'li',
                                         { className: 'nav-item' },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'a',
-                                            { href: '#', className: 'nav-link' },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-image' }),
-                                            'Images'
+                                            __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* Link */],
+                                            { to: '/settings', className: 'nav-link' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-cog' }),
+                                            'Settings'
                                         )
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -77009,7 +77009,7 @@ var AppLayout = function (_Component) {
                     timeOut: 4000,
                     newestOnTop: false,
                     preventDuplicates: true,
-                    position: 'top-left',
+                    position: 'top-right',
                     transitionIn: 'fadeIn',
                     transitionOut: 'fadeOut',
                     progressBar: true })

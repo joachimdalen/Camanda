@@ -9,7 +9,7 @@ class BlogPostResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -23,11 +23,13 @@ class BlogPostResource extends JsonResource
             'summary' => $this->summary,
             'status' => $this->status,
             'status_text' => $this->getStatusText(),
+            'tags' => $this->tags,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'posted_at' => $this->posted_at,
             'created_at_unix' => strtotime($this->created_at),
             'updated_at_unix' => strtotime($this->updated_at),
-            'tags' => $this->tags
+            'posted_at_unix' => strtotime($this->posted_at),
         ];
     }
 }

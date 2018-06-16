@@ -1,8 +1,16 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { connect } from "react-redux"
+import {connect} from "react-redux"
 import {toastr} from 'react-redux-toastr'
-import { setPostTitle, setPostSummary, addPostTag, removePostTag, setPostContent, savePost } from '../../../actions/newPostActions';
+import {
+    setPostTitle,
+    setPostSummary,
+    addPostTag,
+    removePostTag,
+    setPostContent,
+    savePost,
+    setPostStatus
+} from '../../../actions/newPostActions';
 import Card from "../../shared/card/Card";
 import CardHeader from "../../shared/card/CardHeader";
 import CardTitle from "../../shared/card/CardTitle";
@@ -22,14 +30,15 @@ class NewPost extends Component {
                 <button className="btn btn-success btn-block disabled">
                     <i className="fe fe-save"></i>
                     Saving...
-            </button>
+                </button>
             );
         }
         return (
-            <button className="btn btn-success btn-block" onClick={() => this.props.dispatch(savePost(this.props.post.title, this.props.post.summary, this.props.tags, this.props.post.content, 1))}>
+            <button className="btn btn-success btn-block"
+                    onClick={() => this.props.dispatch(savePost(this.props.post.title, this.props.post.summary, this.props.tags, this.props.post.content, 1))}>
                 <i className="fe fe-save"></i>
                 Save
-             </button>
+            </button>
         );
     }
 
@@ -42,24 +51,27 @@ class NewPost extends Component {
                             <div className="col-sm-12 col-md-12 col-lg-8 col-xl-3 order-md-1">
                                 <Card>
                                     <CardHeader>
-                                        <CardTitle title={"Post Metadata"} />
+                                        <CardTitle title={"Post Metadata"}/>
                                     </CardHeader>
                                     <CardBody>
                                         <div className="form-group">
                                             <label className="form-label">Title</label>
-                                            <input name="title" type="text" className="form-control" placeholder="Text.."
-                                                onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))} />
+                                            <input name="title" type="text" className="form-control"
+                                                   placeholder="Text.."
+                                                   onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Tags</label>
-                                            <TagInput tags={this.props.tags} onDismissed={(tag) => this.props.dispatch(removePostTag(tag))}
-                                                onAdded={(tag) => this.props.dispatch(addPostTag(tag))} />
+                                            <TagInput tags={this.props.tags}
+                                                      onDismissed={(tag) => this.props.dispatch(removePostTag(tag))}
+                                                      onAdded={(tag) => this.props.dispatch(addPostTag(tag))}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Summary <span
                                                 className="form-label-small">56/100</span></label>
                                             <textarea className="form-control" name="summary" rows="6"
-                                                placeholder="Content.." onChange={(e) => this.props.dispatch(setPostSummary(e.target.value))}></textarea>
+                                                      placeholder="Content.."
+                                                      onChange={(e) => this.props.dispatch(setPostSummary(e.target.value))}></textarea>
                                         </div>
                                     </CardBody>
                                 </Card>
@@ -67,14 +79,16 @@ class NewPost extends Component {
                             <div className="col-sm-12 col-md-12 col-lg-4 col-xl-9 order-md-1">
                                 <Card className={"zindex-fixed"}>
                                     <CardHeader>
-                                        <CardTitle title={"Post Content"} />
+                                        <CardTitle title={"Post Content"}/>
                                         <CardOptions>
-                                            <a href="#" className="card-options-fullscreen" data-toggle="card-fullscreen">
+                                            <a href="#" className="card-options-fullscreen"
+                                               data-toggle="card-fullscreen">
                                                 <i className="fe fe-maximize"></i></a>
                                         </CardOptions>
                                     </CardHeader>
                                     <CardBody className={"editor-container pb-0"}>
-                                        <Editor onChange={(e) => this.props.dispatch(setPostContent(e))} text={this.props.post.content} />
+                                        <Editor onChange={(e) => this.props.dispatch(setPostContent(e))}
+                                                text={this.props.post.content}/>
                                     </CardBody>
                                 </Card>
                             </div>
@@ -83,12 +97,13 @@ class NewPost extends Component {
                     <div className="col-sm-12 col-md-3 col-lg-2 order-lg-2 order-lg-0 mb-4">
                         <Card>
                             <CardHeader>
-                                <CardTitle title={"Options"} />
+                                <CardTitle title={"Options"}/>
                             </CardHeader>
                             <CardBody>
                                 <div className="form-group">
                                     <label className="form-label">Status</label>
-                                    <select name="status" id="status" className="form-control">
+                                    <select name="status" id="status" className="form-control"
+                                            onChange={(e) => this.props.dispatch(setPostStatus(e.target.value))}>
                                         <option value="3">Draft</option>
                                         <option value="0">Publised</option>
                                     </select>
@@ -100,7 +115,8 @@ class NewPost extends Component {
                                     {this.getSaveStatus()}
                                     <button
                                         onClick={() => toastr.success('The title', 'The message')}
-                                        type="button">Toastr Success</button>
+                                        type="button">Toastr Success
+                                    </button>
                                 </div>
                             </CardBody>
                         </Card>
@@ -110,13 +126,14 @@ class NewPost extends Component {
         );
     }
 }
+
 const mapStateToProps = state => {
     return {
         post: state.newPost.post,
         tags: state.newPost.tags,
         saving: state.newPost.saving,
     }
-}
+};
 export default connect(
     mapStateToProps,
 )(NewPost)

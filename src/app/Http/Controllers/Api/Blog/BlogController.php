@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 class BlogController extends Controller
 {
     /**
-     * Blog respository
+     * Blog repository
      *
      * @var BlogRepository
      */
@@ -54,7 +54,7 @@ class BlogController extends Controller
      * Get all blog posts for the currently signed in user.
      *
      * @param Request $request
-     * @return void
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function getUserBlogPosts(Request $request)
     {
@@ -72,7 +72,7 @@ class BlogController extends Controller
      * Create a new blog post.
      *
      * @param CreatePostRequest $request
-     * @return void
+     * @return BlogPostResource
      */
     public function createBlogPost(CreatePostRequest $request)
     {
@@ -86,7 +86,7 @@ class BlogController extends Controller
 
         $slugType = $this->settings->get(SettingKeys::SLUG_TYPE);
         if ($slugType === 'random') {
-            $slugSize = $this->settings->get(SettingKekys::SLUG_SIZE);
+            $slugSize = $this->settings->get(SettingKeys::SLUG_SIZE);
             $slug = str_random($slugSize);
             while ($this->repo->isSlugInUse($slug)) {
                 $slug = str_random($slugSize);
@@ -95,7 +95,7 @@ class BlogController extends Controller
             $slugSalt = str_random(4);
             //@todo: Check if this is the correct function for string replacements.
             //Limti to the word closest to 250 chars, so we have space to append our salt.
-            $data['slug'] = str_replace($date['title'], ' ', '-') . '-' . $slugSalt;
+            $data['slug'] = str_replace($data['title'], ' ', '-') . '-' . $slugSalt;
         }
 
         //Assign post to logged in user
