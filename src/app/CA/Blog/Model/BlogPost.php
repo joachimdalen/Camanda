@@ -33,7 +33,7 @@ class BlogPost extends AppBaseModel
     {
         switch ($this->status) {
             case PostStatus::PUBLISHED:
-                return 'publised';
+                return 'published';
                 break;
             case PostStatus::SCHEDULED:
                 return 'scheduled';
