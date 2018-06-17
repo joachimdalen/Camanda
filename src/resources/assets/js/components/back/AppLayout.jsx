@@ -5,6 +5,7 @@ import ReduxToastr from 'react-redux-toastr'
 //Import route components
 import NewPost from './posts/NewPost';
 import PostsList from './posts/PostsList';
+import Settings from "./settings/Settings";
 
 export default class AppLayout extends Component {
     constructor(props) {
@@ -34,7 +35,7 @@ export default class AppLayout extends Component {
                                         <Link to={`/blog/posts`} className="nav-link"><i className="fe fe-edit-2"></i>Posts</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to={`/settings`} className="nav-link"><i className="fe fe-cog"></i>Settings</Link>
+                                        <Link to={`/settings`} className="nav-link"><i className="fe fe-settings"></i>Settings</Link>
                                     </li>
                                     <li className="nav-item">
                                         <a href="#" className="nav-link"><i className="fe fe-tag"></i>Whitelabel</a>
@@ -50,8 +51,9 @@ export default class AppLayout extends Component {
                 <div className="my-3 my-md-5">
                     <div className="container-fluid">
                         <Switch>
-                            <Route path="/blog/write" component={NewPost} />
-                            <Route path="/blog/posts" component={PostsList} />
+                            <Route path="/blog/write" exact component={NewPost} />
+                            <Route path="/blog/posts" exact component={PostsList} />
+                            <Route path="/settings" component={Settings}/>
                         </Switch>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ namespace App\CA\Setting;
 /**
  * Class containing all setting keys used in the application.
  */
-class SettingKeys
+class CSettingKeys
 {
     /**
      * Sets what kind of slug to use for a blog post.

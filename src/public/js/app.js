@@ -71883,7 +71883,7 @@ NavLink.defaultProps = {
   "aria-current": "page"
 };
 
-/* unused harmony default export */ var _unused_webpack_default_export = (NavLink);
+/* harmony default export */ __webpack_exports__["a"] = (NavLink);
 
 /***/ }),
 
@@ -71984,19 +71984,19 @@ NavLink.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__("./node_modules/react-router-dom/es/MemoryRouter.js");
 /* unused harmony reexport MemoryRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__("./node_modules/react-router-dom/es/NavLink.js");
-/* unused harmony reexport NavLink */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__("./node_modules/react-router-dom/es/Prompt.js");
 /* unused harmony reexport Prompt */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__("./node_modules/react-router-dom/es/Redirect.js");
 /* unused harmony reexport Redirect */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__("./node_modules/react-router-dom/es/Route.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__("./node_modules/react-router-dom/es/Router.js");
 /* unused harmony reexport Router */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__("./node_modules/react-router-dom/es/StaticRouter.js");
 /* unused harmony reexport StaticRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__("./node_modules/react-router-dom/es/Switch.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__("./node_modules/react-router-dom/es/generatePath.js");
 /* unused harmony reexport generatePath */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__("./node_modules/react-router-dom/es/matchPath.js");
@@ -76652,69 +76652,78 @@ module.exports = function(module) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["f"] = setPostTitle;
-/* harmony export (immutable) */ __webpack_exports__["e"] = setPostSummary;
+/* harmony export (immutable) */ __webpack_exports__["g"] = setPostTitle;
+/* harmony export (immutable) */ __webpack_exports__["f"] = setPostSummary;
 /* harmony export (immutable) */ __webpack_exports__["a"] = addPostTag;
 /* harmony export (immutable) */ __webpack_exports__["b"] = removePostTag;
 /* harmony export (immutable) */ __webpack_exports__["d"] = setPostContent;
+/* harmony export (immutable) */ __webpack_exports__["e"] = setPostStatus;
 /* harmony export (immutable) */ __webpack_exports__["c"] = savePost;
 function setPostTitle(title) {
-  return {
-    type: 'SET_POST_TITLE',
-    payload: title
-  };
+    return {
+        type: 'SET_POST_TITLE',
+        payload: title
+    };
 }
 
 function setPostSummary(summary) {
-  return {
-    type: 'SET_POST_SUMMARY',
-    payload: summary
-  };
+    return {
+        type: 'SET_POST_SUMMARY',
+        payload: summary
+    };
 }
 
 function addPostTag(tag) {
-  return {
-    type: 'ADD_POST_TAG',
-    payload: tag
-  };
+    return {
+        type: 'ADD_POST_TAG',
+        payload: tag
+    };
 }
 
 function removePostTag(tag) {
-  return {
-    type: 'REMOVE_POST_TAG',
-    payload: tag
-  };
+    return {
+        type: 'REMOVE_POST_TAG',
+        payload: tag
+    };
 }
+
 function setPostContent(content) {
-  return {
-    type: 'SET_POST_CONTENT',
-    payload: content
-  };
+    return {
+        type: 'SET_POST_CONTENT',
+        payload: content
+    };
+}
+
+function setPostStatus(status) {
+    return {
+        type: 'SET_POST_STATUS',
+        payload: status
+    };
 }
 
 function savePost(title, summary, tags, content, status) {
-  return function (dispatch) {
-    dispatch({
-      type: "SAVE_POST"
-    });
-    axios.post("/api/blog/posts", {
-      title: title,
-      content: content,
-      summary: summary,
-      tags: tags,
-      status: status
-    }).then(function (response) {
-      dispatch({
-        type: "SAVE_POST_FULFILLED",
-        payload: response.data
-      });
-    }).catch(function (err) {
-      dispatch({
-        type: "SAVE_POST_REJECTED",
-        payload: err
-      });
-    });
-  };
+    return function (dispatch) {
+        dispatch({
+            type: "SAVE_POST"
+        });
+        axios.post("/api/blog/posts", {
+            title: title,
+            content: content,
+            summary: summary,
+            tags: tags,
+            status: status
+        }).then(function (response) {
+            dispatch({
+                type: "SAVE_POST_FULFILLED",
+                payload: response.data
+            });
+        }).catch(function (err) {
+            dispatch({
+                type: "SAVE_POST_REJECTED",
+                payload: err
+            });
+        });
+    };
 }
 
 /***/ }),
@@ -76876,6 +76885,7 @@ if (document.getElementById('app')) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_redux_toastr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_redux_toastr__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__posts_NewPost__ = __webpack_require__("./resources/assets/js/components/back/posts/NewPost.jsx");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__posts_PostsList__ = __webpack_require__("./resources/assets/js/components/back/posts/PostsList.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__settings_Settings__ = __webpack_require__("./resources/assets/js/components/back/settings/Settings.jsx");
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -76889,6 +76899,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 //Import route components
+
 
 
 
@@ -76962,7 +76973,7 @@ var AppLayout = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["a" /* Link */],
                                             { to: '/settings', className: 'nav-link' },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-cog' }),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-settings' }),
                                             'Settings'
                                         )
                                     ),
@@ -76998,10 +77009,11 @@ var AppLayout = function (_Component) {
                         'div',
                         { className: 'container-fluid' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Switch */],
+                            __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["d" /* Switch */],
                             null,
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Route */], { path: '/blog/write', component: __WEBPACK_IMPORTED_MODULE_4__posts_NewPost__["a" /* default */] }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Route */], { path: '/blog/posts', component: __WEBPACK_IMPORTED_MODULE_5__posts_PostsList__["a" /* default */] })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/blog/write', exact: true, component: __WEBPACK_IMPORTED_MODULE_4__posts_NewPost__["a" /* default */] }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/blog/posts', exact: true, component: __WEBPACK_IMPORTED_MODULE_5__posts_PostsList__["a" /* default */] }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: '/settings', component: __WEBPACK_IMPORTED_MODULE_6__settings_Settings__["a" /* default */] })
                         )
                     )
                 ),
@@ -77088,7 +77100,8 @@ var NewPost = function (_Component) {
             }
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'button',
-                { className: 'btn btn-success btn-block', onClick: function onClick() {
+                { className: 'btn btn-success btn-block',
+                    onClick: function onClick() {
                         return _this2.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["c" /* savePost */])(_this2.props.post.title, _this2.props.post.summary, _this2.props.tags, _this2.props.post.content, 1));
                     } },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-save' }),
@@ -77134,9 +77147,10 @@ var NewPost = function (_Component) {
                                                 { className: 'form-label' },
                                                 'Title'
                                             ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'title', type: 'text', className: 'form-control', placeholder: 'Text..',
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { name: 'title', type: 'text', className: 'form-control',
+                                                placeholder: 'Text..',
                                                 onChange: function onChange(e) {
-                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["f" /* setPostTitle */])(e.target.value));
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["g" /* setPostTitle */])(e.target.value));
                                                 } })
                                         ),
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -77147,7 +77161,8 @@ var NewPost = function (_Component) {
                                                 { className: 'form-label' },
                                                 'Tags'
                                             ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__shared_tags_TagInput__["a" /* default */], { tags: this.props.tags, onDismissed: function onDismissed(tag) {
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__shared_tags_TagInput__["a" /* default */], { tags: this.props.tags,
+                                                onDismissed: function onDismissed(tag) {
                                                     return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["b" /* removePostTag */])(tag));
                                                 },
                                                 onAdded: function onAdded(tag) {
@@ -77169,8 +77184,9 @@ var NewPost = function (_Component) {
                                                 )
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { className: 'form-control', name: 'summary', rows: '6',
-                                                placeholder: 'Content..', onChange: function onChange(e) {
-                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["e" /* setPostSummary */])(e.target.value));
+                                                placeholder: 'Content..',
+                                                onChange: function onChange(e) {
+                                                    return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["f" /* setPostSummary */])(e.target.value));
                                                 } })
                                         )
                                     )
@@ -77191,7 +77207,8 @@ var NewPost = function (_Component) {
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'a',
-                                                { href: '#', className: 'card-options-fullscreen', 'data-toggle': 'card-fullscreen' },
+                                                { href: '#', className: 'card-options-fullscreen',
+                                                    'data-toggle': 'card-fullscreen' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'fe fe-maximize' })
                                             )
                                         )
@@ -77201,7 +77218,8 @@ var NewPost = function (_Component) {
                                         { className: "editor-container pb-0" },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__shared_editor_Editor__["a" /* default */], { onChange: function onChange(e) {
                                                 return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["d" /* setPostContent */])(e));
-                                            }, text: this.props.post.content })
+                                            },
+                                            text: this.props.post.content })
                                     )
                                 )
                             )
@@ -77231,7 +77249,10 @@ var NewPost = function (_Component) {
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'select',
-                                        { name: 'status', id: 'status', className: 'form-control' },
+                                        { name: 'status', id: 'status', className: 'form-control',
+                                            onChange: function onChange(e) {
+                                                return _this3.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_4__actions_newPostActions__["e" /* setPostStatus */])(e.target.value));
+                                            } },
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'option',
                                             { value: '3' },
@@ -77572,6 +77593,295 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 /* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_2_react_redux__["connect"])(mapStateToProps)(PostsList));
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/back/settings/Settings.jsx":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__("./node_modules/react-redux/es/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router_dom__ = __webpack_require__("./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_GeneralSettings__ = __webpack_require__("./resources/assets/js/components/back/settings/pages/GeneralSettings.jsx");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var Settings = function (_Component) {
+    _inherits(Settings, _Component);
+
+    function Settings(props) {
+        _classCallCheck(this, Settings);
+
+        return _possibleConstructorReturn(this, (Settings.__proto__ || Object.getPrototypeOf(Settings)).call(this, props));
+    }
+
+    _createClass(Settings, [{
+        key: "getSaveStatus",
+        value: function getSaveStatus() {
+            if (this.props.saving) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "button",
+                    { className: "btn btn-success btn-block disabled" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fe fe-save" }),
+                    "Saving..."
+                );
+            }
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "button",
+                { className: "btn btn-success btn-block",
+                    onClick: function onClick() {
+                        return console.log('d');
+                    } },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fe fe-save" }),
+                "Save"
+            );
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                { className: "container-fluid" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "div",
+                    { className: "row" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { className: "col-sm-12 col-md-3 col-lg-2 mb-4" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "div",
+                            { className: "list-group list-group-transparent mb-0" },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* NavLink */],
+                                { to: "/settings/general",
+                                    className: "list-group-item list-group-item-action", activeClassName: 'active' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "span",
+                                    { className: "icon mr-3" },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("i", { className: "fe fe-layers" })
+                                ),
+                                "General"
+                            )
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "div",
+                        { className: "col-sm-12 col-md-9 col-lg-10 mb-4" },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["d" /* Switch */],
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router_dom__["c" /* Route */], { path: "/settings/general", exact: true, component: __WEBPACK_IMPORTED_MODULE_3__pages_GeneralSettings__["a" /* default */] })
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Settings;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        post: state.newPost.post,
+        tags: state.newPost.tags,
+        saving: state.newPost.saving
+    };
+};
+/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(mapStateToProps)(Settings));
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/back/settings/pages/GeneralSettings.jsx":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GeneralSettings; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_card_Card__ = __webpack_require__("./resources/assets/js/components/shared/card/Card.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_card_CardHeader__ = __webpack_require__("./resources/assets/js/components/shared/card/CardHeader.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_card_CardTitle__ = __webpack_require__("./resources/assets/js/components/shared/card/CardTitle.jsx");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_card_CardBody__ = __webpack_require__("./resources/assets/js/components/shared/card/CardBody.jsx");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+var GeneralSettings = function (_Component) {
+    _inherits(GeneralSettings, _Component);
+
+    function GeneralSettings(props) {
+        _classCallCheck(this, GeneralSettings);
+
+        return _possibleConstructorReturn(this, (GeneralSettings.__proto__ || Object.getPrototypeOf(GeneralSettings)).call(this, props));
+    }
+
+    _createClass(GeneralSettings, [{
+        key: "render",
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                { className: "row" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "div",
+                    { className: "col-12" },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_1__shared_card_Card__["a" /* default */],
+                        null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_2__shared_card_CardHeader__["a" /* default */],
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__shared_card_CardTitle__["a" /* default */], { title: "General" })
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_4__shared_card_CardBody__["a" /* default */],
+                            null,
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                "div",
+                                { className: "row" },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "div",
+                                    { className: "col-4" },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        "div",
+                                        { className: "form-group" },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "div",
+                                            { className: "form-label" },
+                                            "Caching"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "div",
+                                            { className: "custom-switches-stacked" },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "label",
+                                                { className: "custom-switch" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "checkbox", name: "cache_settings",
+                                                    className: "custom-switch-input" }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "custom-switch-indicator" }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    "span",
+                                                    { className: "custom-switch-description" },
+                                                    "Cache settings"
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "label",
+                                                { className: "custom-switch" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "checkbox", name: "cache_blog_posts",
+                                                    className: "custom-switch-input" }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", { className: "custom-switch-indicator" }),
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    "span",
+                                                    { className: "custom-switch-description" },
+                                                    "Cache blog posts"
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    "div",
+                                    { className: "col-4" },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        "div",
+                                        { className: "form-group" },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "label",
+                                            { className: "form-label" },
+                                            "Slug type"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "div",
+                                            { className: "row gutters-sm" },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "div",
+                                                { className: "col" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    "select",
+                                                    { className: "form-control custom-select" },
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        "option",
+                                                        { value: "title" },
+                                                        "Title"
+                                                    ),
+                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                        "option",
+                                                        { value: "random" },
+                                                        "Random"
+                                                    )
+                                                )
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "span",
+                                                { className: "col-auto align-self-center" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                    "span",
+                                                    { className: "form-help", "data-toggle": "popover", "data-placement": "top",
+                                                        "data-content": "<p>Sets what kind of slug to use for a blog post.<br><strong>Title: </strong>Use parts of the post tile when generating the slug. Will make link invalid if title is changed.<br> <strong>Random: </strong>Use a set of random chars as slug. Is not affected when title is changed.</p>" },
+                                                    "?"
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        "div",
+                                        { className: "form-group" },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "label",
+                                            { className: "form-label" },
+                                            "Slug Size"
+                                        ),
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                            "div",
+                                            { className: "row align-items-center" },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "div",
+                                                { className: "col" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { id: "rng", type: "range", className: "form-control custom-range", step: "5", min: "0", max: "50" })
+                                            ),
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                                "div",
+                                                { className: "col-auto" },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { id: "rngval", type: "number", className: "form-control w-8" })
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return GeneralSettings;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+
 
 /***/ }),
 
@@ -79227,85 +79537,94 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    post: {
-      id: null,
-      title: null,
-      summary: null,
-      content: null
-    },
-    tags: [],
-    saving: false,
-    error: null
-  };
-  var action = arguments[1];
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        post: {
+            id: null,
+            title: null,
+            summary: null,
+            content: null,
+            status: 0
+        },
+        tags: [],
+        saving: false,
+        error: null
+    };
+    var action = arguments[1];
 
 
-  switch (action.type) {
-    case "SAVE_POST":
-      {
-        return _extends({}, state, {
-          saving: true
-        });
-      }
-    case "SAVE_POST_REJECTED":
-      {
-        return _extends({}, state, {
-          saving: false,
-          error: action.payload
-        });
-      }
-    case "SAVE_POST_FULFILLED":
-      {
-        return _extends({}, state, {
-          saving: false,
-          post: action.payload
-        });
-      }
-    case "SET_POST_TITLE":
-      {
-        return _extends({}, state, {
-          post: _extends({}, state.post, {
-            title: action.payload
-          })
-        });
-      }
-    case "SET_POST_SUMMARY":
-      {
-        return _extends({}, state, {
-          post: _extends({}, state.post, {
-            summary: action.payload
-          })
-        });
-      }
-    case "ADD_POST_TAG":
-      {
-        if (state.tags.includes(action.payload)) return state;
-        return _extends({}, state, {
-          tags: [].concat(_toConsumableArray(state.tags), [action.payload])
-        });
-      }
-    case "REMOVE_POST_TAG":
-      {
-        if (!state.tags.includes(action.payload)) return state;
-        var index = state.tags.indexOf(action.payload);
-        if (index == -1) return state;
-        return _extends({}, state, {
-          tags: state.tags.filter(function (item) {
-            return item !== state.tags[index];
-          })
-        });
-      }
-    case "SET_POST_CONTENT":
-      {
-        return _extends({}, state, {
-          post: _extends({}, state.post, {
-            content: action.payload
-          })
-        });
-      }
-  }
-  return state;
+    switch (action.type) {
+        case "SAVE_POST":
+            {
+                return _extends({}, state, {
+                    saving: true
+                });
+            }
+        case "SAVE_POST_REJECTED":
+            {
+                return _extends({}, state, {
+                    saving: false,
+                    error: action.payload
+                });
+            }
+        case "SAVE_POST_FULFILLED":
+            {
+                return _extends({}, state, {
+                    saving: false,
+                    post: action.payload
+                });
+            }
+        case "SET_POST_TITLE":
+            {
+                return _extends({}, state, {
+                    post: _extends({}, state.post, {
+                        title: action.payload
+                    })
+                });
+            }
+        case "SET_POST_SUMMARY":
+            {
+                return _extends({}, state, {
+                    post: _extends({}, state.post, {
+                        summary: action.payload
+                    })
+                });
+            }
+        case "ADD_POST_TAG":
+            {
+                if (state.tags.includes(action.payload)) return state;
+                return _extends({}, state, {
+                    tags: [].concat(_toConsumableArray(state.tags), [action.payload])
+                });
+            }
+        case "REMOVE_POST_TAG":
+            {
+                if (!state.tags.includes(action.payload)) return state;
+                var index = state.tags.indexOf(action.payload);
+                if (index === -1) return state;
+                return _extends({}, state, {
+                    tags: state.tags.filter(function (item) {
+                        return item !== state.tags[index];
+                    })
+                });
+            }
+        case "SET_POST_CONTENT":
+            {
+                return _extends({}, state, {
+                    post: _extends({}, state.post, {
+                        content: action.payload
+                    })
+                });
+            }
+        case "SET_POST_STATUS":
+            {
+                return _extends({}, state, {
+                    post: _extends({}, state.post, {
+                        status: action.payload
+                    })
+                });
+            }
+    }
+    return state;
 }
 
 /***/ }),
