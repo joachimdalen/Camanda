@@ -6,7 +6,7 @@ import Card from "../shared/card/Card";
 import CardHeader from "../shared/card/CardHeader";
 import CardTitle from "../shared/card/CardTitle";
 import CardOptions from "../shared/card/CardOptions";
-import Link from "../shared/links/Link";
+import StaticLink from "../shared/links/StaticLink";
 import {Dropdown, DropdownItem} from "../shared/dropdown/Dropdown";
 import TooltipIconLink from "../shared/links/TooltipIconLink";
 
@@ -35,7 +35,7 @@ export default class BlogPosts extends Component {
                     <CardHeader>
                         <CardTitle title={"Posts"}/>
                         <CardOptions>
-                            <Link icon={"plus"} uri={"/blog/posts/write"} title={"Write Posts"} type={"primary"}/>
+                            <StaticLink icon={"plus"} uri={"/blog/posts/write"} title={"Write Posts"} type={"primary"}/>
                         </CardOptions>
                     </CardHeader>
                     <div className="table-responsive">
@@ -69,7 +69,7 @@ export default class BlogPosts extends Component {
                                     <span className="status-icon bg-success"></span> Published
                                 </td>
                                 <td className="text-right">
-                                    <Link type={"secondary"} title={"Unpublish"} uri={"#"} icon={"x"}
+                                    <StaticLink type={"secondary"} title={"Unpublish"} uri={"#"} icon={"x"}
                                           iconClassName={"text-danger"} className={"mr-2"}/>
                                     <Dropdown title={"Actions"} type={"secondary"}>
                                         <DropdownItem icon={"eye"} title={"View"}/>

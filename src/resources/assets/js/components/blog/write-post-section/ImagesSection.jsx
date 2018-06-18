@@ -5,7 +5,7 @@ import CardHeader from "../../shared/card/CardHeader";
 import Card from "../../shared/card/Card";
 import CardTitle from "../../shared/card/CardTitle";
 import CardOptions from "../../shared/card/CardOptions";
-import Link from "../../shared/links/Link";
+import StaticLink from "../../shared/links/StaticLink";
 import CardBody from "../../shared/card/CardBody";
 import TooltipIconLink from "../../shared/links/TooltipIconLink";
 import Button from "../../shared/Button";
@@ -76,8 +76,8 @@ export default class ImagesSection extends Component {
                 <CardHeader>
                     <CardTitle title={"Images"}/>
                     <CardOptions>
-                        <Link type={"info"} icon={"plus"} title={"Select from Gallery"} className={"mr-2"}/>
-                        <Link type={"indigo"} icon={"upload"} title={"Upload"} className={"mr-2"}/>
+                        <StaticLink type={"info"} icon={"plus"} title={"Select from Gallery"} className={"mr-2"}/>
+                        <StaticLink type={"indigo"} icon={"upload"} title={"Upload"} className={"mr-2"}/>
                     </CardOptions>
                 </CardHeader>
                 <CardBody>

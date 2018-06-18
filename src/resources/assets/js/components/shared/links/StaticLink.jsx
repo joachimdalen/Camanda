@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-export default class Link extends Component {
+export default class StaticLink extends Component {
     constructor() {
         super();
         this.state = {};
@@ -22,7 +22,7 @@ export default class Link extends Component {
         );
     }
 }
-Link.propTypes = {
+StaticLink.propTypes = {
     icon: PropTypes.string,
     uri: PropTypes.string,
     title: PropTypes.string,
@@ -30,7 +30,7 @@ Link.propTypes = {
     className: PropTypes.string,
     iconClassName: PropTypes.string
 };
-Link.defaultProps = {
+StaticLink.defaultProps = {
     icon: '',
     uri: '#',
     title: '',
