@@ -35,9 +35,10 @@ class NewPost extends Component {
                 </button>
             );
         }
+        const {title, status, summary, content, headerImage, previewImage} = this.props.post;
         return (
             <button className="btn btn-success btn-block btn-sm"
-                    onClick={() => this.props.dispatch(savePost(this.props.post.title, this.props.post.summary, this.props.tags, this.props.post.content, 1))}>
+                    onClick={() => this.props.createPost(title, summary, this.props.tags, content, status, headerImage, previewImage)}>
                 <i className="fe fe-save mr-1"></i>
                 Save
             </button>
@@ -45,7 +46,10 @@ class NewPost extends Component {
     }
 
     render() {
-        const {post} = this.props;
+        const {
+            post, titleChange, summaryChange, contentChange, headerUrlChange,
+            previewUrlChange, statusChange, tagAdd, tagRemove
+        } = this.props;
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -61,34 +65,34 @@ class NewPost extends Component {
                                             <label className="form-label">Title</label>
                                             <input name="title" type="text" className="form-control" value={post.title || ''}
                                                    placeholder="Title.."
-                                                   onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
+                                                   onChange={(e) => titleChange(e.target.value)}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Tags</label>
                                             <TagInput tags={this.props.tags || []}
-                                                      onDismissed={(tag) => this.props.dispatch(removePostTag(tag))}
-                                                      onAdded={(tag) => this.props.dispatch(addPostTag(tag))}/>
+                                                      onDismissed={(tag) => tagRemove(tag)}
+                                                      onAdded={(tag) => tagAdd(tag)}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Summary <span
                                                 className="form-label-small">56/100</span></label>
                                             <textarea className="form-control" name="summary" rows="6"
                                                       placeholder="Content.."
-                                                      onChange={(e) => this.props.dispatch(setPostSummary(e.target.value))} defaultValue={post.summary || ''}></textarea>
+                                                      onChange={(e) => summaryChange(e.target.value)} defaultValue={post.summary || ''}></textarea>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Header Image</label>
                                             <img className={"img-responsive m-2"} src={post.headerImage || ''}/>
                                             <input name="title" type="text" className="form-control"
                                                    placeholder="Image Url" value={post.headerImage || ''}
-                                                   onChange={(e) => this.props.dispatch(setPostHeaderImage(e.target.value))}/>
+                                                   onChange={(e) => headerUrlChange(e.target.value)}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Preview Image (500x333)</label>
                                             <img className={"img-responsive m-2"} src={post.previewImage || ''}/>
                                             <input name="title" type="text" className="form-control"
                                                    placeholder="Image Url" value={post.previewImage || ''}
-                                                   onChange={(e) => this.props.dispatch(setPostPreviewImage(e.target.value))}/>
+                                                   onChange={(e) => previewUrlChange(e.target.value)}/>
                                         </div>
                                     </CardBody>
                                 </Card>
@@ -104,8 +108,8 @@ class NewPost extends Component {
                                         </CardOptions>
                                     </CardHeader>
                                     <CardBody className={"editor-container pb-0"}>
-                                        <Editor onChange={(e) => this.props.dispatch(setPostContent(e))}
-                                                text={this.props.post.content}/>
+                                        <Editor onChange={(e) => contentChange(e)}
+                                                text={post.content}/>
                                     </CardBody>
                                 </Card>
                             </div>
@@ -120,7 +124,7 @@ class NewPost extends Component {
                                 <div className="form-group">
                                     <label className="form-label">Status</label>
                                     <select name="status" id="status" className="form-control"
-                                            onChange={(e) => this.props.dispatch(setPostStatus(e.target.value))}>
+                                            onChange={(e) => statusChange(e.target.value)}>
                                         <option value="3">Draft</option>
                                         <option value="0">Publised</option>
                                     </select>
@@ -156,6 +160,37 @@ const mapStateToProps = state => {
         saving: state.newPost.saving,
     }
 };
+const mapDispatchToProps = dispatch => {
+    return {
+        titleChange: (text) => {
+            dispatch(setPostTitle(text))
+        },
+        summaryChange: (text) => {
+            dispatch(setPostSummary(text))
+        },
+        contentChange: (text) => {
+            dispatch(setPostContent(text))
+        },
+        headerUrlChange: (url) => {
+            dispatch(setPostHeaderImage(url))
+        },
+        previewUrlChange: (url) => {
+            dispatch(setPostPreviewImage(url))
+        },
+        statusChange: (status) => {
+            dispatch(setPostStatus(status))
+        },
+        tagAdd: (tag) => {
+            dispatch(addPostTag(tag))
+        },
+        tagRemove: (tag) => {
+            dispatch(removePostTag(tag))
+        },
+        createPost: (title, summary, tags, content, status, header, preview) => {
+            dispatch(savePost(title, summary, tags, content, status, header, preview))
+        }
+    }
+};
 export default connect(
-    mapStateToProps,
+    mapStateToProps, mapDispatchToProps
 )(NewPost)
