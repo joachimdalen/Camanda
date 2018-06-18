@@ -10,12 +10,25 @@ strong {
   padding-top: 0;
   padding-left: 0;
   padding-right: 0;
+  hr {
+    border: none;
+    color: #111;
+    letter-spacing: 1em;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+  }
+  hr:before {
+    content: '...';
+  }
 }
-.zindex-fixed{
+
+.zindex-fixed {
   z-index: $zindex-fixed;
 }
-.card-fullscreen{
-  .ql-editor{
+
+.card-fullscreen {
+  .ql-editor {
     min-height: 80vh !important;
   }
 }

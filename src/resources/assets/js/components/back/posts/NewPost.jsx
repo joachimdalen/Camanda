@@ -27,16 +27,16 @@ class NewPost extends Component {
     getSaveStatus() {
         if (this.props.saving) {
             return (
-                <button className="btn btn-success btn-block disabled">
-                    <i className="fe fe-save"></i>
+                <button className="btn btn-success btn-block disabled btn-sm">
+                    <i className="fe fe-save mr-1"></i>
                     Saving...
                 </button>
             );
         }
         return (
-            <button className="btn btn-success btn-block"
+            <button className="btn btn-success btn-block btn-sm"
                     onClick={() => this.props.dispatch(savePost(this.props.post.title, this.props.post.summary, this.props.tags, this.props.post.content, 1))}>
-                <i className="fe fe-save"></i>
+                <i className="fe fe-save mr-1"></i>
                 Save
             </button>
         );
@@ -57,7 +57,7 @@ class NewPost extends Component {
                                         <div className="form-group">
                                             <label className="form-label">Title</label>
                                             <input name="title" type="text" className="form-control"
-                                                   placeholder="Text.."
+                                                   placeholder="Title.."
                                                    onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
                                         </div>
                                         <div className="form-group">
@@ -72,6 +72,20 @@ class NewPost extends Component {
                                             <textarea className="form-control" name="summary" rows="6"
                                                       placeholder="Content.."
                                                       onChange={(e) => this.props.dispatch(setPostSummary(e.target.value))}></textarea>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label">Post Header Image</label>
+                                            <img className={"img-responsive m-2"} src={"http://placehold.it/300x100"}/>
+                                            <input name="title" type="text" className="form-control"
+                                                   placeholder="Image Url"
+                                                   onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label">Post Preview Image (500x333)</label>
+                                            <img className={"img-responsive m-2"} src={"http://placehold.it/300x100"}/>
+                                            <input name="title" type="text" className="form-control"
+                                                   placeholder="Image Url"
+                                                   onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
                                         </div>
                                     </CardBody>
                                 </Card>
@@ -113,9 +127,14 @@ class NewPost extends Component {
                                 </div>
                                 <div className="form-group">
                                     {this.getSaveStatus()}
-                                    <button
+                                    {/*<button
                                         onClick={() => toastr.success('The title', 'The message')}
                                         type="button">Toastr Success
+                                    </button>*/}
+                                    <button className="btn btn-azure btn-block btn-sm"
+                                            onClick={() => console.log('img uploader')}>
+                                        <i className="fe fe-image mr-1"></i>
+                                        Image Uploader
                                     </button>
                                 </div>
                             </CardBody>
