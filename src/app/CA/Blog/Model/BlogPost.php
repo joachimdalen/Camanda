@@ -47,4 +47,12 @@ class BlogPost extends AppBaseModel
 
         }
     }
+
+    public function getShortId()
+    {
+        if ($this->id) {
+            return str_limit($this->id, 8, '');
+        }
+        return '';
+    }
 }

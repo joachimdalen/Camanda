@@ -16,6 +16,7 @@ class BlogPostResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'short_id' => $this->getShortId(),
             'user_id' => $this->user_id,
             'title' => $this->title,
             'slug' => $this->slug,
