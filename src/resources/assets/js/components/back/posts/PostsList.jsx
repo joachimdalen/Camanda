@@ -11,7 +11,8 @@ import {Dropdown, DropdownItem} from "../../shared/dropdown/Dropdown";
 import TooltipIconLink from "../../shared/links/TooltipIconLink";
 import {fetchPosts} from '../../../actions/postsListActions'
 import {BarLoader} from 'react-css-loaders';
-import PostStatus from "../../shared/PostStatus";
+import PostStatus from "../../posts/PostStatus";
+import Moment from 'react-moment';
 
 class PostsList extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class PostsList extends Component {
             <th className="w-1">No.</th>
             <th>Title</th>
             <th>Posted</th>
-            <th>Views</th>
+            <th>Updated</th>
             <th>Created</th>
             <th>Status</th>
             <th></th>
@@ -52,19 +53,33 @@ class PostsList extends Component {
     renderRow(post) {
         return (
             <tr key={post.id}>
-                <td><span className="text-muted">001401</span></td>
+                <td><span className="text-muted">{post.short_id}</span></td>
                 <td><a href="invoice.html" className="text-inherit">{post.title}</a></td>
-                <td>{post.created_at_unix}</td>
-                <td>87956621</td>
-                <td></td>
+                <td>
+                    {!post.posted_at_unix ? (<p>Not Posted</p>) : (
+                        <Moment fromNow unix>
+                            {post.posted_at_unix}
+                        </Moment>
+                    )}
+                </td>
+                <td>
+                    <Moment fromNow unix>
+                        {post.updated_at_unix}
+                    </Moment>
+                </td>
+                <td>
+                    <Moment fromNow unix>
+                        {post.created_at_unix}
+                    </Moment>
+                </td>
                 <td><PostStatus status={post.status_text}/></td>
                 <td className="text-right">
-                    <StaticLink type={"secondary"} title={"Unpublish"} uri={"#"} icon={"x"}
-                          iconClassName={"text-danger"} className={"mr-2"}/>
+                    {this.getPublishActionButton(post)}
                     <Dropdown title={"Actions"} type={"secondary"}>
                         <DropdownItem icon={"eye"} title={"View"}/>
                         <DropdownItem icon={"activity"} title={"View Statistics"}/>
                         <DropdownItem icon={"copy"} title={"Copy Link"}/>
+                        <DropdownItem icon={"eye-off"} title={"Copy Preview Link"}/>
                     </Dropdown>
                 </td>
                 <td>
@@ -72,6 +87,27 @@ class PostsList extends Component {
                 </td>
             </tr>
         );
+    }
+
+    getPublishActionButton(post) {
+        const {status_text} = post;
+        switch (status_text) {
+            case 'draft': {
+                return (<StaticLink type={"secondary"} title={"Publish"} uri={"#"} icon={"check-circle"} iconClassName={"text-success mr-1"} className={"mr-2"}/>)
+            }
+            case 'published': {
+                return (<StaticLink type={"secondary"} title={"Unpublish"} uri={"#"} icon={"x"} iconClassName={"text-danger mr-1"} className={"mr-2"}/>)
+            }
+            case 'private': {
+                return <i className={"fe fe-lock text-danger mr-2"}/>
+            }
+            case 'scheduled': {
+                return (<StaticLink type={"secondary"} title={"Publish Now"} uri={"#"} icon={"clock"} iconClassName={"text-success mr-1"} className={"mr-2"}/>)
+            }
+        }
+    }
+    getDropDownMenu(){
+
     }
 
     renderContentOrLoader() {
