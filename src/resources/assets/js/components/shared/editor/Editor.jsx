@@ -90,15 +90,17 @@ class ImageBlot extends BlockEmbed {
         };
     }
 }
+
 ImageBlot.blotName = "image";
 ImageBlot.tagName = "img";
 Quill.register(ImageBlot);
 
 //Define our toolbar
 const CustomToolbar = () => (
-        <div id="toolbar">
+    <div id="toolbar">
         <span className="ql-formats">
-            <Header/>
+            <HeaderOne/>
+            <HeaderTwo/>
             <Size/>
             <Bold/>
             <Italic/>
@@ -106,45 +108,33 @@ const CustomToolbar = () => (
             <Underline/>
             <Alignment/>
         </span>
-            <span className="ql-formats">
+        <span className="ql-formats">
                 <OrderedList/>
                 <BulletList/>
                 <Indent/>
                 <Outdent/>
-            </span>
-            <span className="ql-formats">
+        </span>
+        <span className="ql-formats">
                 <TweetEmbed/>
                 <VideoEmbed/>
                 <ImageEmbed/>
-            </span>
-            <span className="ql-formats">
+        </span>
+        <span className="ql-formats">
                 <Divider/>
                 <Code/>
-            </span>
-        </div>
-    )
-;
-const Header = () => (
-    <select className="ql-header" defaultValue={""} onChange={e => e.persist()}>
-        <option value="1"></option>
-        <option value="2"></option>
-        <option defaultValue></option>
-    </select>
+        </span>
+    </div>
 );
 const Size = () => (
     <select className="ql-size" defaultValue={""} onChange={e => e.persist()}>
         <option value="small"></option>
         <option defaultValue></option>
-        <option value="large"></option>
-        <option value="huge"></option>
     </select>
 );
-const Bold = () => (
-    <button className="ql-bold"></button>
-);
-const Italic = () => (
-    <button className="ql-italic"></button>
-);
+const HeaderOne = () => (<button className="ql-header" value="1"></button>);
+const HeaderTwo = () => (<button className="ql-header" value="2"></button>);
+const Bold = () => (<button className="ql-bold"></button>);
+const Italic = () => (<button className="ql-italic"></button>);
 const Color = () => (<select className="ql-color"></select>);
 const Underline = () => (<button className="ql-underline"></button>);
 const TweetEmbed = () => (<button className="ql-twitterEmbed"><span className="fe fe-twitter"/></button>);
@@ -174,13 +164,6 @@ export default class Editor extends Component {
             }
         };
         this.formats = [];
-        /* this.quill.addEventListener('click', (ev) => {
-             let embed = Parchment.find(ev.target);
-
-             if (embed instanceof TweetBlot) {
-                 this.quill.setSelection(embed.offset(this.quill.scroll), 1, 'user');
-             }
-         });*/
     }
 
     onChange(value) {
@@ -224,7 +207,8 @@ export default class Editor extends Component {
         this.quill.insertEmbed(range.index, "tweet", id, Quill.sources.USER);
         this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
     }
-    imageEmbed(){
+
+    imageEmbed() {
         let range = this.quill.getSelection(true);
         this.quill.insertEmbed(
             range.index,
@@ -240,12 +224,6 @@ export default class Editor extends Component {
 
 }
 
-/*Editor.formats = [
-    'header', 'font', 'size',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image', 'color',
-];*/
 Editor.propTypes = {
     text: PropTypes.string,
     className: PropTypes.string,

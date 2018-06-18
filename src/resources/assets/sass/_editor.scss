@@ -21,6 +21,10 @@ strong {
   hr:before {
     content: '...';
   }
+  .tweet{
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .zindex-fixed {

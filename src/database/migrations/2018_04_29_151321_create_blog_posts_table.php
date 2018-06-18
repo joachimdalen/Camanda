@@ -21,6 +21,8 @@ class CreateBlogPostsTable extends Migration
             $table->string('slug')->unique()->index();
             $table->text('content');
             $table->string('summary');
+            $table->text('preview_image')->nullable();
+            $table->text('header_image')->nullable();
             $table->integer('status')->default(PostStatus::DRAFT);
             $table->datetime('posted_at')->nullable();
             $table->timestamps();

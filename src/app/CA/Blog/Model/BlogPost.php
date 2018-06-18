@@ -22,6 +22,8 @@ class BlogPost extends AppBaseModel
         'summary',
         'status',
         'posted_at',
+        'header_image',
+        'preview_image'
     ];
 
     /**

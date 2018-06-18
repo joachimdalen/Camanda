@@ -9,7 +9,9 @@ import {
     removePostTag,
     setPostContent,
     savePost,
-    setPostStatus
+    setPostStatus,
+    setPostHeaderImage,
+    setPostPreviewImage
 } from '../../../actions/newPostActions';
 import Card from "../../shared/card/Card";
 import CardHeader from "../../shared/card/CardHeader";
@@ -43,6 +45,7 @@ class NewPost extends Component {
     }
 
     render() {
+        const {post} = this.props;
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -56,13 +59,13 @@ class NewPost extends Component {
                                     <CardBody>
                                         <div className="form-group">
                                             <label className="form-label">Title</label>
-                                            <input name="title" type="text" className="form-control"
+                                            <input name="title" type="text" className="form-control" value={post.title || ''}
                                                    placeholder="Title.."
                                                    onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Tags</label>
-                                            <TagInput tags={this.props.tags}
+                                            <TagInput tags={this.props.tags || []}
                                                       onDismissed={(tag) => this.props.dispatch(removePostTag(tag))}
                                                       onAdded={(tag) => this.props.dispatch(addPostTag(tag))}/>
                                         </div>
@@ -71,21 +74,21 @@ class NewPost extends Component {
                                                 className="form-label-small">56/100</span></label>
                                             <textarea className="form-control" name="summary" rows="6"
                                                       placeholder="Content.."
-                                                      onChange={(e) => this.props.dispatch(setPostSummary(e.target.value))}></textarea>
+                                                      onChange={(e) => this.props.dispatch(setPostSummary(e.target.value))} defaultValue={post.summary || ''}></textarea>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Header Image</label>
-                                            <img className={"img-responsive m-2"} src={"http://placehold.it/300x100"}/>
+                                            <img className={"img-responsive m-2"} src={post.headerImage || ''}/>
                                             <input name="title" type="text" className="form-control"
-                                                   placeholder="Image Url"
-                                                   onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
+                                                   placeholder="Image Url" value={post.headerImage || ''}
+                                                   onChange={(e) => this.props.dispatch(setPostHeaderImage(e.target.value))}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Preview Image (500x333)</label>
-                                            <img className={"img-responsive m-2"} src={"http://placehold.it/300x100"}/>
+                                            <img className={"img-responsive m-2"} src={post.previewImage || ''}/>
                                             <input name="title" type="text" className="form-control"
-                                                   placeholder="Image Url"
-                                                   onChange={(e) => this.props.dispatch(setPostTitle(e.target.value))}/>
+                                                   placeholder="Image Url" value={post.previewImage || ''}
+                                                   onChange={(e) => this.props.dispatch(setPostPreviewImage(e.target.value))}/>
                                         </div>
                                     </CardBody>
                                 </Card>

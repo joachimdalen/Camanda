@@ -1,4 +1,5 @@
 <?php
+
 namespace App\CA\Setting;
 
 use App\CA\Setting\Model\Setting;
@@ -41,4 +42,24 @@ class SettingRepository
     {
         return $this->model->where('key', $key)->first();
     }
+
+    /**
+     * Update a setting value
+     * @param $key
+     * @param $value
+     */
+    public function update($key, $value)
+    {
+        $this->model->where('key', $key)->update(['value' => $value]);
+    }
+
+    /**
+     * Get all setting values
+     * @return Setting[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllSettings()
+    {
+        return $this->model->whereNotIn('key', [SettingKeys::CACHE_SETTINGS])->get();
+    }
+
 }

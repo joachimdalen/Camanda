@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
+        App\Providers\ConsoleStylesProvider::class,
         /*
          * Application Service Providers...
          */

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Blog;
 
 use App\CA\Blog\BlogRepository;
+use App\CA\Blog\PostStatus;
 use App\CA\Setting\SettingKeys;
 use App\CA\Setting\SettingManager;
 use App\CA\Tag\TagHelper;
@@ -85,12 +86,13 @@ class BlogController extends Controller
         }
 
         $slugType = $this->settings->get(SettingKeys::SLUG_TYPE);
-        if ($slugType === 'random') {
+        if ($slugType === 'random' || !$slugType) {
             $slugSize = $this->settings->get(SettingKeys::SLUG_SIZE);
-            $slug = str_random($slugSize);
+            $slug = str_random($slugSize || 15);
             while ($this->repo->isSlugInUse($slug)) {
-                $slug = str_random($slugSize);
+                $slug = str_random($slugSize || 15);
             }
+            $data['slug'] = $slug;
         } else {
             $slugSalt = str_random(4);
             //@todo: Check if this is the correct function for string replacements.
