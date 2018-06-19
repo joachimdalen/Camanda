@@ -20,6 +20,7 @@ import CardOptions from "../../shared/card/CardOptions";
 import CardBody from "../../shared/card/CardBody";
 import TagInput from '../../shared/tags/TagInput';
 import Editor from "../../shared/editor/Editor";
+import ImageUploader from "../../shared/upload/ImageUploader";
 
 class NewPost extends Component {
     constructor(props) {
@@ -98,7 +99,7 @@ class NewPost extends Component {
                                 </Card>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-4 col-xl-9 order-md-1">
-                                <Card className={"zindex-fixed"}>
+                                <Card className={""}>
                                     <CardHeader>
                                         <CardTitle title={"Post Content"}/>
                                         <CardOptions>
@@ -148,6 +149,7 @@ class NewPost extends Component {
                         </Card>
                     </div>
                 </div>
+            <ImageUploader open={true} onClose={() => console.log('modal closed')}/>
             </div>
         );
     }

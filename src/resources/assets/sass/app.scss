@@ -8,3 +8,10 @@ Dashboard UI
 @import "posts";
 @import "editor";
 @import './node_modules/react-redux-toastr/src/styles/index';
+//Fix for button showing on top of ReactModal.
+.input-group-prepend .btn,
+.input-group-append .btn {
+  z-index: 0 !important;
+}
+@import "files";
+@import "image-editor";
