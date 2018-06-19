@@ -25,6 +25,9 @@ import ImageUploader from "../../shared/upload/ImageUploader";
 class NewPost extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            imageUploaderVisible: false
+        }
     }
 
     getSaveStatus() {
@@ -140,7 +143,7 @@ class NewPost extends Component {
                                         type="button">Toastr Success
                                     </button>*/}
                                     <button className="btn btn-azure btn-block btn-sm"
-                                            onClick={() => console.log('img uploader')}>
+                                            onClick={() => this.setState({imageUploaderVisible: true})}>
                                         <i className="fe fe-image mr-1"></i>
                                         Image Uploader
                                     </button>
@@ -149,7 +152,7 @@ class NewPost extends Component {
                         </Card>
                     </div>
                 </div>
-            <ImageUploader open={true} onClose={() => console.log('modal closed')}/>
+                <ImageUploader open={this.state.imageUploaderVisible} onClose={() => this.setState({imageUploaderVisible: false})}/>
             </div>
         );
     }

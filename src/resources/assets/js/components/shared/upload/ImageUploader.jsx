@@ -60,11 +60,25 @@ export default class ImageUploader extends Component {
         })
     }
 
+    close() {
+        this.setState({
+            ready: false,
+            accepted: null,
+            rejected: null,
+            stage: 0,
+            image: null
+        }, () => {
+            //@todo: Destroy editor
+            this.props.onClose();
+        })
+
+    }
+
     render() {
         const {open, onClose} = this.props;
         const {ready, rejected} = this.state;
         return (
-            <Modal visible={true} onClickBackdrop={() => console.log('backdrop')} dialogClassName={"modal-lg modal-dialog-centered"}>
+            <Modal visible={this.props.open} onClickBackdrop={() => console.log('backdrop')} dialogClassName={"modal-lg modal-dialog-centered"}>
                 <div className="modal-header">
                     <h5 className="modal-title">Upload Image</h5>
                 </div>
@@ -72,7 +86,7 @@ export default class ImageUploader extends Component {
                     {this.getStage()}
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-danger btn-sm " onClick={() => console.log('panic')}>
+                    <button type="button" className="btn btn-danger btn-sm " onClick={() => this.close()}>
                         <i className="fe fe-x mr-1"></i>
                         Cancel
                     </button>
