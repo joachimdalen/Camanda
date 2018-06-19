@@ -48,7 +48,7 @@ export default class ImageEditor extends Component {
                 break;
             }
             case "free": {
-                this.setState({ratio: 16 / 9, fixedRatio: false});
+                this.setState({ratio: null, fixedRatio: false});
                 break;
             }
         }
