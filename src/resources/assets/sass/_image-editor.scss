@@ -2,14 +2,10 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  &__toolbar {
+  &__infobar {
     margin: 10px;
   }
   &__cropper {
-    &__info {
-      .input-group {
-        margin-bottom: 5px;
-      }
-    }
+
   }
 }
