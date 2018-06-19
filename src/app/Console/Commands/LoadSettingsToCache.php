@@ -69,5 +69,6 @@ class LoadSettingsToCache extends Command
         $bar->finish();
         //Fix to wrap to new line.
         $this->comment('');
+        return;
     }
 }
