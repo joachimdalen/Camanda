@@ -34,7 +34,7 @@ class SettingManager
     {
         $item = $this->repo->get(SettingKeys::CACHE_SETTINGS);
         //The setting failed to fetch, don't cache value to be on the safe side.
-        Log::warning('[SettingsManager] Failed to fetch setting.', ['key' => SettingKeys::CACHE_SETTINGS]);
+        Log::channel('runtime')->warning('[SettingsManager] Failed to fetch setting.', ['key' => SettingKeys::CACHE_SETTINGS]);
         if (!$item) return false;
         return $item->value;
     }
@@ -75,7 +75,7 @@ class SettingManager
             }
             $item = $this->repo->get($key);
             if (!$item) {
-                Log::warning('[SettingsManager] Failed to fetch setting.', ['key' => $key]);
+                Log::channel('runtime')->warning('[SettingsManager] Failed to fetch setting.', ['key' => $key]);
                 return "";
             }
             Cache::forever($key, $item->value);
@@ -83,7 +83,7 @@ class SettingManager
         }
         $item = $this->repo->get($key);
         if (!$item) {
-            Log::warning('[SettingsManager] Failed to fetch setting.', ['key' => $key]);
+            Log::channel('runtime')->warning('[SettingsManager] Failed to fetch setting.', ['key' => $key]);
             return "";
         }
         return $item->value;

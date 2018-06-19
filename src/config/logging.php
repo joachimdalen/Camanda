@@ -44,6 +44,12 @@ return [
             'level' => 'debug',
         ],
 
+        'runtime' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/runtime.log'),
+            'level' => 'debug',
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
