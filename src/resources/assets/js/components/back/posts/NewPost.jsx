@@ -26,7 +26,8 @@ class NewPost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageUploaderVisible: false
+            imageUploaderVisible: false,
+            imageGalleryVisible: false
         }
     }
 
@@ -146,6 +147,11 @@ class NewPost extends Component {
                                             onClick={() => this.setState({imageUploaderVisible: true})}>
                                         <i className="fe fe-image mr-1"></i>
                                         Image Uploader
+                                    </button>
+                                    <button className="btn btn-indigo btn-block btn-sm"
+                                            onClick={() => this.setState({imageGalleryVisible: true})}>
+                                        <i className="fe fe-book mr-1"></i>
+                                        Image Gallery
                                     </button>
                                 </div>
                             </CardBody>
