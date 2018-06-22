@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(App\CA\Blog\Model\BlogPost::class, function (Faker $faker) {
     return [
         'user_id' => 1,
-        'title' => $faker->title,
+        'title' => $faker->realText(200),
         'slug' => $faker->slug,
         'content' => $faker->realText(200),
         'summary' => $faker->realText(100),

@@ -4,7 +4,6 @@ namespace App\CA\Blog;
 
 use App\CA\Blog\Model\BlogPost;
 use App\CA\Blog\PostStatus;
-use App\Http\Resources\Blog\BlogPostResource;
 
 class BlogRepository
 {
@@ -46,7 +45,7 @@ class BlogRepository
     {
         $posts = $this->model->where('status', PostStatus::PUBLISHED)->paginate(25);
         /*$posts->getCollection()->map(function ($post) {
-            $post->tags = $this->tagRepo->getTagsForPost($post->id);
+        $post->tags = $this->tagRepo->getTagsForPost($post->id);
         });*/
         return $posts;
     }
@@ -62,7 +61,7 @@ class BlogRepository
     public function getPostsForUser($userId, $paginate = true, $pageSize = 25)
     {
         $data = [
-            'id', 'title', 'slug', 'status', 'created_at', 'updated_at', 'posted_at', 'user_id'
+            'id', 'title', 'slug', 'status', 'created_at', 'updated_at', 'posted_at', 'user_id',
         ];
         $posts = $this->model->where('user_id', $userId)->select($data);
         if ($paginate) {
@@ -83,5 +82,16 @@ class BlogRepository
     {
         $post = $this->model->create($data);
         return $post;
+    }
+
+    /**
+     * Get all Blog Posts unformatted, and not in a collection.
+     *
+     * @return BlogPost[]|[]
+     */
+    public function getAllBlogPostsRaw()
+    {
+        $posts = $this->model->all();
+        return $posts;
     }
 }

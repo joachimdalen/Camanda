@@ -88,16 +88,19 @@ class BlogController extends Controller
         $slugType = $this->settings->get(SettingKeys::SLUG_TYPE);
         if ($slugType === 'random' || !$slugType) {
             $slugSize = $this->settings->get(SettingKeys::SLUG_SIZE);
-            $slug = str_random($slugSize || 15);
+            if($slugSize == null){
+                $slugSize = 15;
+            }
+            $slug = str_random($slugSize);
             while ($this->repo->isSlugInUse($slug)) {
-                $slug = str_random($slugSize || 15);
+                $slug = str_random($slugSize);
             }
             $data['slug'] = $slug;
         } else {
             $slugSalt = str_random(4);
             //@todo: Check if this is the correct function for string replacements.
             //Limti to the word closest to 250 chars, so we have space to append our salt.
-            $data['slug'] = str_replace($data['title'], ' ', '-') . '-' . $slugSalt;
+            $data['slug'] = str_replace(' ', '-', str_limit($data['title'], 249, '')) . '-' . $slugSalt;
         }
 
         //Assign post to logged in user
