@@ -14,15 +14,14 @@ Route::group(['prefix' => '', 'namespace' => 'Web'], function () {
 });
 
 Route::group(['prefix' => 'blog', 'namespace' => 'Web'], function () {
-    Route::get('posts', 'BlogController@getBlogPostsView')->name('blogPosts');
-    Route::get('posts/write', 'BlogController@getBlogWritePostView')->name('blogWritePost');
+    Route::get('posts', 'BlogController@getBlogPostsView')->name('web.blog.posts');
+    Route::get('posts/write', 'BlogController@getBlogWritePostView')->name('web.blog.posts.write');
 });
 
 Route::group(['middleware' => ['auth']], function () {
-
     Route::group(['prefix' => 'account', 'namespace' => 'Web', 'middleware' => ['auth']], function () {
-        Route::get('', 'AccountController@getView')->name('userAccount');
-        Route::put('', 'AccountController@updateAccount')->name('updateAccount');
-        Route::delete('avatar', 'AccountController@deleteAvatar')->name('deleteAvatar');
+        Route::get('', 'AccountController@getView')->name('web.account');
+        Route::put('', 'AccountController@updateAccount')->name('web.account.update');
+        Route::delete('avatar', 'AccountController@deleteAvatar')->name('web.account.avatar.delete');
     });
 });

@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         @include('partials.alerts.alerts-combined')
-                        <form action="{{route('updateAccount')}}" method="POST">
+                        <form action="{{route('web.account.update')}}" method="POST">
                             @csrf
                             {{method_field('PUT')}}
                             <div class="row">
