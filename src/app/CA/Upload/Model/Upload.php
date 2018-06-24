@@ -2,9 +2,10 @@
 
 namespace App\CA\Upload\Model;
 
+use App\CA\AppBaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Upload extends Model
+class Upload extends AppBaseModel
 {
     /**
      * Columns/Fields that is allowed to be mass assigned.
@@ -13,13 +14,10 @@ class Upload extends Model
      */
     protected $fillable = [
         'user_id',
-        'name',
         'storage_path',
         'size',
         'mime',
         'width',
         'height',
-        'type',
-        'global'
     ];
 }

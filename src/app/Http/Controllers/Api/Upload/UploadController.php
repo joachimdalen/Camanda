@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Upload;
 
+use App\CA\Upload\UploadRepository;
 use App\Http\Requests\Upload\ImageUploadRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,8 +19,18 @@ use Intervention\Image\ImageManagerStatic as Image;
  */
 class UploadController extends Controller
 {
-    public function __construct()
+    /**
+     * @var UploadRepository
+     */
+    private $repo;
+
+    /**
+     * UploadController constructor.
+     * @param UploadRepository $repository
+     */
+    public function __construct(UploadRepository $repository)
     {
+        $this->repo = $repository;
     }
 
     /**
@@ -41,9 +52,18 @@ class UploadController extends Controller
             $img = Image::make($data['file'])->crop($data['width'], $data['height'])->encode('png');
             $pathRaw = $dir . DIRECTORY_SEPARATOR . $seed . '_' . $uuid . '.png';
             Storage::disk('public')->put($pathRaw, $img);
-            
+            $imgData = [
+                'user_id' => $user->id,
+                'name' => '',
+                'storage_path' => $pathRaw,
+                'size' => $img->filesize(),
+                'mime' => $img->mime(),
+                'width' => $img->width(),
+                'height' => $img->height(),
+            ];
+            $createdImageEntry = $this->repo->create($imgData);
             //$path = Storage::disk('public')->url($pathRaw);
-            //return \response($path);
+            return \response()->json($createdImageEntry);
         } catch (\Exception $exception) {
             Log::error($exception);
             return response()->json(false, Response::HTTP_UNPROCESSABLE_ENTITY);

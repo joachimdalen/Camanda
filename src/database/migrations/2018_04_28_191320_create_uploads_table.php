@@ -16,15 +16,11 @@ class CreateUploadsTable extends Migration
         Schema::create('uploads', function (Blueprint $table) {
             $table->uuid('id')->primary()->index();
             $table->uuid('user_id')->index(); // Uploader
-            $table->string('name')->nullable();
             $table->string('storage_path');
             $table->float('size');
             $table->string('mime');
             $table->integer('width');
             $table->integer('height');
-            $table->string('type');
-            // Accessible by all users, not just the uploader.
-            $table->boolean('global')->default(false);
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')

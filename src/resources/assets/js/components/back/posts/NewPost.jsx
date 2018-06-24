@@ -29,8 +29,6 @@ class NewPost extends Component {
         this.state = {
             imageUploaderVisible: false,
             imageGalleryVisible: false,
-            selectedHeaderType: null,
-            selectedPreviewType: null
         }
     }
 
@@ -53,51 +51,7 @@ class NewPost extends Component {
         );
     }
 
-    _setState(key, value) {
-        this.setState({
-            [key]: value
-        })
-    }
-
-    getHeaderImageSection() {
-        const {selectedHeaderType} = this.state;
-        const {post, headerUrlChange,} = this.props;
-        switch (selectedHeaderType) {
-            case null : {
-                return (
-                    <div className="btn-list text-center">
-                        <button className="btn btn-cyan btn-sm" onClick={() => this._setState('selectedHeaderType', 0)}>
-                            <i className="fe fe-link mr-1"></i>
-                            Use Url
-                        </button>
-                        <button className="btn btn-indigo btn-sm" onClick={() => this._setState('selectedHeaderType', 1)}>
-                            <i className="fe fe-image mr-1"></i>
-                            Gallery Picker
-                        </button>
-                        <button className="btn btn-azure btn-sm" onClick={() => this._setState('selectedHeaderType', 2)}>
-                            <i className="fe fe-upload-cloud mr-1"></i>
-                            Upload
-                        </button>
-                    </div>
-                );
-            }
-            case 0: {
-                return (
-                    <input name="title" type="text" className="form-control"
-                           placeholder="Image Url" value={post.headerImage || ''}
-                           onChange={(e) => headerUrlChange(e.target.value)}/>
-                );
-            }
-            case 1: {
-                return (<p>1</p>);
-            }
-            case 2: {
-                return (<p>2</p>);
-            }
-        }
-    }
-
-    //<img className={"img-responsive m-2"} src={post.headerImage || ''}
+        //<img className={"img-responsive m-2"} src={post.headerImage || ''}
     render() {
         const {
             post, titleChange, summaryChange, contentChange, headerUrlChange,
@@ -135,33 +89,16 @@ class NewPost extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Header Image</label>
-                                            {this.getHeaderImageSection()}
-                                            {this.state.selectedHeaderType !== null ? (
-                                                <button className="btn btn-danger btn-sm mt-2" onClick={() => this._setState('selectedHeaderType', null)}>
-                                                    <i className="fe fe-x mr-1"></i> Cancel
-                                                </button>
-                                            ) : ''}
+                                            <input name="title" type="text" className="form-control"
+                                                   placeholder="Image Url" value={post.headerImage || ''}
+                                                   onChange={(e) => headerUrlChange(e.target.value)}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Preview Image (500x333)</label>
-                                            {/*      <img className={"img-responsive m-2"} src={post.previewImage || ''}/>
+                                            {/*      <img className={"img-responsive m-2"} src={post.previewImage || ''}/>*/}
                                             <input name="title" type="text" className="form-control"
                                                    placeholder="Image Url" value={post.previewImage || ''}
-                                                   onChange={(e) => previewUrlChange(e.target.value)}/>*/}
-                                            <div className="btn-list text-center">
-                                                <button className="btn btn-cyan btn-sm">
-                                                    <i className="fe fe-link mr-1"></i>
-                                                    Use Url
-                                                </button>
-                                                <button className="btn btn-indigo btn-sm">
-                                                    <i className="fe fe-image mr-1"></i>
-                                                    Gallery Picker
-                                                </button>
-                                                <button className="btn btn-azure btn-sm">
-                                                    <i className="fe fe-upload-cloud mr-1"></i>
-                                                    Upload
-                                                </button>
-                                            </div>
+                                                   onChange={(e) => previewUrlChange(e.target.value)}/>
                                         </div>
                                     </CardBody>
                                 </Card>
