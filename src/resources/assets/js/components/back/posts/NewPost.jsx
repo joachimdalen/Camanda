@@ -89,13 +89,14 @@ class NewPost extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Header Image</label>
+                                            <img className={"img-responsive m-2"} src={post.headerImage || ''}/>
                                             <input name="title" type="text" className="form-control"
                                                    placeholder="Image Url" value={post.headerImage || ''}
                                                    onChange={(e) => headerUrlChange(e.target.value)}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Preview Image (500x333)</label>
-                                            {/*      <img className={"img-responsive m-2"} src={post.previewImage || ''}/>*/}
+                                               <img className={"img-responsive m-2"} src={post.previewImage || ''}/>
                                             <input name="title" type="text" className="form-control"
                                                    placeholder="Image Url" value={post.previewImage || ''}
                                                    onChange={(e) => previewUrlChange(e.target.value)}/>
