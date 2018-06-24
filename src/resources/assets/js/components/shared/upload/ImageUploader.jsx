@@ -13,7 +13,8 @@ export default class ImageUploader extends Component {
             accepted: null,
             rejected: null,
             stage: 0,
-            image: null
+            image: null,
+            details: null,
         };
 
     }
@@ -25,7 +26,7 @@ export default class ImageUploader extends Component {
                 return (<SelectFile fileSelected={(accepted, rejected) => this.setFiles(accepted, rejected)} accepted={accepted} rejected={rejected}/>)
             }
             case 1: {
-                return (<ImageEditor imageConfirmed={(file) => this.setSaveFile(file)} imageUnConfirmed={() => this.notReady()} url={accepted.preview || ""}/>)
+                return (<ImageEditor imageConfirmed={(file, details) => this.setSaveFile(file, details)} imageUnConfirmed={() => this.notReady()} url={accepted.preview || ""}/>)
             }
         }
     }
@@ -46,10 +47,11 @@ export default class ImageUploader extends Component {
         });
     }
 
-    setSaveFile(file) {
+    setSaveFile(file, details) {
         this.setState({
             ready: true,
-            image: file
+            image: file,
+            details: details
         })
     }
 
@@ -74,6 +76,19 @@ export default class ImageUploader extends Component {
 
     }
 
+    uploadImage() {
+        const {image, details} = this.state;
+        axios.post('/api/upload', {
+            file: image,
+            width: details.width,
+            height: details.height,
+        }).then((response) => {
+            console.log(response.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
     render() {
         const {open, onClose} = this.props;
         const {ready, rejected} = this.state;
@@ -90,7 +105,7 @@ export default class ImageUploader extends Component {
                         <i className="fe fe-x mr-1"></i>
                         Cancel
                     </button>
-                    <button type="button" className={`btn btn-success btn-sm`} disabled={!ready} onClick={() => console.log('phasers')}>
+                    <button type="button" className={`btn btn-success btn-sm`} disabled={!ready} onClick={() => this.uploadImage()}>
                         <i className="fe fe-upload mr-1"></i>
                         Upload
                     </button>

@@ -152,6 +152,7 @@ return [
          */
         Zizaco\Entrust\EntrustServiceProvider::class,
         App\Providers\ConsoleStylesProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -211,6 +212,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Uuid' => Webpatser\Uuid\Uuid::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

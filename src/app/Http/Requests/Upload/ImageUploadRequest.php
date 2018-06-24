@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Upload;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ImageUploadRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class ImageUploadRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,9 @@ class ImageUploadRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'file' => 'required|base64image',
+            'width' => 'numeric',
+            'height' => 'numeric',
         ];
     }
 }

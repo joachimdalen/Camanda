@@ -13,21 +13,18 @@ export default class ImageEditor extends Component {
             ratio: 500 / 300,
             fixedRatio: true,
             enabled: true,
-
         }
     }
 
-    crop(event) {
-        // image in dataUrl
-        //  console.log(event);
-        this.setState({options: event.detail})
+    crop() {
+        this.setState({options: this.refs.cropper.getData(true)})
     }
 
     setEnabledState() {
         if (this.state.enabled) {
             this.setState({enabled: false}, () => {
                 this.refs.cropper.disable();
-                this.props.imageConfirmed(this.refs.cropper.getCroppedCanvas().toDataURL())
+                this.props.imageConfirmed(this.refs.cropper.getCroppedCanvas().toDataURL(), this.state.options)
             });
         } else {
             this.setState({enabled: true}, () => {
@@ -83,7 +80,7 @@ export default class ImageEditor extends Component {
                     <div className="row">
                         <div className="col-9">
                             <CropperJS ref='cropper' src={url} style={{height: 400, width: '100%'}}
-                                       aspectRatio={this.state.ratio} guides={true} crop={this.crop.bind(this)} cropBoxResizable={this.state.fixedRatio}/>
+                                       aspectRatio={this.state.ratio} guides={true} crop={this.crop.bind(this)} cropBoxResizable={this.state.fixedRatio} />
                         </div>
                         <div className="col-3">
                             <div className="form-group">

@@ -17,10 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'blog', 'middleware' => ['auth:api']], function () {
-    Route::group(['prefix' => 'posts'], function () {
-        Route::get('', 'Api\Blog\BlogController@getUserBlogPosts')->name('api.blog.posts');
-        Route::post('', 'Api\Blog\BlogController@createBlogPost')->name('api.blog.posts.create');
-        Route::put('{slug}', 'Api\Blog\BlogController@updateBlogPost')->name('api.blog.posts.update');
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::group(['prefix' => 'blog'], function () {
+        Route::group(['prefix' => 'posts', 'namespace' => 'Api\Blog'], function () {
+            Route::get('', 'BlogController@getUserBlogPosts')->name('api.blog.posts');
+            Route::post('', 'BlogController@createBlogPost')->name('api.blog.posts.create');
+            Route::put('{slug}', 'BlogController@updateBlogPost')->name('api.blog.posts.update');
+        });
+    });
+    Route::group(['prefix' => 'upload', 'namespace' => 'Api\Upload'], function () {
+        Route::post('', 'UploadController@uploadImage')->name('api.upload');
     });
 });
+
