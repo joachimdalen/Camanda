@@ -54,7 +54,7 @@ class PostsList extends Component {
         return (
             <tr key={post.id}>
                 <td><span className="text-muted">{post.short_id}</span></td>
-                <td><a href="invoice.html" className="text-inherit">{post.title}</a></td>
+                <td><a href="invoice.html" className="text-inherit">{post.title.slice(0, 50)}...</a></td>
                 <td>
                     {!post.posted_at_unix ? (<p>Not Posted</p>) : (
                         <Moment fromNow unix>
