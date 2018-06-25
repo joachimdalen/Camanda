@@ -26,4 +26,15 @@ class UploadRepository
         $created = $this->model->create($data);
         return $created;
     }
+
+    public function getForUser($userId, $paginate = true, $pageSize = 25)
+    {
+        $uploads = $this->model->where('user_id', $userId);
+        if ($paginate) {
+            $uploads = $uploads->paginate($pageSize);
+        } else {
+            $uploads = $uploads->get();
+        }
+        return $uploads;
+    }
 }

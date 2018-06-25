@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 export class Dropdown extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {};
 
     }
@@ -18,6 +18,7 @@ export class Dropdown extends Component {
             <div className={`dropdown ${this.props.dropClassName}`}>
                 <button className={`btn btn-sm btn-${this.props.type} ${this.props.dropClassName} dropdown-toggle`}
                         data-toggle="dropdown">
+                    {this.props.icon !== '' ? (<i className={`fe fe-${this.props.icon} ${this.props.iconClassName} pr-2`}/>) : ''}
                     {this.props.title}
                 </button>
                 <div className="dropdown-menu">
@@ -27,8 +28,10 @@ export class Dropdown extends Component {
         );
     }
 }
+
 Dropdown.propTypes = {
     title: PropTypes.string,
+    icon: PropTypes.string,
     className: PropTypes.string,
     dropClassName: PropTypes.string,
     iconClassName: PropTypes.string,
@@ -38,25 +41,37 @@ Dropdown.defaultProps = {
     title: '',
     className: '',
     dropClassName: '',
+    icon: '',
     iconClassName: '',
     type: 'primary',
 };
 
 export class DropdownItem extends Component {
     render() {
+        if (this.props.type === 'a') {
+            return (
+                <a className="dropdown-item" href={this.props.uri}>
+                    <i className={`fe fe-${this.props.icon} ${this.props.iconClassName} pr-2`}/>
+                    {this.props.title}
+                </a>
+            )
+        }
         return (
-            <a className="dropdown-item" href={this.props.uri}>
+            <button className="dropdown-item" type="button">
                 <i className={`fe fe-${this.props.icon} ${this.props.iconClassName} pr-2`}/>
                 {this.props.title}
-            </a>)
+            </button>
+        )
     }
 }
+
 DropdownItem.propTypes = {
     icon: PropTypes.string,
     className: PropTypes.string,
     iconClassName: PropTypes.string,
     uri: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+    type: PropTypes.oneOf(['a', 'button'])
 };
 DropdownItem.defaultProps = {
     icon: '',
@@ -64,5 +79,5 @@ DropdownItem.defaultProps = {
     iconClassName: '',
     uri: '#',
     title: '',
-
+    type: 'a'
 };

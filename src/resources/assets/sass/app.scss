@@ -15,11 +15,14 @@ Dashboard UI
 
 @import "files";
 @import "image-editor";
-
+@import "image-gallery";
 .image-uploaded-preview {
   max-height: 400px;
 }
 
 .mh-200 {
   max-height: 200px !important;
+}
+.flex-0{
+  flex: 0;
 }

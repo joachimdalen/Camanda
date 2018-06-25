@@ -69,4 +69,16 @@ class UploadController extends Controller
             return response()->json(false, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
+
+    /**
+     * Get all uploads for a user
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function getUploadsByUser(Request $request)
+    {
+        $user = $request->user();
+        $uploads = $this->repo->getForUser($user->id, true, 9);
+        return UploadResource::collection($uploads);
+    }
 }
