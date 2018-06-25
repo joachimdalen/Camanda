@@ -14,6 +14,11 @@ export default class ImageGallery extends Component {
         }
     }
 
+    close() {
+        const {onClose} = this.props;
+        onClose();
+    }
+
     componentDidMount() {
         axios.get('/api/upload/mine').then((response) => {
             this.setState({
@@ -49,7 +54,7 @@ export default class ImageGallery extends Component {
                                             Copy Link
                                         </button>
                                     </CopyToClipboard>
-                                    <DropdownItem icon={"trash"} title={"Delete"} />
+                                    <DropdownItem icon={"trash"} title={"Delete"}/>
                                 </Dropdown>
 
                             </div>
