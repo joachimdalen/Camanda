@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from "react-redux"
-import {toastr} from 'react-redux-toastr'
 import {
     setPostTitle,
     setPostSummary,
@@ -89,14 +87,14 @@ class NewPost extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Header Image</label>
-                                            <img className={"img-responsive m-2"} src={post.headerImage || ''}/>
+                                            <img className={"img-fluid m-2 d-block mx-auto mh-200"} src={post.headerImage || ''}/>
                                             <input name="title" type="text" className="form-control"
                                                    placeholder="Image Url" value={post.headerImage || ''}
                                                    onChange={(e) => headerUrlChange(e.target.value)}/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">Post Preview Image (500x333)</label>
-                                               <img className={"img-responsive m-2"} src={post.previewImage || ''}/>
+                                               <img className={"img-fluid m-2 d-block mx-auto mh-200"} src={post.previewImage || ''}/>
                                             <input name="title" type="text" className="form-control"
                                                    placeholder="Image Url" value={post.previewImage || ''}
                                                    onChange={(e) => previewUrlChange(e.target.value)}/>
@@ -141,10 +139,6 @@ class NewPost extends Component {
                                 </div>
                                 <div className="form-group">
                                     {this.getSaveStatus()}
-                                    {/*<button
-                                        onClick={() => toastr.success('The title', 'The message')}
-                                        type="button">Toastr Success
-                                    </button>*/}
                                     <button className="btn btn-azure btn-block btn-sm"
                                             onClick={() => this.setState({imageUploaderVisible: true})}>
                                         <i className="fe fe-image mr-1"></i>

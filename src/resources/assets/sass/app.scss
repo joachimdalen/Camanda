@@ -1,7 +1,6 @@
 /**
 Dashboard UI
  */
-
 @import 'variables';
 @import './node_modules/bootstrap/scss/bootstrap.scss';
 @import 'dashboard/dashboard';
@@ -13,5 +12,14 @@ Dashboard UI
 .input-group-append .btn {
   z-index: 0 !important;
 }
+
 @import "files";
 @import "image-editor";
+
+.image-uploaded-preview {
+  max-height: 400px;
+}
+
+.mh-200 {
+  max-height: 200px !important;
+}

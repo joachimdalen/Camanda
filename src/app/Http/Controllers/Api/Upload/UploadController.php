@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Upload;
 
 use App\CA\Upload\UploadRepository;
 use App\Http\Requests\Upload\ImageUploadRequest;
+use App\Http\Resources\Upload\UploadResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -37,7 +38,7 @@ class UploadController extends Controller
      * Handles image uploads
      * @todo: Move contentimg into own filesystem, and improve upload code.
      * @param ImageUploadRequest $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+     * @return UploadResource
      */
     public function uploadImage(ImageUploadRequest $request)
     {
@@ -62,8 +63,7 @@ class UploadController extends Controller
                 'height' => $img->height(),
             ];
             $createdImageEntry = $this->repo->create($imgData);
-            //$path = Storage::disk('public')->url($pathRaw);
-            return \response()->json($createdImageEntry);
+            return new UploadResource($createdImageEntry);
         } catch (\Exception $exception) {
             Log::error($exception);
             return response()->json(false, Response::HTTP_UNPROCESSABLE_ENTITY);
