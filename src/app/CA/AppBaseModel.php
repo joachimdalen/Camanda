@@ -14,4 +14,11 @@ class AppBaseModel extends Model
      */
     public $incrementing = false;
 
+    public function getShortId()
+    {
+        if ($this->id) {
+            return str_limit($this->id, 8, '');
+        }
+        return '';
+    }
 }
