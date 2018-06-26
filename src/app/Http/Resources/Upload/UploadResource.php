@@ -24,8 +24,8 @@ class UploadResource extends JsonResource
             'mime' => $this->mime,
             'width' => $this->width,
             'height' => $this->height,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at->toIso8601ZuluString(),
+            'updated_at' => $this->updated_at->toIso8601ZuluString(),
             'created_at_unix' => strtotime($this->created_at),
             'updated_at_unix' => strtotime($this->updated_at),
         ];
