@@ -14,12 +14,20 @@ export default class TooltipIconLink extends Component {
     }
 
     render() {
+        const {type, uri, onClick, icon, iconClassName, placement, className, title} = this.props;
+        if (type === 'a') {
+            return (
+                <a className={`icon ${className}`} href={uri} data-toggle="tooltip"
+                   data-placement={placement} title={title}>
+                    <i className={`fe fe-${icon} ${iconClassName}`}/>
+                </a>
+            );
+        }
         return (
-            <a className={`icon ${this.props.className}`} href={this.props.uri} data-toggle="tooltip"
-               data-placement={this.props.placement}
-               title={this.props.title}>
-                <i className={`fe fe-${this.props.icon}`} />
-            </a>
+            <button className={`icon ${className}`} data-toggle="tooltip"
+                    data-placement={placement} title={title} onClick={onClick}>
+                <i className={`fe fe-${icon} ${iconClassName}`}/>
+            </button>
         );
     }
 }
@@ -29,11 +37,15 @@ TooltipIconLink.propTypes = {
     icon: PropTypes.string,
     uri: PropTypes.string,
     className: PropTypes.string,
+    iconClassName: PropTypes.string,
+    type: PropTypes.oneOf(['a', 'button'])
 };
 TooltipIconLink.defaultProps = {
     placement: 'top',
     title: '',
     icon: '',
     uri: '#',
-    className: ''
+    className: '',
+    iconClassName: '',
+    type: 'a'
 };
