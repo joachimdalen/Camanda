@@ -16,6 +16,7 @@ export default function reducer(state = {
     },
     tags: [],
     saving: false,
+    created: false,
     error: null,
 }, action) {
 
@@ -30,6 +31,7 @@ export default function reducer(state = {
             return {
                 ...state,
                 saving: false,
+                created: false,
                 error: action.payload
             }
         }
@@ -37,6 +39,7 @@ export default function reducer(state = {
             return {
                 ...state,
                 saving: false,
+                created: true,
                 post: action.payload,
                 error: null,
             }

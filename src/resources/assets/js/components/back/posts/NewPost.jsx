@@ -39,21 +39,20 @@ class NewPost extends Component {
                 </button>
             );
         }
-        const {title, status, summary, content, headerImage, previewImage} = this.props.post;
+        const {title, status, summary, content, headerImage, previewImage, tags} = this.props.post;
         return (
             <button className="btn btn-success btn-block btn-sm"
-                    onClick={() => this.props.createPost(title, summary, this.props.tags, content, status, headerImage, previewImage)}>
+                    onClick={() => this.props.createPost(title, summary, tags, content, status, headerImage, previewImage)}>
                 <i className="fe fe-save mr-1"></i>
                 Save
             </button>
         );
     }
-
         //<img className={"img-responsive m-2"} src={post.headerImage || ''}
     render() {
         const {
             post, titleChange, summaryChange, contentChange, headerUrlChange,
-            previewUrlChange, statusChange, tagAdd, tagRemove
+            previewUrlChange, statusChange, tagAdd, tagRemove, created
         } = this.props;
         return (
             <div className="container-fluid">
@@ -129,7 +128,7 @@ class NewPost extends Component {
                                 <div className="form-group">
                                     <label className="form-label">Status</label>
                                     <select name="status" id="status" className="form-control"
-                                            onChange={(e) => statusChange(e.target.value)}>
+                                            onChange={(e) => statusChange(e.target.value)} defaultValue={3}>
                                         <option value="3">Draft</option>
                                         <option value="0">Publised</option>
                                     </select>
@@ -166,6 +165,7 @@ const mapStateToProps = state => {
         post: state.newPost.post,
         tags: state.newPost.tags,
         saving: state.newPost.saving,
+        created: state.newPost.created,
     }
 };
 const mapDispatchToProps = dispatch => {
