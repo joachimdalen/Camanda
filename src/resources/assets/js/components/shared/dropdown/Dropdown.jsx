@@ -5,24 +5,19 @@ import PropTypes from 'prop-types';
 export class Dropdown extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-
     }
 
     render() {
+        const {dropClassName, type, icon, iconClassName, title, children} = this.props;
         return (
-            <div className={`dropdown ${this.props.dropClassName}`}>
-                <button className={`btn btn-sm btn-${this.props.type} ${this.props.dropClassName} dropdown-toggle`}
+            <div className={`dropdown ${dropClassName}`}>
+                <button className={`btn btn-sm btn-${type} ${dropClassName} dropdown-toggle`}
                         data-toggle="dropdown">
-                    {this.props.icon !== '' ? (<i className={`fe fe-${this.props.icon} ${this.props.iconClassName} pr-2`}/>) : ''}
-                    {this.props.title}
+                    {icon !== '' ? (<i className={`fe fe-${icon} ${iconClassName} pr-2`}/>) : ''}
+                    {title}
                 </button>
                 <div className="dropdown-menu">
-                    {this.props.children}
+                    {children}
                 </div>
             </div>
         );
@@ -48,18 +43,19 @@ Dropdown.defaultProps = {
 
 export class DropdownItem extends Component {
     render() {
-        if (this.props.type === 'a') {
+        const {type, uri, onClick, icon, iconClassName, className, title} = this.props;
+        if (type === 'a') {
             return (
-                <a className="dropdown-item" href={this.props.uri}>
-                    <i className={`fe fe-${this.props.icon} ${this.props.iconClassName} pr-2`}/>
-                    {this.props.title}
+                <a className={`dropdown-item ${className}`} href={uri} onClick={onClick}>
+                    <i className={`fe fe-${icon} ${iconClassName} pr-2`}/>
+                    {title}
                 </a>
             )
         }
         return (
-            <button className="dropdown-item" type="button">
-                <i className={`fe fe-${this.props.icon} ${this.props.iconClassName} pr-2`}/>
-                {this.props.title}
+            <button className={`dropdown-item ${className}`} type="button" onClick={onClick}>
+                <i className={`fe fe-${icon} ${iconClassName} pr-2`}/>
+                {title}
             </button>
         )
     }
@@ -71,7 +67,8 @@ DropdownItem.propTypes = {
     iconClassName: PropTypes.string,
     uri: PropTypes.string,
     title: PropTypes.string,
-    type: PropTypes.oneOf(['a', 'button'])
+    type: PropTypes.oneOf(['a', 'button']),
+    onClick: PropTypes.func.isRequired
 };
 DropdownItem.defaultProps = {
     icon: '',
@@ -79,5 +76,6 @@ DropdownItem.defaultProps = {
     iconClassName: '',
     uri: '#',
     title: '',
-    type: 'a'
+    type: 'a',
+    onClick: () => console.log('')
 };
