@@ -8,10 +8,10 @@ export class Dropdown extends Component {
     }
 
     render() {
-        const {dropClassName, type, icon, iconClassName, title, children} = this.props;
+        const {dropClassName, variant, icon, iconClassName, title, children} = this.props;
         return (
             <div className={`dropdown ${dropClassName}`}>
-                <button className={`btn btn-sm btn-${type} ${dropClassName} dropdown-toggle`}
+                <button className={`btn btn-sm btn-${variant} ${dropClassName} dropdown-toggle`}
                         data-toggle="dropdown">
                     {icon !== '' ? (<i className={`fe fe-${icon} ${iconClassName} pr-2`}/>) : ''}
                     {title}
@@ -30,7 +30,7 @@ Dropdown.propTypes = {
     className: PropTypes.string,
     dropClassName: PropTypes.string,
     iconClassName: PropTypes.string,
-    type: PropTypes.string
+    variant: PropTypes.string,
 };
 Dropdown.defaultProps = {
     title: '',
@@ -38,7 +38,7 @@ Dropdown.defaultProps = {
     dropClassName: '',
     icon: '',
     iconClassName: '',
-    type: 'primary',
+    variant: 'primary',
 };
 
 export class DropdownItem extends Component {
