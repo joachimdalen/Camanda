@@ -27,6 +27,9 @@ class BlogPost extends AppBaseModel
         'header_image_id',
         'preview_image_id'
     ];
+    protected $casts = [
+        'posted_at' => 'datetime',
+    ];
 
     /**
      * Get the staus display text from the status integer.
@@ -35,20 +38,6 @@ class BlogPost extends AppBaseModel
      */
     public function getStatusText()
     {
-        switch ($this->status) {
-            case PostStatus::PUBLISHED:
-                return 'published';
-                break;
-            case PostStatus::SCHEDULED:
-                return 'scheduled';
-                break;
-            case PostStatus::PRIVATE:
-                return 'private';
-                break;
-            case PostStatus::DRAFT:
-                return 'draft';
-                break;
-
-        }
+        return PostStatus::getStatusText($this->status);
     }
 }

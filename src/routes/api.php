@@ -22,7 +22,8 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::group(['prefix' => 'posts', 'namespace' => 'Api\Blog'], function () {
             Route::get('', 'BlogController@getUserBlogPosts')->name('api.blog.posts');
             Route::post('', 'BlogController@createBlogPost')->name('api.blog.posts.create');
-            Route::put('{slug}', 'BlogController@updateBlogPost')->name('api.blog.posts.update');
+            Route::put('status', 'BlogController@setPostPublishStatus')->name('api.blog.posts.status');
+            //Route::put('{slug}', 'BlogController@updateBlogPost')->name('api.blog.posts.update');
         });
     });
     Route::group(['prefix' => 'upload', 'namespace' => 'Api\Upload'], function () {

@@ -94,4 +94,30 @@ class BlogRepository
         $posts = $this->model->all();
         return $posts;
     }
+
+    /**
+     * Update the published state of the post.
+     * @param $id
+     * @param $status
+     * @return bool
+     */
+    public function setPostStatus($id, $status)
+    {
+        $updated = $this->model->where('id', $id)->update(['status' => $status]);
+        if ($updated) return true;
+        return false;
+    }
+
+    /**
+     * Update the published date for the post.
+     * @param $id
+     * @param $time
+     * @return bool
+     */
+    public function setPostPublishDate($id, $time)
+    {
+        $updated = $this->model->where('id', $id)->update(['posted_at' => $time]);
+        if ($updated) return true;
+        return false;
+    }
 }

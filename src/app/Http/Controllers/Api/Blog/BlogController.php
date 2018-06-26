@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Api\Blog;
 
 use App\CA\Blog\BlogRepository;
+use App\CA\Blog\Model\BlogPost;
 use App\CA\Blog\PostStatus;
 use App\CA\Setting\SettingKeys;
 use App\CA\Setting\SettingManager;
 use App\CA\Tag\TagHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
+use App\Http\Requests\Post\UpdatePostPublishStatusRequest;
 use App\Http\Resources\Blog\BlogPostResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
@@ -88,7 +91,7 @@ class BlogController extends Controller
         $slugType = $this->settings->get(SettingKeys::SLUG_TYPE);
         if ($slugType === 'random' || !$slugType) {
             $slugSize = $this->settings->get(SettingKeys::SLUG_SIZE);
-            if($slugSize == null){
+            if ($slugSize == null) {
                 $slugSize = 15;
             }
             $slug = str_random($slugSize);
@@ -119,5 +122,23 @@ class BlogController extends Controller
 
         //Format and return the blog post.
         return new BlogPostResource($created);
+    }
+
+    /**
+     * Update the status determining visibility for the blog post.
+     * @param UpdatePostPublishStatusRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setPostPublishStatus(UpdatePostPublishStatusRequest $request)
+    {
+        $postId = $request->id;
+        $status = $request->status;
+        $updated = $this->repo->setPostStatus($postId, $status);
+        if (!$updated) return response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+        if ($status === PostStatus::PUBLISHED) {
+            $updated = $this->repo->setPostPublishDate($postId, Carbon::now());
+            if (!$updated) return response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        return \response()->json(['data' => ['id' => $postId, 'status' => $status, 'status_text' => PostStatus::getStatusText($status)]], Response::HTTP_OK);
     }
 }

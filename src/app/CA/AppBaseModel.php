@@ -4,6 +4,7 @@ namespace App\CA;
 
 use Illuminate\Database\Eloquent\Model;
 use App\CA\Traits\UuidTrait;
+
 class AppBaseModel extends Model
 {
     use UuidTrait;
@@ -21,4 +22,10 @@ class AppBaseModel extends Model
         }
         return '';
     }
+
+    public static function getTableName()
+    {
+        return with(new static)->getTable();
+    }
+
 }

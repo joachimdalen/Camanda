@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from "react-redux"
 import Card from "../../shared/card/Card";
 import CardHeader from "../../shared/card/CardHeader";
 import CardTitle from "../../shared/card/CardTitle";
 import CardOptions from "../../shared/card/CardOptions";
 import CardBody from "../../shared/card/CardBody";
-import StaticLink from "../../shared/links/StaticLink";
 import {Dropdown, DropdownItem} from "../../shared/dropdown/Dropdown";
 import TooltipIconLink from "../../shared/links/TooltipIconLink";
-import {fetchPosts} from '../../../actions/postsListActions'
+import {changePostPublishStatus, fetchPosts, UPDATE_POST_STATUS_FULFILLED} from '../../../actions/postsListActions'
 import {BarLoader} from 'react-css-loaders';
 import PostStatus from "../../posts/PostStatus";
 import Moment from 'react-moment';
+import {Link} from "react-router-dom";
+
 
 class PostsList extends Component {
     constructor(props) {
@@ -20,7 +20,8 @@ class PostsList extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchPosts());
+        this.props.load();
+
     }
 
     renderTableHeader() {
@@ -75,39 +76,75 @@ class PostsList extends Component {
                 <td><PostStatus status={post.status_text}/></td>
                 <td className="text-right">
                     {this.getPublishActionButton(post)}
-                    <Dropdown title={"Actions"} type={"secondary"}>
-                        <DropdownItem icon={"eye"} title={"View"}/>
-                        <DropdownItem icon={"activity"} title={"View Statistics"}/>
-                        <DropdownItem icon={"copy"} title={"Copy Link"}/>
-                        <DropdownItem icon={"eye-off"} title={"Copy Preview Link"}/>
-                    </Dropdown>
+                    {this.getDropDownMenu(post)}
                 </td>
                 <td>
-                    <TooltipIconLink title={"Edit Post"} icon={"edit"} placement={"top"} uri={"#"}/>
+                    {this.getEditButton(post)}
                 </td>
             </tr>
         );
     }
 
+    getEditButton(post) {
+        const {id} = post;
+        return (<Link to={`/blog/posts/${id}/edit`} className="icon" data-toggle="tooltip" data-placement={"top"}><i className="fe fe-edit"></i></Link>)
+    }
+
     getPublishActionButton(post) {
-        const {status_text} = post;
-        switch (status_text) {
-            case 'draft': {
-                return (<StaticLink type={"secondary"} title={"Publish"} uri={"#"} icon={"check-circle"} iconClassName={"text-success mr-1"} className={"mr-2"}/>)
+        const {status} = post;
+        const {changeStatus} = this.props;
+        switch (status) {
+            case 3: {
+                return (
+                    <button className={`btn btn-sm btn-secondary mr-2`} onClick={() => changeStatus(post.id, 0)}>
+                        <i className={`fe fe-check-circle text-success mr-1`}/>
+                        Publish
+                    </button>
+                );
+
             }
-            case 'published': {
-                return (<StaticLink type={"secondary"} title={"Unpublish"} uri={"#"} icon={"x"} iconClassName={"text-danger mr-1"} className={"mr-2"}/>)
+            case 0: {
+                return (
+                    <button className={`btn btn-sm btn-secondary mr-2`} onClick={() => changeStatus(post.id, 2)}>
+                        <i className={`fe fe-x text-danger mr-1`}/>
+                        Unpublish
+                    </button>
+                )
             }
-            case 'private': {
-                return <i className={"fe fe-lock text-danger mr-2"}/>
+            case 2: {
+                return (
+                    <button className={`btn btn-sm btn-secondary mr-2`} onClick={() => changeStatus(post.id, 3)}>
+                        <i className={`fe fe-file-text mr-1`}/>
+                        Draft
+                    </button>
+                )
             }
-            case 'scheduled': {
-                return (<StaticLink type={"secondary"} title={"Publish Now"} uri={"#"} icon={"clock"} iconClassName={"text-success mr-1"} className={"mr-2"}/>)
+            case 1: {
+                return (
+                    <button className={`btn btn-sm btn-secondary mr-2`} onClick={() => changeStatus(post.id, 1)}>
+                        <i className={`fe fe-clock text-success mr-1`}/>
+                        Publish Now
+                    </button>
+                );
             }
         }
     }
-    getDropDownMenu(){
 
+    getDropDownMenu(post) {
+        const {status} = post;
+        if (status === 3) return;
+        const View = () => (<DropdownItem icon={"eye"} title={"View"}/>);
+        const Stats = () => (<DropdownItem icon={"activity"} title={"View Statistics"}/>);
+        const CopyLink = () => (<DropdownItem icon={"copy"} title={"Copy Link"}/>);
+        const PreviewLink = () => (<DropdownItem icon={"eye-off"} title={"Copy Preview Link"}/>);
+        return (
+            <Dropdown title={"Actions"} type={"secondary"}>
+                <View/>
+                {status !== 3 || status !== 0 ? (<Stats/>) : ''}
+                {status !== 2 ? (<CopyLink/>) : ''}
+                {status !== 0 ? (<PreviewLink/>) : ''}
+            </Dropdown>
+        )
     }
 
     renderContentOrLoader() {
@@ -156,7 +193,7 @@ class PostsList extends Component {
                             <CardHeader>
                                 <CardTitle title={"Posts"}/>
                                 <CardOptions>
-                                    <StaticLink icon={"plus"} uri={"/blog/posts/write"} title={"Write Posts"} type={"primary"}/>
+                                    <Link to={`/blog/write`} className="btn btn-primary btn-sm"><i className="fe fe-plus"></i> Write</Link>
                                 </CardOptions>
                             </CardHeader>
                             {this.renderContentOrLoader()}
@@ -175,6 +212,16 @@ const mapStateToProps = state => {
         loading: state.posts.loading
     }
 };
+const mapDispatchToProps = dispatch => {
+    return {
+        load: () => {
+            dispatch(fetchPosts())
+        },
+        changeStatus: (id, status) => {
+            dispatch(changePostPublishStatus(id, status))
+        }
+    }
+};
 export default connect(
-    mapStateToProps,
+    mapStateToProps, mapDispatchToProps
 )(PostsList)
