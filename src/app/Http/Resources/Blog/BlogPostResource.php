@@ -27,10 +27,10 @@ class BlogPostResource extends JsonResource
             'tags' => $this->tags,
             'created_at' => $this->created_at->toIso8601ZuluString(),
             'updated_at' => $this->updated_at->toIso8601ZuluString(),
-            'posted_at' => $this->posted_at->toIso8601ZuluString(),
+            'posted_at' => $this->posted_at !== null ? $this->posted_at->toIso8601ZuluString() : null,
             'created_at_unix' => strtotime($this->created_at),
             'updated_at_unix' => strtotime($this->updated_at),
-            'posted_at_unix' => strtotime($this->posted_at),
+            'posted_at_unix' =>$this->posted_at !== null ? strtotime($this->posted_at) : null,
         ];
     }
 }
