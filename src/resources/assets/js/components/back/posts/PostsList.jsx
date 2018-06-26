@@ -87,7 +87,7 @@ class PostsList extends Component {
 
     getEditButton(post) {
         const {id} = post;
-        return (<Link to={`/blog/posts/${id}/edit`} className="icon" data-toggle="tooltip" data-placement={"top"}><i className="fe fe-edit"></i></Link>)
+        return (<Link to={`/blog/posts/${id}/edit`} className="icon"><i className="fe fe-edit"></i></Link>)
     }
 
     getPublishActionButton(post) {
