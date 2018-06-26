@@ -29,6 +29,15 @@ export default class ImageGallery extends Component {
         })
     }
 
+    deleteImage(image) {
+        axios.delete(`/api/upload/delete/${image.id}`).then((response) => {
+            let index = this.state.images.indexOf(image);
+            if (index < 0) toastr.warn('Failed to remove image', 'Something happened and we could not remove the image from the view. Try refreshing the site.')
+        }).catch((err) => {
+            toastr.error('Failed to delete image', 'An error occurred and we could not delete the image');
+        })
+    }
+
     renderImages() {
         const {images} = this.state;
         if (!images.length) return;
@@ -36,7 +45,7 @@ export default class ImageGallery extends Component {
             return (
                 <div className="col-4" key={image.id}>
                     <div className="card">
-                        <img className="card-img-top img-thumbnail my-auto" src={image.url || ''} alt="And this isn't my nose. This is a false one."/>
+                        <img className="card-img-top img-thumbnail my-auto" src={image.url || ''} alt="Failed to load image"/>
                         <div className="card-body d-flex flex-column p-1 flex-0">
                             <div className="d-flex align-items-center mt-auto">
                                 <div className="w-100">
@@ -54,9 +63,8 @@ export default class ImageGallery extends Component {
                                             Copy Link
                                         </button>
                                     </CopyToClipboard>
-                                    <DropdownItem icon={"trash"} title={"Delete"}/>
+                                    <DropdownItem icon={"trash"} title={"Delete"} type={"button"} className={"text-danger"} onClick={() => this.deleteImage(image)}/>
                                 </Dropdown>
-
                             </div>
                         </div>
                     </div>

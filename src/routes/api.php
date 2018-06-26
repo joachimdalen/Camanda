@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::group(['prefix' => 'upload', 'namespace' => 'Api\Upload'], function () {
         Route::post('', 'UploadController@uploadImage')->name('api.upload');
         Route::get('mine', 'UploadController@getUploadsByUser')->name('api.upload.mine');
+        Route::delete('delete/{upload}', 'UploadController@deleteImage')->name('api.upload.delete');
     });
 });
 

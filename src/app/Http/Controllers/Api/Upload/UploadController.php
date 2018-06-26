@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Upload;
 
+use App\CA\Upload\Model\Upload;
 use App\CA\Upload\UploadRepository;
 use App\Http\Requests\Upload\ImageUploadRequest;
 use App\Http\Resources\Upload\UploadResource;
@@ -80,5 +81,42 @@ class UploadController extends Controller
         $user = $request->user();
         $uploads = $this->repo->getForUser($user->id, true, 9);
         return UploadResource::collection($uploads);
+    }
+
+    /**
+     * Delete a image from the gallery.
+     * @param Request $request
+     * @param Upload $upload
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function deleteImage(Request $request, Upload $upload)
+    {
+        $user = $request->user();
+        if ($user->id !== $upload->user_id) return \response()->json([], Response::HTTP_NOT_FOUND);
+        $path = $upload->storage_path;
+        Storage::disk('public')->delete($path);
+        $folder = dirname($path);
+        $this->deleteDirIfEmpty($folder);
+        if (!$upload->delete()) {
+            Log::channel('runtime')->error('Failed to delete upload entry from the database.', ['id', $upload->id, 'path' => $path]);
+            return \response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        return \response()->json([], Response::HTTP_OK);
+    }
+
+    /**
+     * Delete a directory from the storage if it's empty.
+     * @param $dir
+     */
+    private function deleteDirIfEmpty($dir)
+    {
+        try {
+            if (!Storage::disk('public')->exists($dir)) return;
+            $files = Storage::disk('public')->allFiles($dir);
+            if (count($files) === 0) Storage::disk('public')->deleteDirectory($dir);
+        } catch (\Exception $exception) {
+            Log::channel('runtime')->error($exception);
+        }
     }
 }
