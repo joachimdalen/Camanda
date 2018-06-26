@@ -98,7 +98,6 @@ class BlogController extends Controller
             $data['slug'] = $slug;
         } else {
             $slugSalt = str_random(4);
-            //@todo: Check if this is the correct function for string replacements.
             //Limti to the word closest to 250 chars, so we have space to append our salt.
             $data['slug'] = str_replace(' ', '-', str_limit($data['title'], 249, '')) . '-' . $slugSalt;
         }

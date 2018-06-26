@@ -24,7 +24,7 @@ class CreateBlogPostsTable extends Migration
             $table->text('preview_image')->nullable();
             $table->text('header_image')->nullable();
             $table->integer('status')->default(PostStatus::DRAFT);
-            $table->datetime('posted_at')->nullable();
+            $table->timestamp('posted_at')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
