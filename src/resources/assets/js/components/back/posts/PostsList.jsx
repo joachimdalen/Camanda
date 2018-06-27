@@ -121,7 +121,7 @@ class PostsList extends Component {
             }
             case 1: {
                 return (
-                    <button className={`btn btn-sm btn-secondary mr-2`} onClick={() => changeStatus(post.id, 1)}>
+                    <button className={`btn btn-sm btn-secondary mr-2`} onClick={() => changeStatus(post.id, 0)}>
                         <i className={`fe fe-clock text-success mr-1`}/>
                         Publish Now
                     </button>
@@ -138,7 +138,7 @@ class PostsList extends Component {
         const CopyLink = () => (<DropdownItem icon={"copy"} title={"Copy Link"}/>);
         const PreviewLink = () => (<DropdownItem icon={"eye-off"} title={"Copy Preview Link"}/>);
         return (
-            <Dropdown title={"Actions"} type={"secondary"}>
+            <Dropdown title={"Actions"} variant={"secondary"}>
                 <View/>
                 {status !== 3 || status !== 0 ? (<Stats/>) : ''}
                 {status !== 2 ? (<CopyLink/>) : ''}
