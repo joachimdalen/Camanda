@@ -31,6 +31,8 @@ class BlogPostResource extends JsonResource
             'created_at_unix' => strtotime($this->created_at),
             'updated_at_unix' => strtotime($this->updated_at),
             'posted_at_unix' =>$this->posted_at !== null ? strtotime($this->posted_at) : null,
+            'header_image' => $this->header_image,
+            'preview_image' => $this->preview_image
         ];
     }
 }

@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth:api']], function () {
             Route::get('', 'BlogController@getUserBlogPosts')->name('api.blog.posts');
             Route::post('', 'BlogController@createBlogPost')->name('api.blog.posts.create');
             Route::put('status', 'BlogController@setPostPublishStatus')->name('api.blog.posts.status');
+            Route::get('{post}', 'BlogController@getBlogPost')->name('api.blog.posts.get');
             //Route::put('{slug}', 'BlogController@updateBlogPost')->name('api.blog.posts.update');
         });
     });

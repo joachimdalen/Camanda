@@ -141,4 +141,9 @@ class BlogController extends Controller
         }
         return \response()->json(['data' => ['id' => $postId, 'status' => $status, 'status_text' => PostStatus::getStatusText($status)]], Response::HTTP_OK);
     }
+
+    public function getBlogPost(Request $request, BlogPost $post)
+    {
+        return new BlogPostResource($post);
+    }
 }

@@ -6,8 +6,7 @@ import CardTitle from "../../shared/card/CardTitle";
 import CardOptions from "../../shared/card/CardOptions";
 import CardBody from "../../shared/card/CardBody";
 import {Dropdown, DropdownItem} from "../../shared/dropdown/Dropdown";
-import TooltipIconLink from "../../shared/links/TooltipIconLink";
-import {changePostPublishStatus, fetchPosts, UPDATE_POST_STATUS_FULFILLED} from '../../../actions/postsListActions'
+import {changePostPublishStatus, fetchPosts} from '../../../actions/postsListActions'
 import {BarLoader} from 'react-css-loaders';
 import PostStatus from "../../posts/PostStatus";
 import Moment from 'react-moment';
