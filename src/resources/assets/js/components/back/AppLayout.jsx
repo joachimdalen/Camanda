@@ -6,6 +6,7 @@ import ReduxToastr from 'react-redux-toastr'
 import NewPost from './posts/NewPost';
 import PostsList from './posts/PostsList';
 import Settings from "./settings/Settings";
+import EditPost from './posts/EditPost';
 
 export default class AppLayout extends Component {
     constructor(props) {
@@ -53,6 +54,7 @@ export default class AppLayout extends Component {
                         <Switch>
                             <Route path="/blog/write" exact component={NewPost} />
                             <Route path="/blog/posts" exact component={PostsList} />
+                            <Route path="/blog/edit/:id" exact component={EditPost}/>
                             <Route path="/settings" component={Settings}/>
                         </Switch>
                     </div>

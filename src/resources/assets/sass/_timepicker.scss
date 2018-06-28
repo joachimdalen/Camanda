@@ -1,0 +1,60 @@
+/*
+.timepicker{
+  text-align:center;
+  ul{
+    list-style: none;
+    padding: 0;
+    li{
+      cursor: pointer;
+      padding: 0.1rem;
+    }
+    .selected{
+      color: #d0021b;
+      font-weight: 700;
+    }
+    li:not(.selected):hover{
+      background-color: #f0f8ff;
+      border-radius: 50%;
+    }
+  }
+  .time-of-day{
+    height: auto;
+    align-self: center;
+  }
+}*/
+.timepicker {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  ul {
+    flex-direction: row;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap;
+    .selected {
+      color: #d0021b;
+      font-weight: 700;
+    }
+    li {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    li:not(.selected):hover {
+      background-color: #f0f8ff;
+      border-radius: 50%;
+    }
+  }
+  .picker-header {
+    align-self: start;
+    padding: 0.5rem;
+    font-size: 0.875em;
+    text-align: center;
+    color: #8b9898;
+    vertical-align: center;
+  }
+  .time-of-day {
+    justify-content: center;
+  }
+}

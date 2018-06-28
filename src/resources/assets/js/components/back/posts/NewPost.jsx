@@ -48,7 +48,6 @@ class NewPost extends Component {
             </button>
         );
     }
-        //<img className={"img-responsive m-2"} src={post.headerImage || ''}
     render() {
         const {
             post, titleChange, summaryChange, contentChange, headerUrlChange,
