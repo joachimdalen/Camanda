@@ -2,6 +2,9 @@
 namespace App\CA\Traits;
 
 use Webpatser\Uuid\Uuid;
+/**
+ * Trait that applies a uuid as primary key to the model.
+ */
 trait UuidTrait
 {
 
@@ -12,8 +15,10 @@ trait UuidTrait
     {
         parent::boot();
 
-        static::creating(function ($model) {
-            $model->{$model->getKeyName()} = Uuid::generate()->string;
-        });
+        static::creating(
+            function ($model) {
+                $model->{$model->getKeyName()} = Uuid::generate()->string;
+            }
+        );
     }
 }
