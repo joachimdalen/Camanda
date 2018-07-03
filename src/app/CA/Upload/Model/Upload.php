@@ -5,6 +5,9 @@ namespace App\CA\Upload\Model;
 use App\CA\AppBaseModel;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Model for uploads.
+ */
 class Upload extends AppBaseModel
 {
     /**
