@@ -3,17 +3,22 @@
 namespace App\CA\Blog;
 
 use App\CA\Blog\Model\PostTag;
-
+/**
+ * Responsible for handling all database transactions for the
+ * model PostTag.
+ */
 class PostTagRepository
 {
     /**
+     *
      * @var PostTag
      */
-    private $model;
+    protected $model;
 
     /**
      * PostTagRepository constructor.
-     * @param PostTag $postTag
+     *
+     * @param PostTag $postTag A PostTag instance.
      */
     public function __construct(PostTag $postTag)
     {
@@ -23,7 +28,8 @@ class PostTagRepository
     /**
      * Get all tags for the given post.
      *
-     * @param string $id
+     * @param string $id The id of the blog post to get tags for
+     * 
      * @return PostTag[]
      */
     public function getTagsForPost($id)
@@ -34,9 +40,10 @@ class PostTagRepository
     /**
      * Bind a tag id to the blog post id.
      *
-     * @param string $tagId
-     * @param string $postId
-     * @return void
+     * @param string $tagId  The id of the tag.
+     * @param string $postId The id of the blog post.
+     * 
+     * @return PostTag | null
      */
     public function bindTag($tagId, $postId)
     {

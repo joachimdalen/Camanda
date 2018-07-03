@@ -6,6 +6,9 @@ use App\CA\AppBaseModel;
 use App\CA\Blog\PostStatus;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Model defining blog posts.
+ */
 class BlogPost extends AppBaseModel
 {
 

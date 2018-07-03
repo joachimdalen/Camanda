@@ -1,9 +1,11 @@
 <?php
 
 namespace App\CA\Blog\Model;
-
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Linking object used to link blog posts to tags.
+ */
 class PostTag extends Model
 {
     /**
