@@ -4,6 +4,10 @@ namespace App\CA\Tag\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use App\CA\AppBaseModel;
+
+/**
+ * Model for blog post tags.
+ */
 class Tag extends AppBaseModel
 {
     /**

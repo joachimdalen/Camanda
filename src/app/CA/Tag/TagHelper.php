@@ -11,11 +11,15 @@ use App\CA\Tag\TagRepository;
 class TagHelper
 {
     /**
+     * A TagRepository instance.
+     * 
      * @var TagRepository
      */
     protected $tagRepo;
 
     /**
+     * A PostTagRepository instance.
+     * 
      * @var PostTagRepository
      */
     protected $postTagRepo;
@@ -23,11 +27,12 @@ class TagHelper
     /**
      * TagHelper constructor.
      *
-     * @param TagRepository $tagRepo
-     * @param PostTagRepository $postTagRepo
+     * @param TagRepository     $tagRepo     A TagRepository instance.
+     * @param PostTagRepository $postTagRepo A PostTagRepository instance.
      */
-    public function __construct(TagRepository $tagRepo, PostTagRepository $postTagRepo)
-    {
+    public function __construct(
+        TagRepository $tagRepo, PostTagRepository $postTagRepo
+    ) {
         $this->tagRepo = $tagRepo;
         $this->postTagRepo = $postTagRepo;
 
@@ -36,17 +41,21 @@ class TagHelper
     /**
      * Assign a set of new tags to a post.
      *
-     * @param array $tags
-     * @param BlogPost $post
+     * @param array    $tags Array of tags to connect to the blog post.
+     * @param BlogPost $post The blog post to assign the tags to.
+     *
      * @return Tag[]
      */
     public function assignTagsToPost(array $tags, BlogPost $post)
     {
         $assignedTags = [];
         foreach ($tags as $tag) {
-            //Check if a tag with the same label already exists, if so, assign that one
-            //to the current post. If not, create a new tag and assign.
-            //Using the same tags/tag-ids will allow us to add filtering based on tags.
+            /*
+            Check if a tag with the same label already exists, if so,
+            assign that one to the current post. If not, create a
+            new tag and assign. Using the same tags/tag-ids will
+            allow us to add filtering based on tags.
+             */
             $existingTag = $this->tagRepo->getTagFromLabel($tag['label']);
             if ($existingTag) {
                 $this->postTagRepo->bindTag($existingTag->id, $post->id);
@@ -64,6 +73,7 @@ class TagHelper
      * Get all tags associated with the given blog post.
      *
      * @param BlogPost $post
+     * 
      * @return Tag[]
      */
     public function getTagsForPost(BlogPost $post)

@@ -4,16 +4,23 @@ namespace App\CA\Tag;
 
 use App\CA\Tag\Model\Tag;
 
+/**
+ * Repository responsible of handling all database
+ * interaction for the Tag model.
+ */
 class TagRepository
 {
     /**
+     * A Tag instance.
+     *
      * @var Tag
      */
-    private $model;
+    protected $model;
 
     /**
      * TagRepository constructor.
-     * @param Tag $tag
+     *
+     * @param Tag $tag A Tag instance.
      */
     public function __construct(Tag $tag)
     {
@@ -23,7 +30,8 @@ class TagRepository
     /**
      * Get a tag from given label.
      *
-     * @param string $label
+     * @param string $label The label of the tag to get.
+     * 
      * @return Tag | null
      */
     public function getTagFromLabel($label)
@@ -34,7 +42,8 @@ class TagRepository
     /**
      * Create a new tag.
      *
-     * @param string $label
+     * @param string $label The label of the tag to create.
+     * 
      * @return Tag
      */
     public function createTag($label)
@@ -45,7 +54,8 @@ class TagRepository
     /**
      * Get all tags with id in the array.
      *
-     * @param int[] $ids
+     * @param int[] $ids IDs of tags to get.
+     * 
      * @return Tag[]
      */
     public function getTagsById($ids)
