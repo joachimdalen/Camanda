@@ -5,6 +5,11 @@ namespace App\CA\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * This class is responsible for handling settings
+ * and keeping both the database and cache up to date
+ * with the correct values.
+ */
 class SettingManager
 {
     /**
@@ -17,35 +22,40 @@ class SettingManager
     /**
      * Setting Manager constructor.
      *
-     * @param SettingRepository $repository
+     * @param SettingRepository $repository A SettingRepository instance.
      */
     public function __construct(SettingRepository $repository)
     {
         $this->repo = $repository;
     }
 
-
     /**
      * Check if caching is enabled.
      *
      * @return boolean
      */
-    private function shouldBeCached()
+    private function _shouldBeCached()
     {
         $item = $this->repo->get(SettingKeys::CACHE_SETTINGS);
         //The setting failed to fetch, don't cache value to be on the safe side.
-        Log::channel('runtime')->warning('[SettingsManager] Failed to fetch setting.', ['key' => SettingKeys::CACHE_SETTINGS]);
-        if (!$item) return false;
+        Log::channel('runtime')->warning(
+            '[SettingsManager] Failed to fetch setting.',
+            ['key' => SettingKeys::CACHE_SETTINGS]
+        );
+        if (!$item) {
+            return false;
+        }
         return $item->value;
     }
 
     /**
      * Check if a given value is already loadeed into the cache.
      *
-     * @param string $key
+     * @param string $key Setting key to check.
+     *
      * @return boolean
      */
-    private function isCached($key)
+    private function _isCached($key)
     {
         return Cache::has($key);
     }
@@ -53,29 +63,35 @@ class SettingManager
     /**
      * Update cached value.
      *
-     * @param string $key
-     * @param mixed $value
+     * @param string $key   Setting key to update.
+     * @param mixed  $value The new value of the setting.
+     *
      * @return void
      */
-    private function updateCache($key, $value)
+    private function _updateCache($key, $value)
     {
         Cache::forever($key, $value);
     }
 
     /**
      * Get a settings value.
-     * @param string $key
+     *
+     * @param string $key The setting key to get value for.
+     *
      * @return string
      */
     public function get($key)
     {
-        if ($this->shouldBeCached()) {
-            if ($this->isCached($key)) {
+        if ($this->_shouldBeCached()) {
+            if ($this->_isCached($key)) {
                 return Cache::get($key);
             }
             $item = $this->repo->get($key);
             if (!$item) {
-                Log::channel('runtime')->warning('[SettingsManager] Failed to fetch setting.', ['key' => $key]);
+                Log::channel('runtime')->warning(
+                    '[SettingsManager] Failed to fetch setting.',
+                    ['key' => $key]
+                );
                 return "";
             }
             Cache::forever($key, $item->value);
@@ -83,7 +99,10 @@ class SettingManager
         }
         $item = $this->repo->get($key);
         if (!$item) {
-            Log::channel('runtime')->warning('[SettingsManager] Failed to fetch setting.', ['key' => $key]);
+            Log::channel('runtime')->warning(
+                '[SettingsManager] Failed to fetch setting.',
+                ['key' => $key]
+            );
             return "";
         }
         return $item->value;
@@ -91,14 +110,17 @@ class SettingManager
 
     /**
      * Set and/or update the setting and cache.
-     * @param string $key
-     * @param $value
+     *
+     * @param string $key   The setting key to set.
+     * @param mixed  $value The value to set.
+     * 
+     * @return void
      */
     public function set($key, $value)
     {
         $this->repo->update($key, $value);
-        if ($this->shouldBeCached()) {
-            $this->updateCache($key, $value);
+        if ($this->_shouldBeCached()) {
+            $this->_updateCache($key, $value);
         }
     }
 

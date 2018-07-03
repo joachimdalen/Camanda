@@ -4,16 +4,22 @@ namespace App\CA\Setting;
 
 use App\CA\Setting\Model\Setting;
 
+/**
+ * Class responsible for handling all database interaction
+ * for the setting model.
+ */
 class SettingRepository
 {
     /**
+     *
      * @var Setting
      */
-    private $model;
+    protected $model;
 
     /**
      * SettingRepository constructor.
-     * @param Setting $setting
+     *
+     * @param Setting $setting A Setting instance.
      */
     public function __construct(Setting $setting)
     {
@@ -23,8 +29,9 @@ class SettingRepository
     /**
      * Add a new setting to the database.
      *
-     * @param string $key
-     * @param mixed $value
+     * @param string $key   The setting key to create.
+     * @param mixed  $value The value of the setting.
+     * 
      * @return Setting
      */
     public function create($key, $value)
@@ -35,7 +42,8 @@ class SettingRepository
     /**
      * Get a setting by key.
      *
-     * @param string $key
+     * @param string $key The setting key for the setting to get.
+     * 
      * @return Setting
      */
     public function get($key)
@@ -45,8 +53,11 @@ class SettingRepository
 
     /**
      * Update a setting value
-     * @param $key
-     * @param $value
+     *
+     * @param string $key   The key of the setting to update.
+     * @param mixed  $value The value of the setting.
+     * 
+     * @return void
      */
     public function update($key, $value)
     {
@@ -55,6 +66,7 @@ class SettingRepository
 
     /**
      * Get all setting values
+     *
      * @return Setting[]|\Illuminate\Database\Eloquent\Collection
      */
     public function getAllSettings()

@@ -4,6 +4,9 @@ namespace App\CA\Setting\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Application setting model.
+ */
 class Setting extends Model
 {
     /**
