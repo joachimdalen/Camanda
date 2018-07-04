@@ -43,12 +43,14 @@ class BlogController extends Controller
     /**
      * BlogController Constructor
      *
-     * @param BlogRepository $repository
-     * @param TagHelper $tagHelper
-     * @param SettingManager $settingManager
+     * @param BlogRepository $repository     A BlogRepository instance.
+     * @param TagHelper      $tagHelper      A TagHelper instance.
+     * @param SettingManager $settingManager A SettingManager instance.
      */
-    public function __construct(BlogRepository $repository, TagHelper $tagHelper, SettingManager $settingManager)
-    {
+    public function __construct(
+        BlogRepository $repository, TagHelper $tagHelper,
+        SettingManager $settingManager
+    ) {
         $this->repo = $repository;
         $this->tagHelper = $tagHelper;
         $this->settings = $settingManager;
@@ -57,7 +59,8 @@ class BlogController extends Controller
     /**
      * Get all blog posts for the currently signed in user.
      *
-     * @param Request $request
+     * @param Request $request The http request.
+     *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function getUserBlogPosts(Request $request)
@@ -66,7 +69,9 @@ class BlogController extends Controller
         $user = Auth::guard('api')->user();
 
         //Get the posts for the singed in user, and paginate them.
-        $posts = $this->repo->getPostsForUser($user->id, true, self::PAGINATION_SIZE);
+        $posts = $this->repo->getPostsForUser(
+            $user->id, true, self::PAGINATION_SIZE
+        );
 
         //Format and return the blog posts as a custom collection.
         return BlogPostResource::collection($posts);
@@ -75,7 +80,9 @@ class BlogController extends Controller
     /**
      * Create a new blog post.
      *
-     * @param CreatePostRequest $request
+     * @param CreatePostRequest $request The validated http request
+     *                                   for creating a post.
+     *
      * @return BlogPostResource
      */
     public function createBlogPost(CreatePostRequest $request)
@@ -101,8 +108,12 @@ class BlogController extends Controller
             $data['slug'] = $slug;
         } else {
             $slugSalt = str_random(4);
-            //Limti to the word closest to 250 chars, so we have space to append our salt.
-            $data['slug'] = str_replace(' ', '-', str_limit($data['title'], 249, '')) . '-' . $slugSalt;
+            // Limti to the word closest to 250 chars,
+            // so we have space to append our salt.
+            $data['slug'] = str_replace(
+                ' ', '-',
+                str_limit($data['title'], 249, '')
+            ) . '-' . $slugSalt;
         }
 
         //Assign post to logged in user
@@ -126,7 +137,10 @@ class BlogController extends Controller
 
     /**
      * Update the status determining visibility for the blog post.
-     * @param UpdatePostPublishStatusRequest $request
+     *
+     * @param UpdatePostPublishStatusRequest $request Validated http
+     *                                                request for the new status.
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function setPostPublishStatus(UpdatePostPublishStatusRequest $request)
@@ -134,14 +148,38 @@ class BlogController extends Controller
         $postId = $request->id;
         $status = $request->status;
         $updated = $this->repo->setPostStatus($postId, $status);
-        if (!$updated) return response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+        if (!$updated) {
+            return response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
         if ($status === PostStatus::PUBLISHED) {
             $updated = $this->repo->setPostPublishDate($postId, Carbon::now());
-            if (!$updated) return response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+            if (!$updated) {
+                return response()->json([], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+
         }
-        return \response()->json(['data' => ['id' => $postId, 'status' => $status, 'status_text' => PostStatus::getStatusText($status)]], Response::HTTP_OK);
+        return \response()->json(
+            [
+                'data' =>
+                [
+                    'id' => $postId,
+                    'status' => $status,
+                    'status_text' => PostStatus::getStatusText($status),
+                ],
+            ],
+            Response::HTTP_OK
+        );
     }
 
+    /**
+     * Get a single blog post from url path binding.
+     *
+     * @param Request  $request The base http request.
+     * @param BlogPost $post    The post bound from the id in the url path.
+     *
+     * @return void
+     */
     public function getBlogPost(Request $request, BlogPost $post)
     {
         return new BlogPostResource($post);
