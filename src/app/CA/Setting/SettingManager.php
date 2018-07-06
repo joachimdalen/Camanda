@@ -38,11 +38,11 @@ class SettingManager
     {
         $item = $this->repo->get(SettingKeys::CACHE_SETTINGS);
         //The setting failed to fetch, don't cache value to be on the safe side.
-        Log::channel('runtime')->warning(
-            '[SettingsManager] Failed to fetch setting.',
-            ['key' => SettingKeys::CACHE_SETTINGS]
-        );
         if (!$item) {
+            Log::channel('runtime')->warning(
+                '[SettingsManager:39] Failed to fetch setting.',
+                ['key' => SettingKeys::CACHE_SETTINGS]
+            );
             return false;
         }
         return $item->value;
@@ -89,7 +89,7 @@ class SettingManager
             $item = $this->repo->get($key);
             if (!$item) {
                 Log::channel('runtime')->warning(
-                    '[SettingsManager] Failed to fetch setting.',
+                    '[SettingsManager:89] Failed to fetch setting.',
                     ['key' => $key]
                 );
                 return "";
@@ -100,7 +100,7 @@ class SettingManager
         $item = $this->repo->get($key);
         if (!$item) {
             Log::channel('runtime')->warning(
-                '[SettingsManager] Failed to fetch setting.',
+                '[SettingsManager:100] Failed to fetch setting.',
                 ['key' => $key]
             );
             return "";
@@ -113,7 +113,7 @@ class SettingManager
      *
      * @param string $key   The setting key to set.
      * @param mixed  $value The value to set.
-     * 
+     *
      * @return void
      */
     public function set($key, $value)
@@ -122,6 +122,25 @@ class SettingManager
         if ($this->_shouldBeCached()) {
             $this->_updateCache($key, $value);
         }
+    }
+
+    /**
+     * Get all settings in a group.
+     *
+     * @param array $group Array with setting keys in group.
+     * 
+     * @return Setting[] | []
+     */
+    public function getInGroup($group)
+    {
+        $settings = [];
+        foreach ($group as $item) {
+            Log::info($item);
+            $settings[] = [
+                $item => $this->get($item),
+            ];
+        }
+        return $settings;
     }
 
 }

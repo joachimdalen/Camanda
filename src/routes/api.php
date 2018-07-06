@@ -32,5 +32,7 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::get('mine', 'UploadController@getUploadsByUser')->name('api.upload.mine');
         Route::delete('delete/{upload}', 'UploadController@deleteImage')->name('api.upload.delete');
     });
+    Route::group(['prefix' => 'setting', 'namespace' => 'Api\Setting'], function () {
+        Route::get('/general', 'SettingController@getGeneralSettings')->name('api.settings.general');
+    });
 });
-
