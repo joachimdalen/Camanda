@@ -12,8 +12,7 @@ let mix = require('laravel-mix');
  */
 let contentRoot = 'resources/assets/';
 let publicRoot = 'public/'
-
-
+mix.setPublicPath('./');
 
 mix.react(contentRoot + 'js/app.js', publicRoot + 'js');
 mix.sass(contentRoot + 'sass/app.scss', publicRoot + 'css').options({

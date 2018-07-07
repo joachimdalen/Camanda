@@ -128,17 +128,14 @@ class SettingManager
      * Get all settings in a group.
      *
      * @param array $group Array with setting keys in group.
-     * 
+     *
      * @return Setting[] | []
      */
     public function getInGroup($group)
     {
         $settings = [];
         foreach ($group as $item) {
-            Log::info($item);
-            $settings[] = [
-                $item => $this->get($item),
-            ];
+            $settings[$item] = $this->get($item);
         }
         return $settings;
     }

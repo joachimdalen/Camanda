@@ -3,18 +3,15 @@ import Card from "../../../shared/card/Card";
 import CardHeader from "../../../shared/card/CardHeader";
 import CardTitle from "../../../shared/card/CardTitle";
 import CardBody from "../../../shared/card/CardBody";
+import { fetchGeneral } from '../../../../actions/settingActions';
+import {connect} from "react-redux"
 
-
-export default class GeneralSettings extends Component {
+class GeneralSettings extends Component {
     constructor(props) {
         super(props);
     }
     componentDidMount() {
-        axios.get('/api/setting/general').then((response) => {
-            console.log(response);
-        }).catch((err) => {
-            console.log(err);
-        });
+        this.props.load();
     }
     render() {
         return (
@@ -75,6 +72,11 @@ export default class GeneralSettings extends Component {
 
                                 </div>
                             </div>
+                            <div className="row">
+                                <div className="col-12 text-right">
+                                    <button className="btn btn-sm btn-success"><i className="fe fe-save mr-2"></i>Save</button>
+                                </div>
+                            </div>
                         </CardBody>
                     </Card>
                 </div>
@@ -82,3 +84,20 @@ export default class GeneralSettings extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        settings: state.settings.groups.general,
+        loading: state.settings.loading
+    }
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        load: () => {
+            dispatch(fetchGeneral())
+        }
+    }
+};
+export default connect(
+    mapStateToProps, mapDispatchToProps
+)(GeneralSettings)
