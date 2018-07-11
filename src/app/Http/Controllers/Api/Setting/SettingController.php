@@ -36,4 +36,22 @@ class SettingController extends Controller
             Response::HTTP_OK
         );
     }
+
+    /**
+     * Update a given set of setting values.
+     *
+     * @param Request $request Validated http request.
+     * @return void
+     */
+    public function updateSettings(Request $request)
+    {
+        $settings = $request->get('settings');
+        foreach ($settings as $setting) {
+            $this->manager->set($setting['key'], $setting['value']);
+        }
+        return \response()->json(
+            [],
+            Response::HTTP_OK
+        );
+    }
 }
