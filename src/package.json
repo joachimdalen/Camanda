@@ -27,6 +27,7 @@
         "connected-react-router": "^4.3.0",
         "immutability-helper": "^2.7.1",
         "moment": "^2.22.2",
+        "parchment": "^1.1.4",
         "prop-types": "^15.6.1",
         "react-bootstrap": "^0.32.1",
         "react-bootstrap-time-picker": "^1.0.3",

@@ -1,98 +1,17 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactQuill, {Quill} from 'react-quill';
+import ReactQuill, {Quill, Toolbar} from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import ImageBlot from './blots/ImageBlot';
+import DividerBlot from "./blots/DividerBlot";
+import VideoBlot from "./blots/VideoBlot";
+import TweetBlot from "./blots/TweetBlot";
+import ImageBlotUI from "./blots-ui/ImageBlotUI";
 
-let Inline = Quill.import("blots/inline");
-let Block = Quill.import("blots/block");
-let BlockEmbed = Quill.import("blots/block/embed");
-const Parchment = Quill.import('parchment');
-
-/* Create and register blots*/
-class DividerBlot extends BlockEmbed {
-}
-
-DividerBlot.blotName = "divider";
-DividerBlot.tagName = "hr";
+/* Register blots*/
 Quill.register(DividerBlot);
-
-class VideoBlot extends BlockEmbed {
-    static create(url) {
-        let node = super.create();
-        node.setAttribute("src", url);
-        node.setAttribute("frameborder", "0");
-        node.setAttribute("allowfullscreen", true);
-        return node;
-    }
-
-    static formats(node) {
-        let format = {};
-        if (node.hasAttribute("height")) {
-            format.height = node.getAttribute("height");
-        }
-        if (node.hasAttribute("width")) {
-            format.width = node.getAttribute("width");
-        }
-        return format;
-    }
-
-    static value(node) {
-        return node.getAttribute("src");
-    }
-
-    format(name, value) {
-        if (name === "height" || name === "width") {
-            if (value) {
-                this.domNode.setAttribute(name, value);
-            } else {
-                this.domNode.removeAttribute(name, value);
-            }
-        } else {
-            super.format(name, value);
-        }
-    }
-}
-
-VideoBlot.blotName = "video";
-VideoBlot.tagName = "iframe";
 Quill.register(VideoBlot);
-
-class TweetBlot extends BlockEmbed {
-    static create(id) {
-        let node = super.create();
-        node.dataset.id = id;
-        twttr.widgets.createTweet(id, node);
-        return node;
-    }
-
-    static value(domNode) {
-        return domNode.dataset.id;
-    }
-}
-
-TweetBlot.blotName = "tweet";
-TweetBlot.tagName = "div";
-TweetBlot.className = "tweet";
 Quill.register(TweetBlot);
-
-class ImageBlot extends BlockEmbed {
-    static create(value) {
-        let node = super.create();
-        node.setAttribute("alt", value.alt);
-        node.setAttribute("src", value.url);
-        return node;
-    }
-
-    static value(node) {
-        return {
-            alt: node.getAttribute("alt"),
-            url: node.getAttribute("src")
-        };
-    }
-}
-
-ImageBlot.blotName = "image";
-ImageBlot.tagName = "img";
 Quill.register(ImageBlot);
 
 //Define our toolbar
@@ -150,20 +69,29 @@ const Code = () => (<button className="ql-code"></button>);
 export default class Editor extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            imageSelectionOpen: false,
+        };
+        this.editorRef = React.createRef();
         this.onChange = this.onChange.bind(this);
         this.modules = {
             toolbar: {
                 container: "#toolbar",
                 handlers: {
-                    "twitterEmbed": this.twitterEmbed,
                     "divider": this.divider,
-                    "videoEmbed": this.videoEmbed,
-                    "imageEmbed": this.imageEmbed
+                    /*  "twitterEmbed": this.twitterEmbed,
+                      "videoEmbed": this.videoEmbed,
+                      "imageEmbed": this.imageEmbed*/
+                    imageEmbed: () => {
+                        console.log('clicked');
+                        console.log(this.editorRef);
+                        this.setState({imageSelectionOpen: true});
+                    }
                 }
             }
         };
         this.formats = [];
+
     }
 
     onChange(value) {
@@ -180,7 +108,9 @@ export default class Editor extends Component {
                     placeholder={this.props.placeholder}
                     modules={this.modules}
                     className={this.props.className}
+                    ref={(el) => { this.editorRef = el; }}
                 />
+                <ImageBlotUI open={this.state.imageSelectionOpen} onClose={(imageProps) => this.closeImageEmbed(imageProps)} addImage={(details) => this.addImage(details)}/>
             </div>
         );
     }
@@ -220,6 +150,31 @@ export default class Editor extends Component {
             Quill.sources.USER
         );
         this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+    }
+
+    addImage(details) {
+        this.setState({
+            imageSelectionOpen: false,
+        });
+        console.log(this.editorRef);
+        const editor = this.editorRef.getEditor();
+        const selection = editor.getSelection();
+        console.log(selection);
+        let index = 0;
+        if (selection !== null) index = selection.index;
+        editor.insertEmbed(index, "image", {
+            alt: "Image",
+            url: details.url,
+            width: details.width,
+            height: details.height
+        });
+        editor.setSelection(index + 1, Quill.sources.SILENT);
+    }
+
+    closeImageEmbed(imageProps) {
+        this.setState({
+            imageSelectionOpen: false,
+        });
     }
 
 }
