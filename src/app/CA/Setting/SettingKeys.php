@@ -18,14 +18,14 @@ class SettingKeys
     const SLUG_TYPE = 'slug_type';
 
     /**
-     * Sets lenght of the slug when the SLUG_TYPE is set to random.
+     * Sets length of the slug when the SLUG_TYPE is set to random.
      * Max: 20 Min: 5
      */
     const SLUG_SIZE = 'slug_size';
 
     /**
-     * Sets wether or not setting values should be cahed inside the application.
-     * This value will not be cahed and will always be cheked directly against
+     * Sets whether or not setting values should be cached inside the application.
+     * This value will not be cached and will always be checked directly against
      * the database.
      * Default: true
      */
