@@ -7,6 +7,7 @@ use App\CA\Setting\SettingManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class SettingController extends Controller
 {
@@ -46,8 +47,9 @@ class SettingController extends Controller
     public function updateSettings(Request $request)
     {
         $settings = $request->get('settings');
-        foreach ($settings as $setting) {
-            $this->manager->set($setting['key'], $setting['value']);
+        foreach ($settings as $key => $value) {
+            Log::info([$key, $value]);
+            $this->manager->set($key, $value);
         }
         return \response()->json(
             [],
